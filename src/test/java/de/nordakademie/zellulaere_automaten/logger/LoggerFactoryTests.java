@@ -14,10 +14,9 @@ public class LoggerFactoryTests {
     @Test
     public void testLoggerFactorygetLoggerType_True(){
         LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger logger = loggerFactory.getLoggerType(true);
+        ILogger logger = loggerFactory.getLoggerType(Integer.parseInt("1"));
         assertInstanceOf(LogFile.class, logger, "Logger should be instance of LogFile");
     }
-
     /**
      * Tests the {@code LoggerFactory.getLoggerType(boolean)} method,
      * to ensure that passing {@code false} returns an instance
@@ -26,7 +25,8 @@ public class LoggerFactoryTests {
     @Test
     public void testLoggerFactorygetLoggerType_False(){
         LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger logger = loggerFactory.getLoggerType(false);
+        String loggerType = "2";
+        ILogger logger = loggerFactory.getLoggerType(Integer.parseInt("2"));
         assertInstanceOf(ConsoleLogger.class, logger, "Logger should be instance of ConsoleLogger");
     }
 }
