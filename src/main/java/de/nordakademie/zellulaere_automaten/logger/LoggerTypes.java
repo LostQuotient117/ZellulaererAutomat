@@ -38,12 +38,10 @@ public enum LoggerTypes {
      * @return loggerType: Chosen type for the logger.
      */
     public static LoggerTypes getType(int value) {
-        LoggerTypes loggerType = Arrays.stream(LoggerTypes.values())
+        return Arrays.stream(LoggerTypes.values())
                                         .filter(entry ->entry.getValue() == value)
                                         .findFirst()
-                                        .orElse(null);
-        if (loggerType == null)
-            throw new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist");
-        return loggerType;
+                                        .orElseThrow(() ->
+                                                new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist"));
     }
 }
