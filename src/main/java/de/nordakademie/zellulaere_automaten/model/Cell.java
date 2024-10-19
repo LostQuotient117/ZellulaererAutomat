@@ -19,7 +19,7 @@ public class Cell {
         this.neighborList = neighborList;
     }
 
-
+    // region Getter
     public int getRow() {
         return row;
     }
@@ -35,6 +35,7 @@ public class Cell {
     public List<Cell> getNeighborList() {
         return neighborList;
     }
+    // endregion
 
     /*
     public StateCalculation getStateCalculation() {
@@ -42,6 +43,7 @@ public class Cell {
     }
      */
 
+    // region Setter
     public void setRow(int row) {
         this.row = row;
     }
@@ -57,6 +59,7 @@ public class Cell {
     public void setNeighborList(List<Cell> neighborList) {
         this.neighborList = neighborList;
     }
+    // endregion
 
     /*
     public void setStateCalculation(StateCalculation stateCalculation) {
