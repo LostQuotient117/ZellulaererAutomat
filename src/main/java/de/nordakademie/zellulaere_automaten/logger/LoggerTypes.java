@@ -1,50 +1,47 @@
 package de.nordakademie.zellulaere_automaten.logger;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 /**
  * An enumeration representing different types of loggers.
- * <p>
  * Each enum constant corresponds to a specific logger type and provides a
  * way to create instances of the {@link ILogger} interface.
- * </p>
  */
 public enum LoggerTypes {
-    /**
-     * Represents the {@link LogFile} logger type.
-     */
     LogFile(1),
-    /**
-     * Represents the {@link ConsoleLogger} logger type.
-     */
     ConsoleLogger(2);
-
     private final int value;
 
     /**
-     * Constructs a {@link LoggerTypes} enum constant with the specified
-     * logger constructor.
-     * @param value a {@link Supplier} that provides instances of
-     * {@link ILogger}.
+     * Constructor for Enumtypes for the Logger with a corresponding int value
+     * @param value: the corresponding int value to the enum
      */
     LoggerTypes(int value) {
         this.value = value;
     }
+
     /**
-     * Creates and returns a new instance of the logger associated with
-     * this enum constant.
-     * @return a new instance of {@link ILogger} for the corresponding logger type.
+     * Getter returns the value of the enum
+     * @return the corresponding int for enum.
      */
-    public int getLogger() {
+    public int getValue() {
         return value;
     }
 
+    /**
+     *This method takes a value and finds the corresponding enum type for it.
+     * Used for user input, when configuring the program.
+     * @param value: chosen logger-mode
+     * @return: LoggerType
+     */
     public static LoggerTypes fromValue(int value) {
-        for (LoggerTypes loggerType : LoggerTypes.values()) {
-            if (loggerType.getLogger() == value) {
-                return loggerType; // Gibt den passenden Enum-Eintrag zurück
-            }
-        }
-        throw new IllegalArgumentException("Kein LoggerType mit dem Wert " + value + " gefunden");
+        LoggerTypes loggerType = Arrays.stream(LoggerTypes.values())
+                                        .filter(entry ->entry.getValue() == value)
+                                        .findFirst()
+                                        .orElse(null);
+        if (loggerType == null)
+            throw new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist");
+        return loggerType;
     }
 }

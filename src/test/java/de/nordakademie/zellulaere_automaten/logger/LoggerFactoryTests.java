@@ -1,6 +1,9 @@
 package de.nordakademie.zellulaere_automaten.logger;
 
+import de.nordakademie.zellulaere_automaten.logger.loggerImpl.LogFile;
+import de.nordakademie.zellulaere_automaten.logger.loggerImpl.ConsoleLogger;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -12,9 +15,9 @@ public class LoggerFactoryTests {
      * of {@code LogFile}.
      */
     @Test
-    public void testLoggerFactorygetLoggerType_True(){
+    public void testLoggerFactoryCreateLoggerType_True(){
         LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger logger = loggerFactory.getLoggerType(Integer.parseInt("1"));
+        ILogger logger = loggerFactory.createLogger("1");
         assertInstanceOf(LogFile.class, logger, "Logger should be instance of LogFile");
     }
     /**
@@ -23,10 +26,10 @@ public class LoggerFactoryTests {
      * of {@code ConsoleLogger}.
      */
     @Test
-    public void testLoggerFactorygetLoggerType_False(){
+    public void testLoggerFactoryCreateLoggerType_False(){
         LoggerFactory loggerFactory = new LoggerFactory();
         String loggerType = "2";
-        ILogger logger = loggerFactory.getLoggerType(Integer.parseInt("2"));
+        ILogger logger = loggerFactory.createLogger("2");
         assertInstanceOf(ConsoleLogger.class, logger, "Logger should be instance of ConsoleLogger");
     }
 }
