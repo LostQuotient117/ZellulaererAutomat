@@ -25,7 +25,7 @@ public enum LoggerTypes {
      * Getter returns the value of the enum
      * @return the corresponding int for enum.
      */
-    public int getLogger() {
+    public int getValue() {
         return value;
     }
 
@@ -37,7 +37,7 @@ public enum LoggerTypes {
      */
     public static LoggerTypes fromValue(int value) {
         LoggerTypes loggerType = Arrays.stream(LoggerTypes.values())
-                                        .filter(entry ->entry.getLogger() == value)
+                                        .filter(entry ->entry.getValue() == value)
                                         .findFirst()
                                         .orElse(null);
         if (loggerType == null)

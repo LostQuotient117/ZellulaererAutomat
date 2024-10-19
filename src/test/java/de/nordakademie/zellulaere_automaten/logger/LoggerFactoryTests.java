@@ -15,7 +15,7 @@ public class LoggerFactoryTests {
      * of {@code LogFile}.
      */
     @Test
-    public void testLoggerFactoryGetLoggerType_True(){
+    public void testLoggerFactoryCreateLoggerType_True(){
         LoggerFactory loggerFactory = new LoggerFactory();
         ILogger logger = loggerFactory.createLogger("1");
         assertInstanceOf(LogFile.class, logger, "Logger should be instance of LogFile");
@@ -26,7 +26,7 @@ public class LoggerFactoryTests {
      * of {@code ConsoleLogger}.
      */
     @Test
-    public void testLoggerFactoryGetLoggerType_False(){
+    public void testLoggerFactoryCreateLoggerType_False(){
         LoggerFactory loggerFactory = new LoggerFactory();
         String loggerType = "2";
         ILogger logger = loggerFactory.createLogger("2");
