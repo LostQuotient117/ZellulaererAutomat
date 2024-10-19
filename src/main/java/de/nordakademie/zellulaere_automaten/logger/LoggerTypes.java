@@ -6,6 +6,7 @@ import java.util.Arrays;
  * An enumeration representing different types of loggers.
  * Each enum constant corresponds to a specific logger type and provides a
  * way to create instances of the {@link ILogger} interface.
+ * @author Jannick.Gottschalk
  */
 public enum LoggerTypes {
 

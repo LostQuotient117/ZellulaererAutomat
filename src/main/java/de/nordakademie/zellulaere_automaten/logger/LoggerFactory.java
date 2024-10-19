@@ -9,6 +9,7 @@ import de.nordakademie.zellulaere_automaten.logger.loggerImpl.*;
  * implementation based on a specified parameter. It supports the
  * creation of either a {@code LogFile} or a {@code LogConsole}.
  * </p>
+ * @author Jannick.Gottschalk
  */
 public class LoggerFactory {
     /**
