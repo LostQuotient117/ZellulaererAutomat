@@ -35,8 +35,8 @@ class TestCell {
     }
 
     @Test
-    void testIsAlive() {
-        assertTrue(cell.isAlive());
+    void testGetIsAlive() {
+        assertTrue(cell.getIsAlive());
     }
 
     @Test
@@ -66,8 +66,8 @@ class TestCell {
 
     @Test
     void testSetIsAlive() {
-        cell.setAlive(false);
-        assertFalse(cell.isAlive());
+        cell.setIsAlive(false);
+        assertFalse(cell.getIsAlive());
     }
 
     @Test
