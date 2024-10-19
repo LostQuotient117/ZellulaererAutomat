@@ -1,7 +1,6 @@
 package de.nordakademie.zellulaere_automaten.logger;
 
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 /**
  * An enumeration representing different types of loggers.
@@ -9,8 +8,11 @@ import java.util.function.Supplier;
  * way to create instances of the {@link ILogger} interface.
  */
 public enum LoggerTypes {
+
     LogFile(1),
-    ConsoleLogger(2);
+
+    LogConsole(2);
+
     private final int value;
 
     /**
@@ -32,10 +34,10 @@ public enum LoggerTypes {
     /**
      *This method takes a value and finds the corresponding enum type for it.
      * Used for user input, when configuring the program.
-     * @param value: chosen logger-mode
-     * @return: LoggerType
+     * @param value: chosen logger-mode.
+     * @return loggerType: Chosen type for the logger.
      */
-    public static LoggerTypes fromValue(int value) {
+    public static LoggerTypes getType(int value) {
         LoggerTypes loggerType = Arrays.stream(LoggerTypes.values())
                                         .filter(entry ->entry.getValue() == value)
                                         .findFirst()
