@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * The {@code CellTests} class contains unit tests for the {@code Cell} class.
  * It uses JUnit 5 for testing.
  * The tests cover the getter and setter methods of the {@code Cell} class.
+ * It also includes a test for the {@code isEqualCell} method.
  *
  * @author Lars Nicht
  */
@@ -132,6 +133,45 @@ class CellTests {
         assertEquals(newMockStateCalculation, cell.getStateCalculation());
     }
      */
+    // endregion
+
+
+    // region Logic Tests
+
+    // region isEqualCell Tests
+
+    /**
+     * Tests the {@code isEqualCell} method of the {@code Cell} class.
+     * Asserts that two cells with the same coordinates and alive status are equal.
+     */
+    @Test
+    void isEqualCell_WithSameCoordinatesAndAliveStatus_ShouldReturnTrue() {
+        Cell otherCell = new Cell(1, 1, true);
+        assertTrue(cell.isEqualCell(otherCell));
+    }
+
+    /**
+     * Tests the {@code isEqualCell} method of the {@code Cell} class.
+     * Asserts that two cells with different coordinates are not equal.
+     */
+    @Test
+    void isEqualCell_WithDifferentCoordinates_ShouldReturnFalse() {
+        Cell otherCell = new Cell(2, 1, true);
+        assertFalse(cell.isEqualCell(otherCell));
+    }
+
+    /**
+     * Tests the {@code isEqualCell} method of the {@code Cell} class.
+     * Asserts that two cells with different alive status are not equal.
+     */
+    @Test
+    void isEqualCell_WithDifferentAliveStatus_ShouldReturnFalse() {
+        Cell otherCell = new Cell(1, 1, false);
+        assertFalse(cell.isEqualCell(otherCell));
+    }
+    // endregion
+
+
     // endregion
 
 }
