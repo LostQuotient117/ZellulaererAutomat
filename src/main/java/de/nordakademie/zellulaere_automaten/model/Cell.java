@@ -9,6 +9,7 @@ import java.util.List;
  * The {@code Cell} class represents a cell in a cellular automaton.
  * It contains properties such as row, column, alive status, and a list of neighboring cells.
  * The class provides getter and setter methods to access and modify these properties.
+ *
  * @author Lars Nicht
  */
 public class Cell {
@@ -22,8 +23,8 @@ public class Cell {
     /**
      * Constructs a new {@code Cell} with the specified properties.
      *
-     * @param row the row position of the cell
-     * @param column the column position of the cell
+     * @param row     the row position of the cell
+     * @param column  the column position of the cell
      * @param isAlive the alive status of the cell
      */
     public Cell(int row, int column, boolean isAlive) {
@@ -36,9 +37,9 @@ public class Cell {
     /**
      * Constructs a new {@code Cell} with the specified properties.
      *
-     * @param row the row position of the cell
-     * @param column the column position of the cell
-     * @param isAlive the alive status of the cell
+     * @param row          the row position of the cell
+     * @param column       the column position of the cell
+     * @param isAlive      the alive status of the cell
      * @param neighborList the list of neighboring cells
      */
     public Cell(int row, int column, boolean isAlive, List<Cell> neighborList) {
@@ -49,6 +50,7 @@ public class Cell {
     }
 
     // region Getter
+
     /**
      * Returns the row position of the cell.
      *
@@ -93,6 +95,7 @@ public class Cell {
      */
 
     // region Setter
+
     /**
      * Sets the row position of the cell.
      *
@@ -136,4 +139,21 @@ public class Cell {
     }
 
      */
+
+    // region Logic
+
+    /**
+     * Compares this cell with another cell.
+     * They are considered equal if they have the same coordinates and alive status.
+     *
+     * @param otherCell the cell to compare with
+     * @return {@code true} if the cells are equal, {@code false} otherwise
+     */
+    public boolean isEqualCell(Cell otherCell) {
+        return this.column == otherCell.getColumn()
+                && this.row == otherCell.getRow()
+                && this.isAlive == otherCell.getIsAlive();
+    }
+
+    // endregion
 }
