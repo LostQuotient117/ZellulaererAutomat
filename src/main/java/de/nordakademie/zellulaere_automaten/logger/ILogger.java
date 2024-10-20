@@ -12,5 +12,5 @@ public interface ILogger {
      * this interface must include the log-method.
      * This method logs the cellular automata.
      */
-    void log();
+    void log(Object gridInput);
 }

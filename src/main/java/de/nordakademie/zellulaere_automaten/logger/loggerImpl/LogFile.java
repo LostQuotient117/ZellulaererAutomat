@@ -1,10 +1,8 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
-import de.nordakademie.zellulaere_automaten.logger.ILogger;
-
-public class LogFile implements ILogger {
+public class LogFile extends Log {
     @Override
-    public void log() {
+    protected void writeLog(String formattedGrid) {
 
     }
 }
