@@ -16,6 +16,8 @@ public class LogConsoleTests {
     public void setUp(){
         System.setOut(new PrintStream(outputStreamCaptor));
     }
+
+    //region testStepWriter
     /**
      * Tests {@link LogConsole#stepWriterConsole(int)} and ensure
      * that the correct output is selected in the console
@@ -52,4 +54,6 @@ public class LogConsoleTests {
         LogConsole logConsole = new LogConsole();
         assertThrows(IllegalArgumentException.class, () -> logConsole.stepWriterConsole(-5));
     }
+
+    //endregion
 }
