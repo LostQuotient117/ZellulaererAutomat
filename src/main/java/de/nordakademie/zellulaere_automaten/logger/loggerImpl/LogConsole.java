@@ -5,7 +5,7 @@ import de.nordakademie.zellulaere_automaten.model.*;
 public class LogConsole extends Log {
 
     @Override
-    protected void writeLog(String formattedGrid) {
+    protected void writeLog(String formattedGrid, int iteration) {
     }
 
     /**
@@ -29,6 +29,6 @@ public class LogConsole extends Log {
         if (step < 0){
             throw new IllegalArgumentException("Step number must be a positive integer");
         }
-        System.out.println("### (" + step + ")");
+        System.out.print("### (" + step + ")");
     }
 }

@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LogConsoleTests {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     public static String wantedString100x100;
+    public static String wantedStringHeaderAndBody;
 
     //region BeforeEach
     /**
@@ -46,6 +47,16 @@ public class LogConsoleTests {
             wantedStringBuilder.append('\n');
         }
         wantedString100x100 = wantedStringBuilder.toString();
+    }
+    @BeforeAll
+    public static void wantedStringHeaderAndBodyForTestConsoleWriteLog() {
+        StringBuilder wantedStringBuilder = new StringBuilder();
+        wantedStringBuilder.append("### (99)\n");
+        for (int i = 0; i < 100; i++) {
+            wantedStringBuilder.append("0".repeat(100));
+            wantedStringBuilder.append('\n');
+        }
+        wantedStringHeaderAndBody = wantedStringBuilder.toString();
     }
     //endregion
     //region testStepWriter
@@ -100,6 +111,35 @@ public class LogConsoleTests {
         LogConsole logConsole = new LogConsole();
         logConsole.writeLogBody(wantedString100x100);
         assertEquals(wantedString100x100, outputStreamCaptor.toString());
+    }
+    //endregion
+    //region testConsoleWriteLog
+    /**
+     * Tests the {@link LogConsole#writeLog(String, int)} method with a valid iteration count.
+     * <p>
+     * This test verifies that the {@code writeLog} method correctly writes the log to the console
+     * when called with an iteration count of 99. The output is captured and compared to the predefined
+     * {@code wantedStringHeaderAndBody} to ensure accuracy.
+     * </p>
+     */
+    @Test
+    public void testConsoleWriteLog_iteration100(){
+        LogConsole logConsole = new LogConsole();
+        logConsole.writeLog(wantedStringHeaderAndBody, 99);
+        assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
+    }
+    /**
+     * Tests the {@link LogConsole#writeLog(String, int)} method with an illegal iteration count.
+     * <p>
+     * This test verifies that the {@code writeLog} method throws an {@link IllegalArgumentException}
+     * when called with a negative iteration count. This ensures that the method handles invalid input
+     * appropriately.
+     * </p>
+     */
+    @Test
+    public void testConsoleWriteLog_illegalIteration(){
+        LogConsole logConsole = new LogConsole();
+        assertThrows(IllegalArgumentException.class, () -> logConsole.writeLog(wantedStringHeaderAndBody, -5));
     }
     //endregion
 }

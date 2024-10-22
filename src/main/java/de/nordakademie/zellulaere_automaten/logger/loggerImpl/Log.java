@@ -20,8 +20,9 @@ public abstract class Log implements ILogger {
      * </p>
      *
      * @param formattedGrid the string representation of the grid to be logged
+     * @param iteration the experiment-iteration of the grid to be printed
      */
-    protected abstract void writeLog(String formattedGrid);
+    protected abstract void writeLog(String formattedGrid, int iteration);
 
     //region inputChecks
 
