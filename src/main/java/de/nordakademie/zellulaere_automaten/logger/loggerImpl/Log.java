@@ -14,18 +14,4 @@ public abstract class Log implements ILogger {
     public boolean inputIsArray(Object input) {
         return (input instanceof Cell[][]);
     }
-
-    //public String formatArraytoString(Array[][] Cell){
-        //here comes the magic
-
-    //    String formattedString = "";
-    //    return formattedString;
-    //}
-
-    //public String formatHashMaptoString(HashMap<Cell, List<Cell>> inputHash){
-        //here comes the magic
-
-    //    String formattedString = "";
-    //    return formattedString;
-    //}
 }
