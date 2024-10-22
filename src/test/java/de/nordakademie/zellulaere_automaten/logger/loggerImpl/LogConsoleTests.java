@@ -48,6 +48,14 @@ public class LogConsoleTests {
         }
         wantedString100x100 = wantedStringBuilder.toString();
     }
+    /**
+     * Initializes a string representing a header and a 100x100 grid of zeros for testing purposes.
+     * <p>
+     * This method is annotated with {@code @BeforeAll} to ensure that the string is set up before any tests are run.
+     * The string consists of a header line followed by one hundred lines, each containing one hundred zeros,
+     * with each line separated by a newline character. The header includes the iteration count in parentheses.
+     * </p>
+     */
     @BeforeAll
     public static void wantedStringHeaderAndBodyForTestConsoleWriteLog() {
         StringBuilder wantedStringBuilder = new StringBuilder();
