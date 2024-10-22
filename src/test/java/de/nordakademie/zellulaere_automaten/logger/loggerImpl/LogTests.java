@@ -44,7 +44,7 @@ public class LogTests {
             wantedStringBuilder.append("0".repeat(100));
             wantedStringBuilder.append('\n');
         }
-        String wantedString = wantedStringBuilder.toString();
+        wantedString = wantedStringBuilder.toString();
     }
 
     //endregion
@@ -66,6 +66,7 @@ public class LogTests {
         assertTrue(log.inputIsArray(testArray100x100));
     }
     //einfügen mit richtigen Daten, wenn die Datenstruktur der Hashmap fest steht
+
     /**
      * This test checks whether the method {@link Log#inputIsArray(Object)} returns
      * {@code false} when a {@code hashmap} is passed.
