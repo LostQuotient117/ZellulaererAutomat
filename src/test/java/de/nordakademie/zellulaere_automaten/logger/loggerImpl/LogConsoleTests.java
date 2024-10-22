@@ -44,17 +44,17 @@ public class LogConsoleTests {
         StringBuilder wantedStringBuilder = new StringBuilder();
         for (int i = 0; i < 100; i++) {
             wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append('\n');
+            wantedStringBuilder.append(System.lineSeparator());
         }
         wantedString100x100 = wantedStringBuilder.toString();
     }
     @BeforeAll
     public static void wantedStringHeaderAndBodyForTestConsoleWriteLog() {
         StringBuilder wantedStringBuilder = new StringBuilder();
-        wantedStringBuilder.append("### (99)\n");
+        wantedStringBuilder.append("### (99)").append(System.lineSeparator());
         for (int i = 0; i < 100; i++) {
             wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append('\n');
+            wantedStringBuilder.append(System.lineSeparator());
         }
         wantedStringHeaderAndBody = wantedStringBuilder.toString();
     }
@@ -70,6 +70,7 @@ public class LogConsoleTests {
         int step = 1;
         String wantedOutput = "### (1)";
         LogConsole logConsole = new LogConsole();
+        outputStreamCaptor.reset();
         logConsole.stepWriterConsole(step);
         Assertions.assertEquals(wantedOutput, outputStreamCaptor.toString().trim());
     }
@@ -84,6 +85,7 @@ public class LogConsoleTests {
         int step = 100;
         String wantedOutput = "### (100)";
         LogConsole logConsole = new LogConsole();
+        outputStreamCaptor.reset();
         logConsole.stepWriterConsole(step);
         Assertions.assertEquals(wantedOutput, outputStreamCaptor.toString().trim());
     }
@@ -109,6 +111,7 @@ public class LogConsoleTests {
     @Test
     public void testConsoleWriteLogBody(){
         LogConsole logConsole = new LogConsole();
+        outputStreamCaptor.reset();
         logConsole.writeLogBody(wantedString100x100);
         assertEquals(wantedString100x100, outputStreamCaptor.toString());
     }
@@ -125,7 +128,8 @@ public class LogConsoleTests {
     @Test
     public void testConsoleWriteLog_iteration100(){
         LogConsole logConsole = new LogConsole();
-        logConsole.writeLog(wantedStringHeaderAndBody, 99);
+        outputStreamCaptor.reset();
+        logConsole.writeLog(wantedString100x100, 99);
         assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
     }
     /**

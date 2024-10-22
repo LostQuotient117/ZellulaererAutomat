@@ -6,6 +6,8 @@ public class LogConsole extends Log {
 
     @Override
     protected void writeLog(String formattedGrid, int iteration) {
+        stepWriterConsole(iteration);
+        writeLogBody(formattedGrid);
     }
 
     /**
@@ -29,6 +31,6 @@ public class LogConsole extends Log {
         if (step < 0){
             throw new IllegalArgumentException("Step number must be a positive integer");
         }
-        System.out.print("### (" + step + ")");
+        System.out.println("### (" + step + ")");
     }
 }

@@ -42,7 +42,7 @@ public class LogTests {
         StringBuilder wantedStringBuilder = new StringBuilder();
         for (int i = 0; i < 100; i++) {
             wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append('\n');
+            wantedStringBuilder.append(System.lineSeparator());
         }
         wantedString = wantedStringBuilder.toString();
     }

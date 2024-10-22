@@ -60,7 +60,7 @@ public abstract class Log implements ILogger {
             for (Cell cell : cells) {
                 formattedString.append(cell.getIsAlive() ? '1' : '0');
             }
-            formattedString.append("\n");
+            formattedString.append(System.lineSeparator());
         }
         return formattedString.toString();
     }
