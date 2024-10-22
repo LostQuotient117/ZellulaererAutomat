@@ -6,9 +6,21 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 public abstract class Log implements ILogger {
     @Override
     public void log(Object gridInput) {
-    //hier eine Schleife um jede Zeile des Grids zu drucken. Vlt zeilenweise format---toString ausführen und das Ergebniss in eine eigene procedure geben die dann druckt
+
     }
 
+    /**
+     * Writes the formatted grid string to the console.
+     * <p>
+     * This method outputs the provided string to the standard output stream.
+     * It is intended to log the formatted grid representation of a {@link Cell} array.
+     * </p>
+     * <p>
+     * Subclasses must implement this method to define the specific logging behavior.
+     * </p>
+     *
+     * @param formattedGrid the string representation of the grid to be logged
+     */
     protected abstract void writeLog(String formattedGrid);
 
     //region inputChecks

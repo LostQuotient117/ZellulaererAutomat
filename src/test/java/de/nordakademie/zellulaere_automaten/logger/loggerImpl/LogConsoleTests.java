@@ -87,18 +87,18 @@ public class LogConsoleTests {
     }
 
     //endregion
-    //region testConsoleWriter
+    //region testConsoleWriteLogBody
     /**
-     * Tests the {@link LogConsole#writeLog(String)} method to ensure it correctly writes the log to the console.
+     * Tests the {@link LogConsole#writeLogBody(String)} method to ensure it correctly writes the log to the console.
      * <p>
-     * This test verifies that the {@code writeLog} method outputs the expected string to the console.
+     * This test verifies that the {@code writeLogBody} method outputs the expected string to the console.
      * The output is captured and compared to the predefined {@code wantedString} to ensure accuracy.
      * </p>
      */
     @Test
-    public void testConsoleWriter(){
+    public void testConsoleWriteLogBody(){
         LogConsole logConsole = new LogConsole();
-        logConsole.writeLog(wantedString100x100);
+        logConsole.writeLogBody(wantedString100x100);
         assertEquals(wantedString100x100, outputStreamCaptor.toString());
     }
     //endregion
