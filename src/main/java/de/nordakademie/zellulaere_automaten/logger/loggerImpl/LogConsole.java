@@ -10,6 +10,7 @@ public class LogConsole extends Log {
         writeLogBody(formattedGrid);
     }
 
+    //region used Functions
     /**
      * Writes the formatted grid string to the console.
      * <p>
@@ -33,4 +34,6 @@ public class LogConsole extends Log {
         }
         System.out.println("### (" + step + ")");
     }
+
+    //endregion
 }
