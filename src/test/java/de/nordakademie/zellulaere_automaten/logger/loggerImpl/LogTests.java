@@ -53,7 +53,6 @@ public class LogTests {
     public void testLog(){
         //hier soll so das mit größte getestet werden
     }
-
     //region isArrayTests
 
     /**
@@ -78,7 +77,6 @@ public class LogTests {
     //}
 
     //endregion
-
     //region formatArrayToStringTests
 
     /**

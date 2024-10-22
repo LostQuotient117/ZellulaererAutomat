@@ -9,7 +9,7 @@ public abstract class Log implements ILogger {
     //hier eine Schleife um jede Zeile des Grids zu drucken. Vlt zeilenweise format---toString ausführen und das Ergebniss in eine eigene procedure geben die dann druckt
     }
 
-    protected abstract void writeLog(String formattedGrid); //richtige Variable mit übergeben. Möglicherweise schon formatiert?
+    protected abstract void writeLog(String formattedGrid);
 
     //region inputChecks
 
@@ -28,9 +28,8 @@ public abstract class Log implements ILogger {
     }
 
     //endregion
-
     //region formatToString
-
+    //ToDo: Hash map to string
     /**
      * Converts a two-dimensional array of {@link Cell} objects into a string representation.
      * <p>
@@ -53,5 +52,5 @@ public abstract class Log implements ILogger {
         return formattedString.toString();
     }
 
-    //endregion
+    //endregion /
 }
