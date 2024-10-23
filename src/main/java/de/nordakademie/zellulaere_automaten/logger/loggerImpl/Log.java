@@ -27,23 +27,6 @@ public abstract class Log implements ILogger {
      */
     protected abstract void writeLog(String formattedGrid, int iteration);
     //endregion
-    //region inputChecks
-
-    /**
-     * Checks if the given input is a two-dimensional array of {@link Cell} objects.
-     * <p>
-     * This method returns {@code true} if the input is an instance of {@code Cell[][]},
-     * and {@code false} otherwise.
-     * </p>
-     *
-     * @param input the object to be checked
-     * @return {@code true} if the input is a {@code Cell[][]}, {@code false} otherwise
-     */
-    public boolean inputIsArray(Object input) {
-        return (input instanceof Cell[][]);
-    }
-
-    //endregion
     //region formatToString
     /**
      * Converts a two-dimensional array of {@link Cell} objects into a string representation.
