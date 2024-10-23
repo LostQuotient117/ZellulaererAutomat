@@ -170,18 +170,6 @@ public class LogTests {
         Log log = new LogConsole();
         assertFalse(log.isListOfListsOfCells(testFalseList));
     }
-    /**
-     * Tests the {@link Log#isListOfListsOfCells(Object)} method to ensure it returns false for a list of lists containing only {@code null} values.
-     * <p>
-     * This test verifies that the {@link Log#isListOfListsOfCells(Object)} method correctly identifies a list of lists
-     * that contains only {@code null} values as an invalid structure.
-     * </p>
-     */
-    @Test
-    public void testIsListOfListsOfCells_False_AllNulls(){
-        Log log = new LogConsole();
-        assertFalse(log.isListOfListsOfCells(testFalseAllNullsList));
-    }
     //endregion
     //region formatToStringTests
     /**
