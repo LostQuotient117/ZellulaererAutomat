@@ -77,4 +77,39 @@ public abstract class Log implements ILogger {
     }
 
     //endregion /
+    //region listCheck
+
+    /**
+     * Checks if the given input is a list of lists containing {@link Cell} objects or {@code null} values.
+     * <p>
+     * This method verifies that the input is a list of lists, where each inner list contains either
+     * {@link Cell} objects or {@code null} values. It returns {@code true} if the structure is valid and contains
+     * at least one non-{@code null} {@link Cell}. If any element is not a {@link Cell},
+     *the method returns {@code false}.
+     * </p>
+     *
+     * @param gridInput the input to be checked, expected to be a list of lists
+     * @return {@code true} if the input is a valid list of lists containing {@link Cell} objects or {@code null} values,
+     * and contains at least one non-null {@link Cell}; {@code false} otherwise
+     */
+    public boolean isListOfListsOfCells(Object gridInput) {
+        if (gridInput instanceof List<?> outerList) {
+            if (!outerList.isEmpty() && outerList.getFirst() instanceof List<?>) {
+                for (Object innerListObj : outerList) {
+                    if (innerListObj instanceof List<?> innerList) {
+                        for (Object element : innerList) {
+                            if (element != null && !(element instanceof Cell)) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    //endregion
 }
