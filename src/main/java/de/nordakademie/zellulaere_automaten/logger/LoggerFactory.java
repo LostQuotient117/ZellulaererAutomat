@@ -1,5 +1,8 @@
 package de.nordakademie.zellulaere_automaten.logger;
 
+import de.nordakademie.zellulaere_automaten.logger.loggerImpl.LogConsole;
+import de.nordakademie.zellulaere_automaten.logger.loggerImpl.LogFile;
+
 /**
  * A factory class for creating instances of {@link ILogger}.
  * <p>
