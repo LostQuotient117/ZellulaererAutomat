@@ -3,6 +3,7 @@ package de.nordakademie.zellulaere_automaten.model;
 import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.StateCalculation;
 
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -153,6 +154,26 @@ public class Cell {
         return this.column == otherCell.getColumn()
                 && this.row == otherCell.getRow()
                 && this.isAlive == otherCell.getIsAlive();
+    }
+
+    @Override
+    public String toString() {
+        return isAlive ? "1" : "0";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) //Checks whether the two variables refer to the same object in memory
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Cell otherCell = (Cell) obj;
+        return row == otherCell.row && column == otherCell.column;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column);
     }
 
     // endregion
