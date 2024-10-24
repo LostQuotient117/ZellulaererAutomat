@@ -2,7 +2,7 @@ package de.nordakademie.zellulaere_automaten.grid;
 
 import java.util.Arrays;
 
-public enum GridType{
+public enum GridType {
     ClassicGrid(1),
     HashMapGrid(2);
     private final int value;

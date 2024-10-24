@@ -12,21 +12,6 @@ import java.util.ArrayList;
 public interface IGrid {
 
     /**
-     *This method initializes the grid with all cells being off.
-     * @param rows: defines number of rows for grid
-     * @param columns: defines number of columns for grid
-     */
-    public void initializeEmptyGrid(int rows, int columns);
-
-    /**
-     *This method initializes the grid with given configuration.
-     * @param rows: defines number of rows for grid
-     * @param columns: defines number of columns for grid
-     * @param configuration defines a list of int tuples which show active cells and their coordinates
-     */
-    public void initializeStartConfig(int rows, int columns, ArrayList<Tuple<Integer, Integer>> configuration);
-
-    /**
      * This method goes through the grid data-structure and recalculates the alive value of its cells.
      * @return new grid state with calculated cell states
      */
