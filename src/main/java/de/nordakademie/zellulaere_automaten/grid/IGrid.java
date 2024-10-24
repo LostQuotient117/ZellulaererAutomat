@@ -1,9 +1,5 @@
 package de.nordakademie.zellulaere_automaten.grid;
 
-import de.nordakademie.zellulaere_automaten.experiment.Tuple;
-
-import java.util.ArrayList;
-
 /**
  * The {@code IGrid} is the interface for the {@code ClassicGrid} and {@code HashMapGrid} which
  * implement two different datastructures and the methods defined in this interface.
@@ -22,4 +18,7 @@ public interface IGrid {
      * @return true: when the grid has not changed
      */
     public boolean isStable();
+
+    @Override
+    public String toString();
 }
