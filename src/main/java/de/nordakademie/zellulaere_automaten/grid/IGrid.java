@@ -1,5 +1,7 @@
 package de.nordakademie.zellulaere_automaten.grid;
 
+import de.nordakademie.zellulaere_automaten.model.Cell;
+
 /**
  * The {@code IGrid} is the interface for the {@code ClassicGrid} and {@code HashMapGrid} which
  * implement two different datastructures and the methods defined in this interface.
@@ -12,6 +14,16 @@ public interface IGrid {
      * @return new grid state with calculated cell states
      */
     public IGrid calculateNextGeneration();
+
+    /**
+     * Returns the cell located at the specified coordinates in the grid.
+     *
+     * @param x the row index of the cell
+     * @param y the column index of the cell
+     * @return the cell located at the specified (x, y) coordinates
+     * @throws IndexOutOfBoundsException if the specified coordinates are out of bounds
+     */
+    public Cell getCellByCoordinates(int x, int y);
 
     /**
      * Checks if grid is in a stable constellation
