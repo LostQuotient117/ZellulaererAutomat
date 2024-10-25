@@ -156,11 +156,25 @@ public class Cell {
                 && this.isAlive == otherCell.getIsAlive();
     }
 
+    /**
+     * Returns a string representation of the cell's state.
+     * If the cell is alive, it returns "1"; otherwise, it returns "0".
+     *
+     * @return "1" if the cell is alive, otherwise "0"
+     */
     @Override
     public String toString() {
         return isAlive ? "1" : "0";
     }
 
+    /**
+     * Compares this cell to the specified object.
+     * The result is {@code true} if and only if the argument is not null,
+     * is of the same class, and has the same row and column values.
+     *
+     * @param obj the object to compare this cell against
+     * @return {@code true} if the given object represents a cell with the same row and column; {@code false} otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) //Checks whether the two variables refer to the same object in memory
@@ -171,6 +185,12 @@ public class Cell {
         return row == otherCell.row && column == otherCell.column;
     }
 
+    /**
+     * Returns a hash code value for the cell based on its row and column.
+     * Cells with the same row and column will have the same hash code.
+     *
+     * @return a hash code value for this cell
+     */
     @Override
     public int hashCode() {
         return Objects.hash(row, column);
