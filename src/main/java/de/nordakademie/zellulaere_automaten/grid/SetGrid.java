@@ -6,7 +6,7 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class SetGrid implements IGrid{
+public class SetGrid{
     private int rows;
     private int columns;
     Set<Cell> activeCells;
@@ -24,7 +24,7 @@ public class SetGrid implements IGrid{
      *
      * @return new grid state with calculated cell states
      */
-    @Override
+    //@Override
     public IGrid calculateNextGeneration() {
         return null;
     }
@@ -35,7 +35,7 @@ public class SetGrid implements IGrid{
      *
      * @return true: when the grid has not changed
      */
-    @Override
+    //@Override
     public boolean isStable() {
         return false;
     }
