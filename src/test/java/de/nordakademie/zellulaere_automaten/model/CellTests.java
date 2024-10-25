@@ -18,18 +18,13 @@ class CellTests {
 
     private Cell cell;
 
-    //left out for now because of complexity and errors
-    //private StateCalculation mockStateCalculation;
-
     /**
      * Sets up the test environment before each test.
      * Initializes a new {@code Cell} instance.
      */
     @BeforeEach
     void setUp() {
-        //left out for now because of complexity and errors
-        //mockStateCalculation = Mockito.mock(StateCalculation.class);
-        cell = new Cell(1, 1, true, List.of());
+        cell = new Cell(1, 1, true);
     }
 
     // region Getter Tests
@@ -59,25 +54,7 @@ class CellTests {
     void getIsAlive_WhenCalled_ShouldReturnTrue() {
         assertTrue(cell.getIsAlive());
     }
-
-    /**
-     * Tests the {@code getNeighborList} method of the {@code Cell} class.
-     * Asserts that the neighbor list is not null.
-     */
-    @Test
-    void getNeighborList_WhenCalled_ShouldNotBeNull() {
-        assertNotNull(cell.getNeighborList());
-    }
-
-    //left out for now because of complexity and errors
-    /*
-    @Test
-    void testGetStateCalculation() {
-        assertEquals(mockStateCalculation, cell.getStateCalculation());
-    }
-     */
     // endregion
-
 
     // region Setter Tests
     /**
@@ -109,30 +86,7 @@ class CellTests {
         cell.setIsAlive(false);
         assertFalse(cell.getIsAlive());
     }
-
-
-    /**
-     * Tests the {@code setNeighborList} method of the {@code Cell} class.
-     * Asserts that the neighbor list is correctly set.
-     */
-    @Test
-    void setNeighborList_WithValidList_ShouldUpdateNeighborList() {
-        List<Cell> neighbors = List.of(new Cell(0, 0, false, List.of()));
-        cell.setNeighborList(neighbors);
-        assertEquals(neighbors, cell.getNeighborList());
-    }
-
-    //left out for now because of complexity and errors
-    /*
-    @Test
-    void testSetStateCalculation() {
-        StateCalculation newMockStateCalculation = Mockito.mock(StateCalculation.class);
-        cell.setStateCalculation(newMockStateCalculation);
-        assertEquals(newMockStateCalculation, cell.getStateCalculation());
-    }
-     */
     // endregion
-
 
     // region Logic Tests
 

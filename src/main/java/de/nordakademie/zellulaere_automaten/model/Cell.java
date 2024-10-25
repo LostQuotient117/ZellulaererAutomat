@@ -17,9 +17,6 @@ public class Cell {
     private int row;
     private int column;
     private boolean isAlive;
-    private List<Cell> neighborList;
-
-    // private StateCalculation stateCalculation;
 
     /**
      * Constructs a new {@code Cell} with the specified properties.
@@ -32,22 +29,6 @@ public class Cell {
         this.row = row;
         this.column = column;
         this.isAlive = isAlive;
-    }
-
-
-    /**
-     * Constructs a new {@code Cell} with the specified properties.
-     *
-     * @param row          the row position of the cell
-     * @param column       the column position of the cell
-     * @param isAlive      the alive status of the cell
-     * @param neighborList the list of neighboring cells
-     */
-    public Cell(int row, int column, boolean isAlive, List<Cell> neighborList) {
-        this.row = row;
-        this.column = column;
-        this.isAlive = isAlive;
-        this.neighborList = neighborList;
     }
 
     // region Getter
@@ -78,22 +59,7 @@ public class Cell {
     public boolean getIsAlive() {
         return isAlive;
     }
-
-    /**
-     * Returns the list of neighboring cells.
-     *
-     * @return the list of neighboring cells
-     */
-    public List<Cell> getNeighborList() {
-        return neighborList;
-    }
     // endregion
-
-    /*
-    public StateCalculation getStateCalculation() {
-        return stateCalculation;
-    }
-     */
 
     // region Setter
 
@@ -123,23 +89,7 @@ public class Cell {
     public void setIsAlive(boolean alive) {
         isAlive = alive;
     }
-
-    /**
-     * Sets the list of neighboring cells.
-     *
-     * @param neighborList the new list of neighboring cells
-     */
-    public void setNeighborList(List<Cell> neighborList) {
-        this.neighborList = neighborList;
-    }
     // endregion
-
-    /*
-    public void setStateCalculation(StateCalculation stateCalculation) {
-        this.stateCalculation = stateCalculation;
-    }
-
-     */
 
     // region Logic
 
@@ -182,7 +132,7 @@ public class Cell {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Cell otherCell = (Cell) obj;
-        return row == otherCell.row && column == otherCell.column;
+        return row == otherCell.row && column == otherCell.column && isAlive == otherCell.isAlive;
     }
 
     /**
