@@ -1,12 +1,10 @@
 package de.nordakademie.zellulaere_automaten.model;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 /**
  * The {@code CellTests} class contains unit tests for the {@code Cell} class.
@@ -138,40 +136,135 @@ class CellTests {
 
     // region Logic Tests
 
-    // region isEqualCell Tests
-
+    // region toStringTests
     /**
-     * Tests the {@code isEqualCell} method of the {@code Cell} class.
-     * Asserts that two cells with the same coordinates and alive status are equal.
+     * Tests the {@code toString()} method for a dead cell.
+     * This test verifies that when the {@code isAlive} property of the cell is false, the method returns "0".
      */
     @Test
-    void isEqualCell_WithSameCoordinatesAndAliveStatus_ShouldReturnTrue() {
-        Cell otherCell = new Cell(1, 1, true);
-        assertTrue(cell.isEqualCell(otherCell));
-    }
-
-    /**
-     * Tests the {@code isEqualCell} method of the {@code Cell} class.
-     * Asserts that two cells with different coordinates are not equal.
-     */
-    @Test
-    void isEqualCell_WithDifferentCoordinates_ShouldReturnFalse() {
-        Cell otherCell = new Cell(2, 1, true);
-        assertFalse(cell.isEqualCell(otherCell));
-    }
-
-    /**
-     * Tests the {@code isEqualCell} method of the {@code Cell} class.
-     * Asserts that two cells with different alive status are not equal.
-     */
-    @Test
-    void isEqualCell_WithDifferentAliveStatus_ShouldReturnFalse() {
+    void toString_DeadCell_ShouldReturnZeroString(){
         Cell otherCell = new Cell(1, 1, false);
-        assertFalse(cell.isEqualCell(otherCell));
+        assertEquals("0", otherCell.toString());
+    }
+
+    /**
+     * Tests the {@code toString()} method for a live cell.
+     * This test verifies that when the {@code isAlive} property of the cell is true, the method returns "1".
+     */
+    @Test
+    void toString_AliveCell_ShouldReturnStringWithNoOne(){
+        Cell otherCell = new Cell(1, 1, true);
+        assertEquals("1", otherCell.toString());
+    }
+    //endregion
+
+    // region equals tests
+
+    /**
+     * Tests the {@code equals()} method for the same object.
+     * This test verifies that a {@code Cell} object is equal to itself, returning true when both references
+     * are to the same instance.
+     */
+    @Test
+    void equals_SameObject_ReturnsTrue() {
+        Cell cell = new Cell(1, 1, true);
+        assertEquals(cell, cell);
+    }
+
+    /**
+     * Tests the {@code equals()} method when comparing to a {@code null} object.
+     * This test verifies that a {@code Cell} object is not equal to {@code null}, returning false.
+     */
+    @Test
+    void equals_NullObject_ReturnsFalse() {
+        Cell cell = new Cell(1, 1, true);
+        assertNotEquals(null, cell);
+    }
+
+    /**
+     * Tests the {@code equals()} method when comparing to an object of a different class.
+     * This test verifies that a {@code Cell} object is not equal to an object of a different class,
+     * returning false.
+     */
+    @Test
+    void equals_DifferentClassObject_ReturnsFalse() {
+        Cell cell = new Cell(1, 1, true);
+        String differentObject = "I am not a Cell";
+        assertNotEquals(cell, differentObject);
+    }
+
+    /**
+     * Tests the {@code equals()} method when two cells have the same {@code row} and {@code column}.
+     * This test verifies that two {@code Cell} objects with the same {@code row} and {@code column} are
+     * considered equal, even if their {@code isAlive} status is different.
+     */
+    @Test
+    void equals_SameRowAndColumn_ReturnsTrue() {
+        Cell cell1 = new Cell(1, 1, true);
+        Cell cell2 = new Cell(1, 1, false);  // Different alive status, but should still be equal based on row and column
+        assertEquals(cell1, cell2);
+    }
+
+    /**
+     * Tests the {@code equals()} method when two cells have different {@code row} values.
+     * This test verifies that two {@code Cell} objects with different {@code row} values are not equal.
+     */
+    @Test
+    void equals_DifferentRow_ReturnsFalse() {
+        Cell cell1 = new Cell(1, 1, true);
+        Cell cell2 = new Cell(2, 1, true);  // Different row
+        assertNotEquals(cell1, cell2);
+    }
+
+    /**
+     * Tests the {@code equals()} method when two cells have different {@code column} values.
+     * This test verifies that two {@code Cell} objects with different {@code column} values are not equal.
+     */
+    @Test
+    void equals_DifferentColumn_ReturnsFalse() {
+        Cell cell1 = new Cell(1, 1, true);
+        Cell cell2 = new Cell(1, 2, true);  // Different column
+        assertNotEquals(cell1, cell2);
     }
     // endregion
 
+    // region hashCoce test
 
+    /**
+     * Tests that the hashCode of the same object remains consistent across multiple calls.
+     * This test verifies that calling {@code hashCode()} multiple times on the same {@code Cell} object
+     * returns the same value each time, ensuring the consistency of the hash code.
+     */
+    @Test
+    void hashCode_ConsistentHashCode_ReturnsSameValue() {
+        Cell cell = new Cell(1, 1, true);
+        int initialHashCode = cell.hashCode();
+        assertEquals(initialHashCode, cell.hashCode());
+        assertEquals(initialHashCode, cell.hashCode());
+    }
+
+    /**
+     * Tests that two objects which are equal according to {@code equals()} have the same hash code.
+     * This test verifies that if two {@code Cell} objects are equal, they must have the same hash code.
+     */
+    @Test
+    void hashCode_EqualObjects_ReturnSameHashCode() {
+        Cell cell1 = new Cell(1, 1, true);
+        Cell cell2 = new Cell(1, 1, false); // row and column are the same, isAlive is ignored in equals
+        assertEquals(cell1.hashCode(), cell2.hashCode());
+    }
+
+    /**
+     * Tests that two objects which are not equal according to {@code equals()} have different hash codes.
+     * This test verifies that if two {@code Cell} objects are not equal, they should ideally have different hash codes.
+     */
+    @Test
+    void hashCode_UnequalObjects_ReturnDifferentHashCodes() {
+        Cell cell1 = new Cell(1, 1, true);
+        Cell cell2 = new Cell(2, 1, true); // Different row
+        assertNotEquals(cell1.hashCode(), cell2.hashCode());
+    }
+    //endregion
     // endregion
 
 }

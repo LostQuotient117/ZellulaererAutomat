@@ -1,5 +1,7 @@
 package de.nordakademie.zellulaere_automaten.logger;
 
+import de.nordakademie.zellulaere_automaten.logger.loggerImpl.LogConsole;
+import de.nordakademie.zellulaere_automaten.logger.loggerImpl.LogFile;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
