@@ -66,6 +66,32 @@ class ClassicGridTest {
     }
 
     /**
+     * Test for the toString method when the grid is initialized with alternating alive and dead cells.
+     * The expected result is a correctly formatted string representation of the grid.
+     */
+    @Test
+    void toString_AlternatingCells_CorrectlyFormatted() {
+        ClassicGrid grid = new ClassicGrid(3, 3);
+
+        grid.getGrid()[0][0] = new Cell(0, 0, true);
+        grid.getGrid()[0][1] = new Cell(0, 1, false);
+        grid.getGrid()[0][2] = new Cell(0, 2, true);
+
+        grid.getGrid()[1][0] = new Cell(1, 0, false);
+        grid.getGrid()[1][1] = new Cell(1, 1, true);
+        grid.getGrid()[1][2] = new Cell(1, 2, false);
+
+        grid.getGrid()[2][0] = new Cell(2, 0, true);
+        grid.getGrid()[2][1] = new Cell(2, 1, false);
+        grid.getGrid()[2][2] = new Cell(2, 2, true);
+
+        String expectedOutput = "1 0 1 \n0 1 0 \n1 0 1 \n";
+        String actualOutput = grid.toString();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    /**
      * Test for the copyGrid method when modifying the original grid.
      * The expected result is that the copied grid remains unchanged.
      */
