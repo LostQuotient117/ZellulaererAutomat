@@ -1,69 +1,59 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * This Test-Class tests the methods of the {@link LogFile}-class
+ */
 public class LogFileTests {
     private static String wantedString100x100;
     private static String wantedStringHeaderAndBody;
     private static String wantedStringHeaderAndBody100Iterations;
+
+
     /**
-     * Initializes a string representing a 100x100 grid of zeros for testing purposes.
-     * <p>
-     * This method is annotated with {@code @BeforeAll} to ensure that the string is
-     * set up before any tests are run. The string consists of one hundred lines, each containing
-     * one hundred zeros, with each line separated by a newline character to imitate the grid structure.
-     * </p>
+     *Sets up specific string variables required for testing different scenarios.
+     * @param testInfo Provides information about the currently running test, including its display name.
      */
-    @BeforeAll
-    public static void wantedStringForTestFormatArraytoStringTests() {
-        StringBuilder wantedStringBuilder = new StringBuilder();
-        for (int i = 0; i < 100; i++) {
-            wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append(System.lineSeparator());
-        }
-        wantedString100x100 = wantedStringBuilder.toString();
-    }
-    /**
-     * Initializes a string representing a header and a 100x100 grid of zeros for testing purposes.
-     * <p>
-     * This method is annotated with {@code @BeforeAll} to ensure that the string is set up before any tests are run.
-     * The string consists of a header line followed by one hundred lines, each containing one hundred zeros,
-     * with each line separated by a newline character. The header includes the iteration count in parentheses.
-     * </p>
-     */
-    @BeforeAll
-    public static void wantedStringHeaderAndBodyForTestConsoleWriteLog() {
-        StringBuilder wantedStringBuilder = new StringBuilder();
-        wantedStringBuilder.append("### (99)").append(System.lineSeparator());
-        for (int i = 0; i < 100; i++) {
-            wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append(System.lineSeparator());
-        }
-        wantedStringHeaderAndBody = wantedStringBuilder.toString();
-    }
-    /**
-     * Generates a test string with 100 iterations of a specific pattern.
-     * Each iteration consists of a header line followed by 100 lines of 100 zeros.
-     * The generated string is stored in the static variable {@code wantedStringHeaderAndBody100Iterations}.
-     */
-    @BeforeAll
-    public static void wantedStringHeaderAndBody100IterationsForTestWriteLogWith100Iterations(){
-        StringBuilder wantedStringBuilder = new StringBuilder();
-        for (int i = 1; i <= 100; i++) {
-            wantedStringBuilder.append("### (").append(i).append(")").append(System.lineSeparator());
-            for (int j = 0; j < 100; j++) {
+    @BeforeEach
+    public void setUpVariables(TestInfo testInfo){
+        String test = testInfo.getDisplayName();
+        if (test.equals("buildStringForFile_GridAndIteration_ShouldReturnGridStringWithIteration()") ||
+                test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()") ||
+                (test.equals("writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile()"))){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            for (int i = 0; i < 100; i++) {
                 wantedStringBuilder.append("0".repeat(100));
                 wantedStringBuilder.append(System.lineSeparator());
             }
-            wantedStringBuilder.append(System.lineSeparator());
+            wantedString100x100 = wantedStringBuilder.toString();
         }
-        wantedStringHeaderAndBody100Iterations = wantedStringBuilder.toString();
+        if (test.equals("exportGridToFile_GridWithHeaderAndBody_ShouldWriteFileWithGrid()") ||
+            test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            wantedStringBuilder.append("### (99)").append(System.lineSeparator());
+            for (int i = 0; i < 100; i++) {
+                wantedStringBuilder.append("0".repeat(100));
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            wantedStringHeaderAndBody = wantedStringBuilder.toString();
+        }
+        if (test.equals("writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            for (int i = 1; i <= 100; i++) {
+                wantedStringBuilder.append("### (").append(i).append(")").append(System.lineSeparator());
+                for (int j = 0; j < 100; j++) {
+                    wantedStringBuilder.append("0".repeat(100));
+                    wantedStringBuilder.append(System.lineSeparator());
+                }
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            wantedStringHeaderAndBody100Iterations = wantedStringBuilder.toString();
+        }
     }
     /**
      * Tests the private method {@code buildStringForFile} of the {@code LogFile} class.
@@ -77,7 +67,7 @@ public class LogFileTests {
      * @throws NoSuchMethodException if the method cannot be found
      */
     @Test
-    public void testBuildStringForFile() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public void buildStringForFile_GridAndIteration_ShouldReturnGridStringWithIteration() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         LogFile logFile = new LogFile();
         Method privateBuildStringForFile = LogFile.class.getDeclaredMethod("buildStringForFile", String.class, int.class);
         privateBuildStringForFile.setAccessible(true);
@@ -86,17 +76,15 @@ public class LogFileTests {
     }
     /**
      * Tests the private method {@code exportGridToFile} of the {@code LogFile} class.
-     * <p>
-     * This test uses reflection to access the private method and verifies that the method
-     * correctly exports a string with a header and a 100x100 grid of zeros to a file.
-     * </p>
+     * <p> This test uses reflection to access the private method and verifies that the method
+     * correctly exports a string with a header and a 100x100 grid of zeros to a file.</p>
      *
      * @throws NoSuchMethodException if the method cannot be found
      * @throws InvocationTargetException if the underlying method throws an exception
      * @throws IllegalAccessException if the underlying method is inaccessible
      */
     @Test
-    public void testExportGridToFile() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void exportGridToFile_GridWithHeaderAndBody_ShouldWriteFileWithGrid() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         LogFile logFile = new LogFile();
         String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
 
@@ -121,12 +109,10 @@ public class LogFileTests {
     }
     /**
      * Tests the {@link LogFile#writeLog(String formattedGrid, int iteration)}.
-     * <p>
-     * This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file.
-     * </p>
+     * <p> This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file.</p>
      */
     @Test
-    public void testWriteLog(){
+    public void writeLog_GridStringAndIteration_ShouldWriteFile(){
         LogFile logFile = new LogFile();
         String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
 
@@ -149,13 +135,11 @@ public class LogFileTests {
     }
     /**
      * Tests {@link LogFile#writeLog(String, int)} with 100 iterations.
-     * <p>
-     * This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file
-     * for 100 iterations.
-     * </p>
+     * <p> This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file
+     * for 100 iterations.</p>
      */
     @Test
-    public void testWriteLogWith100Iterations(){
+    public void writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile(){
         LogFile logFile = new LogFile();
         String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
 
