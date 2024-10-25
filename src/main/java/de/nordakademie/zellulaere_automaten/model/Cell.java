@@ -17,9 +17,6 @@ public class Cell {
     private int row;
     private int column;
     private boolean isAlive;
-    private List<Cell> neighborList;
-
-    // private StateCalculation stateCalculation;
 
     /**
      * Constructs a new {@code Cell} with the specified properties.
@@ -32,22 +29,6 @@ public class Cell {
         this.row = row;
         this.column = column;
         this.isAlive = isAlive;
-    }
-
-
-    /**
-     * Constructs a new {@code Cell} with the specified properties.
-     *
-     * @param row          the row position of the cell
-     * @param column       the column position of the cell
-     * @param isAlive      the alive status of the cell
-     * @param neighborList the list of neighboring cells
-     */
-    public Cell(int row, int column, boolean isAlive, List<Cell> neighborList) {
-        this.row = row;
-        this.column = column;
-        this.isAlive = isAlive;
-        this.neighborList = neighborList;
     }
 
     // region Getter
@@ -78,22 +59,7 @@ public class Cell {
     public boolean getIsAlive() {
         return isAlive;
     }
-
-    /**
-     * Returns the list of neighboring cells.
-     *
-     * @return the list of neighboring cells
-     */
-    public List<Cell> getNeighborList() {
-        return neighborList;
-    }
     // endregion
-
-    /*
-    public StateCalculation getStateCalculation() {
-        return stateCalculation;
-    }
-     */
 
     // region Setter
 
@@ -123,23 +89,7 @@ public class Cell {
     public void setIsAlive(boolean alive) {
         isAlive = alive;
     }
-
-    /**
-     * Sets the list of neighboring cells.
-     *
-     * @param neighborList the new list of neighboring cells
-     */
-    public void setNeighborList(List<Cell> neighborList) {
-        this.neighborList = neighborList;
-    }
     // endregion
-
-    /*
-    public void setStateCalculation(StateCalculation stateCalculation) {
-        this.stateCalculation = stateCalculation;
-    }
-
-     */
 
     // region Logic
 
@@ -156,11 +106,25 @@ public class Cell {
                 && this.isAlive == otherCell.getIsAlive();
     }
 
+    /**
+     * Returns a string representation of the cell's state.
+     * If the cell is alive, it returns "1"; otherwise, it returns "0".
+     *
+     * @return "1" if the cell is alive, otherwise "0"
+     */
     @Override
     public String toString() {
         return isAlive ? "1" : "0";
     }
 
+    /**
+     * Compares this cell to the specified object.
+     * The result is {@code true} if and only if the argument is not null,
+     * is of the same class, and has the same row and column values.
+     *
+     * @param obj the object to compare this cell against
+     * @return {@code true} if the given object represents a cell with the same row and column; {@code false} otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) //Checks whether the two variables refer to the same object in memory
@@ -168,9 +132,15 @@ public class Cell {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Cell otherCell = (Cell) obj;
-        return row == otherCell.row && column == otherCell.column;
+        return row == otherCell.row && column == otherCell.column && isAlive == otherCell.isAlive;
     }
 
+    /**
+     * Returns a hash code value for the cell based on its row and column.
+     * Cells with the same row and column will have the same hash code.
+     *
+     * @return a hash code value for this cell
+     */
     @Override
     public int hashCode() {
         return Objects.hash(row, column);

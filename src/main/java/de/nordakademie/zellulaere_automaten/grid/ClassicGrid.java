@@ -2,6 +2,8 @@ package de.nordakademie.zellulaere_automaten.grid;
 
 import de.nordakademie.zellulaere_automaten.experiment.Tuple;
 import de.nordakademie.zellulaere_automaten.model.Cell;
+import de.nordakademie.zellulaere_automaten.strategy.simulationMode.SimulationMode;
+import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.StateCalculation;
 
 import java.util.ArrayList;
 
@@ -10,15 +12,27 @@ public class ClassicGrid implements IGrid{
     private int columns;
 
     private Cell[][] grid;
-    private ArrayList<Cell> previousGenActiveCells;
-    private ArrayList<Cell> activeCells;
-    private ArrayList<Cell> previousGenDeadCells;
-    private ArrayList<Cell> deadCells;
+    private Cell[][] previousGrid;
+
+    private SimulationMode neighborCalculationStrategy;
+    private StateCalculation stateCalculationStrategy;
 
     public ClassicGrid(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
+
         this.grid = new Cell[rows][columns];
+        this.previousGrid = new Cell[rows][columns];
+    }
+    public ClassicGrid(int rows, int columns, SimulationMode neighborCalculationStrategy, StateCalculation stateCalculationStrategy) {
+        this.rows = rows;
+        this.columns = columns;
+
+        this.grid = new Cell[rows][columns];
+        this.previousGrid = new Cell[rows][columns];
+
+        this.neighborCalculationStrategy = neighborCalculationStrategy;
+        this.stateCalculationStrategy = stateCalculationStrategy;
     }
 
     // region Getter & Setter
@@ -34,6 +48,9 @@ public class ClassicGrid implements IGrid{
     public Cell[][] getGrid() {
         return grid;
     }
+    public Cell[][] getPreviousGrid() {
+        return previousGrid;
+    }
     // endregion
 
     /**
@@ -43,6 +60,15 @@ public class ClassicGrid implements IGrid{
      */
     @Override
     public IGrid calculateNextGeneration() {
+        copyGrid(grid, previousGrid);
+        /*for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                Cell cell = grid[row][col];
+                ArrayList<Cell> neighbors = neighborCalculationStrategy.getNeighbors(cell);
+                boolean newIsAlive = stateCalculationStrategy.calculateAlive(cell, neighbors);
+                cell.setIsAlive(newIsAlive);
+            }
+        }*/
         return null;
     }
 
@@ -53,39 +79,29 @@ public class ClassicGrid implements IGrid{
      */
     @Override
     public boolean isStable() {
-        return false;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (!grid[row][col].equals(previousGrid[row][col])) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     // region helper functions
-    private boolean isEqualCell(Cell first, Cell second) {
-        return first.getColumn() == second.getColumn()
-                && first.getRow() == second.getRow()
-                && first.getIsAlive() == second.getIsAlive();
-    }
-
-    private boolean sameAmountOfCells(ArrayList<Cell> current, ArrayList<Cell> previous){
-        return current.size() == previous.size();
-    }
-
-    // Currying
-    private boolean sameAmountOfActiveCells(){
-        return sameAmountOfCells(this.activeCells, this.previousGenActiveCells);
-    }
-    private boolean sameAmountOfDeadCells(){
-        return sameAmountOfCells(this.deadCells, this.previousGenDeadCells);
-    }
-
-
-    private boolean checkForCellEqualityInList(ArrayList<Cell> current, ArrayList<Cell> previous){
-        return current.stream()
-                .allMatch(currentCell -> previous.stream().anyMatch(lastGenCell -> isEqualCell(currentCell, lastGenCell)));
-    }
-
-    private boolean checkForCellEqualityInActiveList(){
-        return checkForCellEqualityInList(this.activeCells, this.previousGenActiveCells);
-    }
-    private boolean checkForCellEqualityInDeadList(){
-        return checkForCellEqualityInList(this.deadCells, this.previousGenDeadCells);
+    protected void copyGrid(Cell[][] origin, Cell[][] copy) {
+        for (int row = 0; row < origin.length; row++) {
+            for (int col = 0; col < origin[row].length; col++) {
+                copy[row][col] = new Cell(
+                        origin[row][col].getRow(),
+                        origin[row][col].getColumn(),
+                        origin[row][col].getIsAlive()
+                );
+            }
+        }
     }
     // endregion
 }
+
+

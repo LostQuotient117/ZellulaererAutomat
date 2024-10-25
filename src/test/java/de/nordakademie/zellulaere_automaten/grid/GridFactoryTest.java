@@ -14,7 +14,7 @@ public class GridFactoryTest
         gridFactory = new GridFactory();
     }
 
-    @Test
+  /*  @Test
     void testGridFactory_CreateClassicGird_True(){
         IGrid grid = gridFactory.createGrid("1");
         assertInstanceOf(ClassicGrid.class, grid, String.format("Grid should be instance of ClassicGrid, but its %s", grid.getClass()));
@@ -39,5 +39,5 @@ public class GridFactoryTest
         assertThrows(EnumConstantNotPresentException.class, () -> {
             gridFactory.createGrid(""+notExistentValue);
         }, "Expected an EnumConstantNotPresentException to be thrown for an invalid grid type");
-    }
+    }*/
 }

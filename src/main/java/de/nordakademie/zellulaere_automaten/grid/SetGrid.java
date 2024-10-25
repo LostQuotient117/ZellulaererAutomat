@@ -20,6 +20,16 @@ public class SetGrid implements IGrid{
     }
 
     /**
+     * This method goes through the grid data-structure and recalculates the alive value of its cells.
+     *
+     * @return new grid state with calculated cell states
+     */
+    @Override
+    public IGrid calculateNextGeneration() {
+        return null;
+    }
+
+    /**
      * TODO: Zelle Override
      * Checks if grid is in a stable constellation
      *
