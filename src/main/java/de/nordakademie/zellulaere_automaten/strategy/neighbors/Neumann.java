@@ -1,28 +1,21 @@
-package de.nordakademie.zellulaere_automaten.strategy.simulationMode;
+package de.nordakademie.zellulaere_automaten.strategy.neighbors;
+import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Neumann implements SimulationMode {
+public class Neumann extends AbstractNeighbors {
     /**
-     * Returns a list of neighboring cells.
+     * Returns a list of neighboring cells in the Neumann neighborhood.
+     * The Neumann neighborhood includes only the direct neighbors: up, down, left, and right.
      *
-     * This method creates a list of neighboring cells, based on the Neumann neighborhood.
-     * The list includes the direct neighbors which are above, below, to the left and to the right to the specific cell.
-     *
-     * @param cell the cell for that
-     * @return list of neighboring cells
+     * @param cell the cell for which neighbors are to be found
+     * @param grid the grid containing all cells
+     * @return a list of direct neighboring cells (Neumann neighborhood)
      */
     @Override
-    public List<Cell> getNeighbors(Cell cell){
-        List<Cell> neighbors = new ArrayList<>();
-
-        neighbors.add(new Cell(cell.getRow(), cell.getColumn() -1,false));
-        neighbors.add(new Cell(cell.getRow(), cell.getColumn() +1,false));
-        neighbors.add(new Cell(cell.getRow() -1, cell.getColumn(),false));
-        neighbors.add(new Cell(cell.getRow() +1, cell.getColumn(),false));
-
-        return neighbors;
+    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid) {
+        return super.getNeighbors(cell, grid);
     }
 }
 

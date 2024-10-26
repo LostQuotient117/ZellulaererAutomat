@@ -1,11 +1,11 @@
-package de.nordakademie.zellulaere_automaten.strategy.simulationMode;
+package de.nordakademie.zellulaere_automaten.strategy.neighbors;
+import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Moore implements SimulationMode{
+public class Moore extends AbstractNeighbors{
+
     /**
      * Returns a list of neighboring Moore cells.
      * This method creates a list of neighboring cells, based on the Moore neighborhood.
@@ -16,13 +16,28 @@ public class Moore implements SimulationMode{
      * @return list of neighboring Moore cells
      */
     @Override
-    public ArrayList<Cell> getNeighbors(Cell cell){
-        ArrayList<Cell> mooreNeighbors = new ArrayList<>();
+    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid){
+        ArrayList<Cell> mooreNeighbors = getDirectNeighbors(cell, grid);
+        int priorRow = cell.getRow()-1;
+        int priorColumn = cell.getColumn()-1;
+        int nextRow = cell.getColumn()+1;
+        int nextColumn = cell.getColumn()+1;
 
-        mooreNeighbors.add(new Cell(cell.getRow() -1, cell.getColumn() -1,false));
-        mooreNeighbors.add(new Cell(cell.getRow() -1, cell.getColumn() +1,false));
-        mooreNeighbors.add(new Cell(cell.getRow() +1, cell.getColumn() -1,false));
-        mooreNeighbors.add(new Cell(cell.getRow() +1, cell.getColumn() +1,false));
+        //diagonal top right
+        if (priorRow >= 0 && priorColumn >= 0)
+            mooreNeighbors.add(grid.getCellByCoordinates(priorRow, priorColumn));
+
+        //diagonal top left
+        if (priorRow >= 0 && nextColumn < grid.getColumns())
+            mooreNeighbors.add(grid.getCellByCoordinates(priorRow, nextColumn));
+
+        //diagonal bottom right
+        if (nextRow < grid.getRows() && priorColumn >= 0)
+            mooreNeighbors.add(grid.getCellByCoordinates(nextRow, priorColumn));
+
+        //diagonal bottom left
+        if (nextRow < grid.getRows() && nextColumn < grid.getColumns())
+            mooreNeighbors.add(grid.getCellByCoordinates(nextRow, nextColumn));
 
         return mooreNeighbors;
     }
