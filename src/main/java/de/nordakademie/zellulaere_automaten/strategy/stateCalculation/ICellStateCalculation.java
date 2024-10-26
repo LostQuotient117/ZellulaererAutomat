@@ -8,6 +8,6 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.ArrayList;
 
-public interface StateCalculation {
+public interface ICellStateCalculation {
     void calculateCellState(Cell cell, ArrayList<Cell> neighbours);
 }

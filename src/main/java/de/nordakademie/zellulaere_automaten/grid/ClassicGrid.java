@@ -2,7 +2,7 @@ package de.nordakademie.zellulaere_automaten.grid;
 
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.INeighborStrategy;
-import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.StateCalculation;
+import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellStateCalculation;
 
 public class ClassicGrid implements IGrid<Cell[][]>{
 
@@ -14,7 +14,7 @@ public class ClassicGrid implements IGrid<Cell[][]>{
     private Cell[][] previousGrid;
 
     private INeighborStrategy neighborCalculationStrategy;
-    private StateCalculation stateCalculationStrategy;
+    private ICellStateCalculation stateCalculationStrategy;
     //endregion
 
     //region Constructors
@@ -25,7 +25,7 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         this.grid = new Cell[rows][columns];
         this.previousGrid = new Cell[rows][columns];
     }
-    public ClassicGrid(int rows, int columns, INeighborStrategy neighborCalculationStrategy, StateCalculation stateCalculationStrategy) {
+    public ClassicGrid(int rows, int columns, INeighborStrategy neighborCalculationStrategy, ICellStateCalculation ICellStateCalculationStrategy) {
         this.rows = rows;
         this.columns = columns;
 
@@ -33,7 +33,7 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         this.previousGrid = new Cell[rows][columns];
 
         this.neighborCalculationStrategy = neighborCalculationStrategy;
-        this.stateCalculationStrategy = stateCalculationStrategy;
+        this.stateCalculationStrategy = ICellStateCalculationStrategy;
     }
     //endregion
 

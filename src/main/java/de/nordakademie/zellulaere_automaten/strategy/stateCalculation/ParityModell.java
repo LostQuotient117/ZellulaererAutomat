@@ -1,15 +1,8 @@
 package de.nordakademie.zellulaere_automaten.strategy.stateCalculation;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import java.util.ArrayList;
-import java.util.List;
-import de.nordakademie.zellulaere_automaten.strategy.simulationMode.SimulationMode;
 
-public class ParityModell implements StateCalculation {
-    private SimulationMode simulationMode;
-
-    public ParityModell(SimulationMode simulationMode) {
-        this.simulationMode = simulationMode;
-    }
+public class ParityModell implements ICellStateCalculation {
 
     @Override
     public void calculateCellState(Cell cell, ArrayList<Cell> neighbors){

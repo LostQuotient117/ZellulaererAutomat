@@ -1,8 +1,5 @@
 package de.nordakademie.zellulaere_automaten.model;
 
-import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.StateCalculation;
-
-import java.util.List;
 import java.util.Objects;
 
 
