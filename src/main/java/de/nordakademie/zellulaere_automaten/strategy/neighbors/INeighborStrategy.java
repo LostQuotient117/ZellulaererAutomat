@@ -2,15 +2,17 @@
  * This interface defines the SimulationMode that is relevant for the deviation between the neighborhood used.
  */
 
-package de.nordakademie.zellulaere_automaten.strategy.simulationMode;
+package de.nordakademie.zellulaere_automaten.strategy.neighbors;
+import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public interface SimulationMode {
+public interface INeighborStrategy {
 
-    public List<Cell> getNeighbors(Cell cell);
+    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid);
 
 }
 
