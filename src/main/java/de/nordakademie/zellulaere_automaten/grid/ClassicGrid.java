@@ -1,13 +1,10 @@
 package de.nordakademie.zellulaere_automaten.grid;
 
-import de.nordakademie.zellulaere_automaten.experiment.Tuple;
 import de.nordakademie.zellulaere_automaten.model.Cell;
-import de.nordakademie.zellulaere_automaten.strategy.simulationMode.SimulationMode;
+import de.nordakademie.zellulaere_automaten.strategy.neighbors.INeighborStrategy;
 import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.StateCalculation;
 
-import java.util.ArrayList;
-
-public class ClassicGrid implements IGrid{
+public class ClassicGrid implements IGrid<Cell[][]>{
 
     //region variables
     private int rows;
@@ -16,7 +13,7 @@ public class ClassicGrid implements IGrid{
     private Cell[][] grid;
     private Cell[][] previousGrid;
 
-    private SimulationMode neighborCalculationStrategy;
+    private INeighborStrategy neighborCalculationStrategy;
     private StateCalculation stateCalculationStrategy;
     //endregion
 
@@ -28,7 +25,7 @@ public class ClassicGrid implements IGrid{
         this.grid = new Cell[rows][columns];
         this.previousGrid = new Cell[rows][columns];
     }
-    public ClassicGrid(int rows, int columns, SimulationMode neighborCalculationStrategy, StateCalculation stateCalculationStrategy) {
+    public ClassicGrid(int rows, int columns, INeighborStrategy neighborCalculationStrategy, StateCalculation stateCalculationStrategy) {
         this.rows = rows;
         this.columns = columns;
 
@@ -42,14 +39,17 @@ public class ClassicGrid implements IGrid{
 
     // region Getter & Setter
 
+    @Override
     public int getRows() {
         return rows;
     }
 
+    @Override
     public int getColumns() {
         return columns;
     }
 
+    @Override
     public Cell[][] getGrid() {
         return grid;
     }
@@ -64,7 +64,7 @@ public class ClassicGrid implements IGrid{
      * @return new grid state with calculated cell states
      */
     @Override
-    public IGrid calculateNextGeneration() {
+    public Cell[][] calculateNextGeneration() {
         copyGrid(grid, previousGrid);
         /*for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
@@ -79,7 +79,6 @@ public class ClassicGrid implements IGrid{
 
     /**
      * Returns the cell located at the specified coordinates in the grid.
-     *
      * @param x the row index of the cell
      * @param y the column index of the cell
      * @return the cell located at the specified (x, y) coordinates
@@ -87,13 +86,12 @@ public class ClassicGrid implements IGrid{
      */
     @Override
     public Cell getCellByCoordinates(int x, int y) {
-        return null;
+        return grid[x][y];
     }
 
     /**
      * Returns a string representation of the grid, where each cell's state is represented
      * by its toString method. A newline is added after each row to separate the rows.
-     *
      * @return a string representation of the current state of the grid
      */
     @Override
@@ -111,7 +109,6 @@ public class ClassicGrid implements IGrid{
 
     /**
      * Checks if grid is in a stable constellation
-     *
      * @return true: when the grid has not changed
      */
     @Override

@@ -7,13 +7,17 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
  * implement two different datastructures and the methods defined in this interface.
  * To decide which Object should be used, we use the {@code GridFactory}.
  */
-public interface IGrid {
+public interface IGrid<T> {
+
+    public int getRows();
+    public int getColumns();
+    public T getGrid();
 
     /**
      * This method goes through the grid data-structure and recalculates the alive value of its cells.
      * @return new grid state with calculated cell states
      */
-    public IGrid calculateNextGeneration();
+    public T calculateNextGeneration();
 
     /**
      * Returns the cell located at the specified coordinates in the grid.
