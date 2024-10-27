@@ -22,6 +22,7 @@ public class LogConsole extends Log {
      */
     public void writeLogBody(String formattedGrid) {
         System.out.print(formattedGrid);
+        System.out.print(System.lineSeparator());
     }
     /**
      *This function is responsible for printing the first line of a grid,

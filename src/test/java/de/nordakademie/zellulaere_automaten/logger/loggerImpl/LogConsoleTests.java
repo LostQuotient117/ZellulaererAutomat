@@ -120,7 +120,7 @@ public class LogConsoleTests {
     public void testConsoleWriteLogBody(){
         LogConsole logConsole = new LogConsole();
         outputStreamCaptor.reset();
-        logConsole.writeLogBody(wantedString100x100);
+        logConsole.writeLogBody(wantedString100x100.trim());
         assertEquals(wantedString100x100, outputStreamCaptor.toString());
     }
     //endregion
@@ -137,7 +137,7 @@ public class LogConsoleTests {
     public void testConsoleWriteLog_iteration100(){
         LogConsole logConsole = new LogConsole();
         outputStreamCaptor.reset();
-        logConsole.writeLog(wantedString100x100, 99);
+        logConsole.writeLog(wantedString100x100.trim(), 99);
         assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
     }
     /**
