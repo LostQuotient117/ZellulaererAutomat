@@ -11,9 +11,9 @@ public class LogFile extends Log {
 
     /**
      * Writes the formatted grid and iteration number to a log file.
-     * <p> This method formats the log data and writes it to a file. If an
+     * This method formats the log data and writes it to a file. If an
      * {@code IOException} occurs during the file writing process, it is
-     * caught and the stack trace is printed.</p>
+     * caught and the stack trace is printed.
      *
      * @param formattedGrid the formatted grid string to be logged
      * @param iteration the iteration number to be included in the log
@@ -28,8 +28,8 @@ public class LogFile extends Log {
     }
     /**
      * Builds a string for logging to a file.
-     * <p> This method constructs a string that includes the iteration number
-     * and the formatted grid, separated by a line separator.</p>
+     * This method constructs a string that includes the iteration number
+     * and the formatted grid, separated by a line separator.
      *
      * @param formattedGrid the formatted grid string
      * @param iteration the iteration number
@@ -41,9 +41,9 @@ public class LogFile extends Log {
     }
     /**
      * Exports the constructed log string to a file.
-     * <p> This method writes the provided string to a log file. If an
+     * This method writes the provided string to a log file. If an
      * {@code IOException} occurs during the file writing process, it is
-     * propagated to the caller. </p>
+     * propagated to the caller.
      *
      * @param buildedStringForFile the string to be written to the file
      * @throws IOException if an I/O error occurs
