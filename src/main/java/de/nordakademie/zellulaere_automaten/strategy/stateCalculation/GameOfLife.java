@@ -5,21 +5,14 @@ import java.util.ArrayList;
 public class GameOfLife implements ICellStateCalculation {
 
     @Override
-    public void calculateCellState(Cell cell, ArrayList<Cell> neighbors){
-     int aliveNeighbors = 0;
-        for (int i = 0; i < neighbors.size(); i++) {
-            if (neighbors.get(i).getIsAlive()){
-                aliveNeighbors++;
-            }
-        }
+    public boolean staysAlive(Cell aliveCell, ArrayList<Cell> neighbors) {
+        long aliveNeighbors = neighbors.stream().filter(Cell::getIsAlive).count();
+        return aliveNeighbors == 2 || aliveNeighbors == 3;
+    }
 
-        if (cell.getIsAlive()) {
-            if (aliveNeighbors < 2 || aliveNeighbors > 3) {
-            cell.setIsAlive(false);}
-    }
-    else {
-        if (aliveNeighbors == 3) {
-            cell.setIsAlive(true);}
-    }
+    @Override
+    public boolean staysDead(Cell deadCell, ArrayList<Cell> neighbors) {
+        long aliveNeighbors = neighbors.stream().filter(Cell::getIsAlive).count();
+        return aliveNeighbors != 3;
     }
 }
