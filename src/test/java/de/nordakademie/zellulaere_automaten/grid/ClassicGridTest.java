@@ -18,7 +18,7 @@ class ClassicGridTest {
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
                 Cell cell = new Cell(row, col, true); // All cells are alive
-                grid.getGrid()[row][col] = cell;
+                grid.getDataStructure()[row][col] = cell;
                 grid.getPreviousGrid()[row][col] = new Cell(row, col, true); // Set previous grid to the same
             }
         }
@@ -35,7 +35,7 @@ class ClassicGridTest {
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
                 Cell cell = new Cell(row, col, true); // Current grid cells are alive
-                grid.getGrid()[row][col] = cell;
+                grid.getDataStructure()[row][col] = cell;
                 grid.getPreviousGrid()[row][col] = new Cell(row, col, false); // Previous grid cells are dead
             }
         }
@@ -57,15 +57,15 @@ class ClassicGridTest {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 boolean isAlive = (row + col) % 2 == 0; // Alternating alive and dead cells
-                grid.getGrid()[row][col] = new Cell(row, col, isAlive);
+                grid.getDataStructure()[row][col] = new Cell(row, col, isAlive);
             }
         }
 
-        grid.copyGrid(grid.getGrid(), grid.getPreviousGrid());
+        grid.copyGrid(grid.getDataStructure(), grid.getPreviousGrid());
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                assertEquals(grid.getGrid()[row][col], grid.getPreviousGrid()[row][col]);
+                assertEquals(grid.getDataStructure()[row][col], grid.getPreviousGrid()[row][col]);
             }
         }
     }
@@ -83,14 +83,14 @@ class ClassicGridTest {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 boolean isAlive = (row + col) % 2 == 0;
-                grid.getGrid()[row][col] = new Cell(row, col, isAlive);
+                grid.getDataStructure()[row][col] = new Cell(row, col, isAlive);
             }
         }
 
-        grid.copyGrid(grid.getGrid(), grid.getPreviousGrid());
-        grid.getGrid()[0][0].setIsAlive(!grid.getGrid()[0][0].getIsAlive());
+        grid.copyGrid(grid.getDataStructure(), grid.getPreviousGrid());
+        grid.getDataStructure()[0][0].setIsAlive(!grid.getDataStructure()[0][0].getIsAlive());
 
-        assertNotEquals(grid.getGrid()[0][0], grid.getPreviousGrid()[0][0]);
+        assertNotEquals(grid.getDataStructure()[0][0], grid.getPreviousGrid()[0][0]);
     }
     //endregion
 
@@ -103,17 +103,15 @@ class ClassicGridTest {
     void toString_AlternatingCells_CorrectlyFormatted() {
         ClassicGrid grid = new ClassicGrid(3, 3);
 
-        grid.getGrid()[0][0] = new Cell(0, 0, true);
-        grid.getGrid()[0][1] = new Cell(0, 1, false);
-        grid.getGrid()[0][2] = new Cell(0, 2, true);
-
-        grid.getGrid()[1][0] = new Cell(1, 0, false);
-        grid.getGrid()[1][1] = new Cell(1, 1, true);
-        grid.getGrid()[1][2] = new Cell(1, 2, false);
-
-        grid.getGrid()[2][0] = new Cell(2, 0, true);
-        grid.getGrid()[2][1] = new Cell(2, 1, false);
-        grid.getGrid()[2][2] = new Cell(2, 2, true);
+        grid.getDataStructure()[0][0] = new Cell(0, 0, true);
+        grid.getDataStructure()[0][1] = new Cell(0, 1, false);
+        grid.getDataStructure()[0][2] = new Cell(0, 2, true);
+        grid.getDataStructure()[1][0] = new Cell(1, 0, false);
+        grid.getDataStructure()[1][1] = new Cell(1, 1, true);
+        grid.getDataStructure()[1][2] = new Cell(1, 2, false);
+        grid.getDataStructure()[2][0] = new Cell(2, 0, true);
+        grid.getDataStructure()[2][1] = new Cell(2, 1, false);
+        grid.getDataStructure()[2][2] = new Cell(2, 2, true);
 
         String expectedOutput = "1 0 1 \n0 1 0 \n1 0 1 \n";
         String actualOutput = grid.toString();
@@ -132,7 +130,7 @@ class ClassicGridTest {
         ClassicGrid grid = new ClassicGrid(3, 3);
 
         Cell expectedCell = new Cell(1, 1, true);
-        grid.getGrid()[1][1] = expectedCell;
+        grid.getDataStructure()[1][1] = expectedCell;
 
         Cell actualCell = grid.getCellByCoordinates(1, 1);
 

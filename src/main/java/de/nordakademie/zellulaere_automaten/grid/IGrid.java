@@ -11,7 +11,7 @@ public interface IGrid<T> {
 
     public int getRows();
     public int getColumns();
-    public T getGrid();
+    public T getDataStructure();
 
     /**
      * This method goes through the grid data-structure and recalculates the alive value of its cells.

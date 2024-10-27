@@ -50,7 +50,7 @@ public class ClassicGrid implements IGrid<Cell[][]>{
     }
 
     @Override
-    public Cell[][] getGrid() {
+    public Cell[][] getDataStructure() {
         return grid;
     }
 
