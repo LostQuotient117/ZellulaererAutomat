@@ -1,22 +1,23 @@
 package de.nordakademie.zellulaere_automaten.grid;
 
-import de.nordakademie.zellulaere_automaten.experiment.Tuple;
 import de.nordakademie.zellulaere_automaten.model.Cell;
-import de.nordakademie.zellulaere_automaten.strategy.simulationMode.SimulationMode;
-import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.StateCalculation;
+import de.nordakademie.zellulaere_automaten.strategy.neighbors.INeighborStrategy;
+import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellStateCalculation;
 
-import java.util.ArrayList;
+public class ClassicGrid implements IGrid<Cell[][]>{
 
-public class ClassicGrid implements IGrid{
+    //region variables
     private int rows;
     private int columns;
 
     private Cell[][] grid;
     private Cell[][] previousGrid;
 
-    private SimulationMode neighborCalculationStrategy;
-    private StateCalculation stateCalculationStrategy;
+    private INeighborStrategy neighborCalculationStrategy;
+    private ICellStateCalculation stateCalculationStrategy;
+    //endregion
 
+    //region Constructors
     public ClassicGrid(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
@@ -24,7 +25,7 @@ public class ClassicGrid implements IGrid{
         this.grid = new Cell[rows][columns];
         this.previousGrid = new Cell[rows][columns];
     }
-    public ClassicGrid(int rows, int columns, SimulationMode neighborCalculationStrategy, StateCalculation stateCalculationStrategy) {
+    public ClassicGrid(int rows, int columns, INeighborStrategy neighborCalculationStrategy, ICellStateCalculation ICellStateCalculationStrategy) {
         this.rows = rows;
         this.columns = columns;
 
@@ -32,22 +33,27 @@ public class ClassicGrid implements IGrid{
         this.previousGrid = new Cell[rows][columns];
 
         this.neighborCalculationStrategy = neighborCalculationStrategy;
-        this.stateCalculationStrategy = stateCalculationStrategy;
+        this.stateCalculationStrategy = ICellStateCalculationStrategy;
     }
+    //endregion
 
     // region Getter & Setter
 
+    @Override
     public int getRows() {
         return rows;
     }
 
+    @Override
     public int getColumns() {
         return columns;
     }
 
-    public Cell[][] getGrid() {
+    @Override
+    public Cell[][] getDataStructure() {
         return grid;
     }
+
     public Cell[][] getPreviousGrid() {
         return previousGrid;
     }
@@ -55,11 +61,10 @@ public class ClassicGrid implements IGrid{
 
     /**
      * This method goes through the grid data-structure and recalculates the alive value of its cells.
-     *
      * @return new grid state with calculated cell states
      */
     @Override
-    public IGrid calculateNextGeneration() {
+    public Cell[][] calculateNextGeneration() {
         copyGrid(grid, previousGrid);
         /*for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
@@ -73,8 +78,37 @@ public class ClassicGrid implements IGrid{
     }
 
     /**
+     * Returns the cell located at the specified coordinates in the grid.
+     * @param x the row index of the cell
+     * @param y the column index of the cell
+     * @return the cell located at the specified (x, y) coordinates
+     * @throws IndexOutOfBoundsException if the specified coordinates are out of bounds
+     */
+    @Override
+    public Cell getCellByCoordinates(int x, int y) {
+        return grid[x][y];
+    }
+
+    /**
+     * Returns a string representation of the grid, where each cell's state is represented
+     * by its toString method. A newline is added after each row to separate the rows.
+     * @return a string representation of the current state of the grid
+     */
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                stringBuilder.append(grid[row][col].toString());
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
      * Checks if grid is in a stable constellation
-     *
      * @return true: when the grid has not changed
      */
     @Override
