@@ -1,0 +1,90 @@
+package de.nordakademie.zellulaere_automaten.grid;
+
+import de.nordakademie.zellulaere_automaten.model.Cell;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ClassicGridTest {
+    /**
+     * Test for the isStable method when both grids are identical.
+     * The expected result is that the grid is stable (true).
+     */
+    @Test
+    void isStable_IdenticalGrids_ReturnsTrue() {
+        ClassicGrid grid = new ClassicGrid(3, 3);
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int col = 0; col < grid.getColumns(); col++) {
+                Cell cell = new Cell(row, col, true); // All cells are alive
+                grid.getGrid()[row][col] = cell;
+                grid.getPreviousGrid()[row][col] = new Cell(row, col, true); // Set previous grid to the same
+            }
+        }
+        assertTrue(grid.isStable());
+    }
+
+    /**
+     * Test for the isStable method when the grids have different states.
+     * The expected result is that the grid is not stable (false).
+     */
+    @Test
+    void isStable_DifferentGrids_ReturnsFalse() {
+        ClassicGrid grid = new ClassicGrid(3, 3);
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int col = 0; col < grid.getColumns(); col++) {
+                Cell cell = new Cell(row, col, true); // Current grid cells are alive
+                grid.getGrid()[row][col] = cell;
+                grid.getPreviousGrid()[row][col] = new Cell(row, col, false); // Previous grid cells are dead
+            }
+        }
+        assertFalse(grid.isStable());
+    }
+    /**
+     * Test for the copyGrid method when copying from one grid to another.
+     * The expected result is that the target grid has the same content as the source grid.
+     */
+    @Test
+    void copyGrid_SourceCopiedToTarget_GridsAreEqual() {
+        int rows = 3;
+        int columns = 3;
+        ClassicGrid grid = new ClassicGrid(rows, columns);
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                boolean isAlive = (row + col) % 2 == 0; // Alternating alive and dead cells
+                grid.getGrid()[row][col] = new Cell(row, col, isAlive);
+            }
+        }
+
+        grid.copyGrid(grid.getGrid(), grid.getPreviousGrid());
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                assertEquals(grid.getGrid()[row][col], grid.getPreviousGrid()[row][col]);
+            }
+        }
+    }
+
+    /**
+     * Test for the copyGrid method when modifying the original grid.
+     * The expected result is that the copied grid remains unchanged.
+     */
+    @Test
+    void copyGrid_ModifySourceGrid_CopyRemainsUnchanged() {
+        int rows = 3;
+        int columns = 3;
+        ClassicGrid grid = new ClassicGrid(rows, columns);
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                boolean isAlive = (row + col) % 2 == 0;
+                grid.getGrid()[row][col] = new Cell(row, col, isAlive);
+            }
+        }
+
+        grid.copyGrid(grid.getGrid(), grid.getPreviousGrid());
+        grid.getGrid()[0][0].setIsAlive(!grid.getGrid()[0][0].getIsAlive());
+
+        assertNotEquals(grid.getGrid()[0][0], grid.getPreviousGrid()[0][0]);
+    }
+}
