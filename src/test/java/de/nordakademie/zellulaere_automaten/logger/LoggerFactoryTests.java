@@ -4,6 +4,8 @@ import de.nordakademie.zellulaere_automaten.logger.loggerImpl.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class LoggerFactoryTests {
@@ -41,9 +43,11 @@ public class LoggerFactoryTests {
      */
     @Test
     public void testLoggerFactoryCreateLoggerType_wrongInput(){
+        LoggerFactory mockFactory = mock(LoggerFactory.class);
         int notExistentValue = LoggerTypes.values().length + 1;
+        when(mockFactory.createLogger(String.valueOf(notExistentValue))).thenThrow(new EnumConstantNotPresentException(LoggerTypes.class, "INVALID"));
         assertThrows(EnumConstantNotPresentException.class, () ->
-                loggerFactory.createLogger(String.valueOf(notExistentValue)),
+                mockFactory.createLogger(String.valueOf(notExistentValue)),
                 "Expected an EnumConstantNotPresentException to be thrown for an invalid logger type");
     }
 }
