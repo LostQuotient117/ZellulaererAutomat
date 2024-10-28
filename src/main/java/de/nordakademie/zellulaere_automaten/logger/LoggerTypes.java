@@ -1,6 +1,7 @@
 package de.nordakademie.zellulaere_automaten.logger;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * An enumeration representing different types of loggers.
@@ -12,7 +13,9 @@ public enum LoggerTypes {
 
     LogFile(1),
 
-    LogConsole(2);
+    LogConsole(2),
+
+    Both(3);
 
     private final int value;
 
@@ -44,5 +47,11 @@ public enum LoggerTypes {
                                         .findFirst()
                                         .orElseThrow(() ->
                                                 new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist"));
+    }
+
+    public static String getAvailableLoggerTypesForUserInput() {
+        return Arrays.stream(LoggerTypes.values())
+                .map(loggerType -> loggerType.getValue() + " für " + loggerType.name())
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

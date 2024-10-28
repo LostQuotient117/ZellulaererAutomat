@@ -26,6 +26,7 @@ public class LoggerFactory {
         return switch (loggerTypes) {
             case LogFile -> new LogFile();
             case LogConsole -> new LogConsole();
+            case Both -> new LogConsoleAndFile();
         };
     }
 }

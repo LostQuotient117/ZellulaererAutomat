@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ZellulaereAutomatenApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ZellulaereAutomatenApplication.class, args);
+		//SpringApplication.run(ZellulaereAutomatenApplication.class, args);
+		InputHandler inputHandler = new InputHandler();
+		inputHandler.getUserInputs();
 	}
 
 }
