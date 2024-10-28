@@ -6,6 +6,7 @@ import java.util.Arrays;
  * An enumeration representing different types of loggers.
  * Each enum constant corresponds to a specific logger type and provides a
  * way to create instances of the {@link ILogger} interface.
+ * @author Jannick.Gottschalk
  */
 public enum LoggerTypes {
 
@@ -38,12 +39,10 @@ public enum LoggerTypes {
      * @return loggerType: Chosen type for the logger.
      */
     public static LoggerTypes getType(int value) {
-        LoggerTypes loggerType = Arrays.stream(LoggerTypes.values())
+        return Arrays.stream(LoggerTypes.values())
                                         .filter(entry ->entry.getValue() == value)
                                         .findFirst()
-                                        .orElse(null);
-        if (loggerType == null)
-            throw new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist");
-        return loggerType;
+                                        .orElseThrow(() ->
+                                                new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist"));
     }
 }

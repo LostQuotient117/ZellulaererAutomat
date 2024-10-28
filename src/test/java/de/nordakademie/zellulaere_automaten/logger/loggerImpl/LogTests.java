@@ -1,0 +1,179 @@
+package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
+
+import de.nordakademie.zellulaere_automaten.logger.ILogger;
+import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
+import org.junit.jupiter.api.*;
+
+import java.io.*;
+import java.util.Objects;
+
+/**
+ * This test-class tests the {@link Log}-class and its methods.
+ */
+public class LogTests {
+    private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    public static String givenString100x100;
+    public static String wantedStringHeaderAndBody;
+    public static String wantedStringHeaderAndBody100Iterations;
+
+    /**
+     *Sets up specific string variables required for testing different scenarios.
+     * @param testInfo Provides information about the currently running test, including its display name.
+     */
+    @BeforeEach
+    public void setUp(TestInfo testInfo) {
+        String test = testInfo.getDisplayName();
+        if (test.equals("log_gridStringAndIteration_LogConsoleOutput()") ||
+                test.equals("log_gridStringAndIteration_LogConsoleOutput100Iterations()") ||
+                test.equals("log_GridStringAndIteration_LogFileOutput()") ||
+                test.equals("log_gridWithHeaderAndBody_ShouldWriteFile()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            for (int i = 0; i < 100; i++) {
+                wantedStringBuilder.append("0".repeat(100));
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            givenString100x100 = wantedStringBuilder.toString();
+        }
+        if (test.equals("log_gridStringAndIteration_LogConsoleOutput()") ||
+                test.equals("log_GridStringAndIteration_LogFileOutput()") ||
+                test.equals("log_gridWithHeaderAndBody_ShouldWriteFile()")){
+                StringBuilder wantedStringBuilder = new StringBuilder();
+                wantedStringBuilder.append("### (99)").append(System.lineSeparator());
+                for (int i = 0; i < 100; i++) {
+                    wantedStringBuilder.append("0".repeat(100));
+                    wantedStringBuilder.append(System.lineSeparator());
+                }
+                wantedStringHeaderAndBody = wantedStringBuilder.toString();
+        }
+        if (test.equals("log_gridStringAndIteration_LogConsoleOutput100Iterations()") || test.equals("log_gridWithHeaderAndBody_ShouldWriteFile()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            for (int i = 1; i <= 100; i++) {
+                wantedStringBuilder.append("### (").append(i).append(")").append(System.lineSeparator());
+                for (int j = 0; j < 100; j++) {
+                    wantedStringBuilder.append("0".repeat(100));
+                    wantedStringBuilder.append(System.lineSeparator());
+                }
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            wantedStringHeaderAndBody100Iterations = wantedStringBuilder.toString();
+        }
+        if (test.equals("log_gridStringAndIteration_LogConsoleOutput()") ||
+                test.equals("log_gridStringAndIteration_LogConsoleOutput100Iterations()")){
+            System.setOut(new PrintStream(outputStreamCaptor));
+        }
+    }
+    //region LogTests
+
+    /**
+     * Tests the logging functionality by comparing the console output with the expected string.
+     * This test creates a logger using {@link LoggerFactory} with a user input of {@code "2"} for {@link LogConsole}.
+     * It then logs a trimmed version of {@code givenString100x100} with 99 iterations.
+     * The output is captured and compared to {@code wantedStringHeaderAndBody} to ensure they match.
+     */
+    @Test
+    public void log_gridStringAndIteration_LogConsoleOutput() {
+        LoggerFactory loggerFactory = new LoggerFactory();
+        // "2" as userInput for LogConsole
+        ILogger log = loggerFactory.createLogger("2");
+        //99 for testing
+        outputStreamCaptor.reset();
+        log.log(givenString100x100.trim(), 99);
+        Assertions.assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
+    }
+
+    /**
+     * Tests the logging functionality over 100 iterations by comparing the console output with the expected string.
+     * This test creates a logger using {@link LoggerFactory} with a user input of {@code "2"} for {@link LogConsole}.
+     * It logs a trimmed version of {@code givenString100x100} for each iteration from 1 to 100.
+     * The output is captured and compared line by line to {@code wantedStringHeaderAndBody100Iterations} to ensure they match.
+     * The comparison is done line by line to ignore any whitespace differences, as {@code outStreamCaptor} does not capture leading or trailing spaces.
+     */
+    @Test
+    public void log_gridStringAndIteration_LogConsoleOutput100Iterations() {
+        LoggerFactory loggerFactory = new LoggerFactory();
+        // "2" as userInput for LogConsole
+        ILogger log = loggerFactory.createLogger("2");
+        outputStreamCaptor.reset();
+        for (int i = 1; i <= 100; i++) {
+            log.log(givenString100x100.trim(), i);
+        }
+        String assertString = outputStreamCaptor.toString();
+        String[] wantedStringLines = wantedStringHeaderAndBody100Iterations.split("\r\n");
+        String[] outStreamCaptorLines = assertString.split("\r\n");
+        int j = 0;
+        for (int i = 0; i < wantedStringLines.length; i++) {
+            if (Objects.equals(wantedStringLines[i], "")) {
+                i++;
+            }
+            Assertions.assertEquals(wantedStringLines[i], outStreamCaptorLines[j]);
+            j++;
+        }
+    }
+
+    /**
+     * Tests the logging functionality of {@link Log#log(String, int)} by creating a log file and logging a trimmed string with an iteration count.
+     * Deletes any existing log file, creates a logger, logs the string with 99 as iteration,
+     * and compares the file content to the expected output.
+     * This test uses {@link LoggerFactory} to create a logger and logs the trimmed string
+     * {@code givenString100x100} with 99 iterations. The content of the log file
+     * is then compared to {@code wantedStringHeaderAndBody}.
+     */
+    @Test
+    public void log_GridStringAndIteration_LogFileOutput() {
+        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+
+        //deletion of old file for the new test
+        File file = new File(filename);
+        file.delete();
+
+        LoggerFactory loggerFactory = new LoggerFactory();
+        ILogger log = loggerFactory.createLogger("1");
+        log.log(givenString100x100, 99);
+
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null){
+                fileContent.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assertions.assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
+    }
+
+    /**
+     * Tests the logging functionality of {@link Log#log(String, int)} by creating a log file with a header and body.
+     * Deletes any existing log file, creates a Log.log-file, logs a string 100 times,
+     * and compares the file content to the expected output.
+     * This test uses {@link LoggerFactory} to create a logger and logs the string
+     * {@code givenString100x100} with 100 iterations. The content of the log file
+     * is then compared to {@code wantedStringHeaderAndBody100Iterations}.
+     */
+    @Test
+    public void log_gridWithHeaderAndBody_ShouldWriteFile(){
+        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+
+        //deletion of old file for the new test
+        File file = new File(filename);
+        file.delete();
+
+        LoggerFactory loggerFactory = new LoggerFactory();
+        ILogger log = loggerFactory.createLogger("1");
+        for (int i = 1; i <= 100; i++) {
+            log.log(givenString100x100, i);
+        }
+
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null){
+                fileContent.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assertions.assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
+    }
+    //endregion
+}
