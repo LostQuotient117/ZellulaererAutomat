@@ -1,12 +1,21 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
 import de.nordakademie.zellulaere_automaten.logger.ILogger;
+import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 
 public abstract class Log implements ILogger {
+    /**
+     * log is the main call method for the logger.
+     * <p> It calls the abstraction of {@link Log} previously defined by {@link LoggerFactory} and therefore executes either
+     * {@link LogConsole#writeLog(String, int)} or {@link LogFile#writeLog(String, int)}</p>
+     *
+     * @param gridInput the already formatted grid as string
+     * @param iteration the iteration for the to be printed grid
+     */
     @Override
-    public void log(Object gridInput) {
-
+    public void log(String gridInput, int iteration) {
+        writeLog(gridInput, iteration);
     }
 
     //region abstracts
