@@ -38,7 +38,9 @@ public class GameOfLifeExperiment1Structure2 extends BaseExperiment implements I
                 }
             }
         }
-        this.grid = new SetGrid(40, 41, startConfig, new GameOfLife(), new Moore());
+
+        // Update the grid with the new startConfig
+        ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 
     // for GameOfLifeExperiment1Structure2Tests
