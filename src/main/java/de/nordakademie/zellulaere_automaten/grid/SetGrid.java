@@ -50,6 +50,15 @@ public class SetGrid implements IGrid{
     }
 
     /**
+     * Sets the active cells in the grid to the specified start configuration.
+     *
+     * @param startConfig the set of cells to be set as active in the grid
+     */
+    public void setActiveCells(Set<Cell> startConfig) {
+        this.activeCells = new HashSet<>(startConfig);
+    }
+
+    /**
      * Returns the number of rows in the grid.
      * @return the number of rows in the grid
      */

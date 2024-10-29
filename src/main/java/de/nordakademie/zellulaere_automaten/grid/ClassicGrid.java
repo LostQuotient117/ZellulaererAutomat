@@ -4,7 +4,9 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.INeighborStrategy;
 import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellStateCalculation;
 
-public class ClassicGrid implements IGrid<Cell[][]>{
+import java.util.ArrayList;
+
+public class ClassicGrid implements IGrid<Cell[][]> {
 
     //region variables
     private int rows;
@@ -25,6 +27,20 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         this.grid = new Cell[rows][columns];
         this.previousGrid = new Cell[rows][columns];
     }
+
+    /**
+     * Constructs a new ClassicGrid with specified dimensions, neighbor calculation strategy, and state calculation strategy.
+     * <p>
+     * This constructor initializes the grid and previous grid with the specified number of rows and columns.
+     * It also sets the neighbor calculation strategy and state calculation strategy.
+     * Each cell in the grid and previous grid is initialized to a dead state.
+     * </p>
+     *
+     * @param rows                          the number of rows in the grid
+     * @param columns                       the number of columns in the grid
+     * @param neighborCalculationStrategy   the strategy for calculating neighbors of a cell
+     * @param ICellStateCalculationStrategy the strategy for calculating the state of a cell
+     */
     public ClassicGrid(int rows, int columns, INeighborStrategy neighborCalculationStrategy, ICellStateCalculation ICellStateCalculationStrategy) {
         this.rows = rows;
         this.columns = columns;
@@ -34,7 +50,15 @@ public class ClassicGrid implements IGrid<Cell[][]>{
 
         this.neighborCalculationStrategy = neighborCalculationStrategy;
         this.stateCalculationStrategy = ICellStateCalculationStrategy;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                this.grid[row][col] = new Cell(row, col, false);
+                this.previousGrid[row][col] = new Cell(row, col, false);
+            }
+        }
     }
+
     //endregion
 
     // region Getter & Setter
@@ -60,25 +84,41 @@ public class ClassicGrid implements IGrid<Cell[][]>{
     // endregion
 
     /**
-     * This method goes through the grid data-structure and recalculates the alive value of its cells.
-     * @return new grid state with calculated cell states
+     * Calculates the next generation of cells in the grid.
+     * <p>
+     * This method iterates through the grid data structure and recalculates the alive state of each cell
+     * based on its neighbors and the state calculation strategy.
+     * </p>
+     * <p>
+     * The current grid state is copied to the previous grid before calculation. For each cell, the method
+     * retrieves its neighbors using the neighbor calculation strategy and determines its new alive state
+     * using the state calculation strategy.
+     * </p>
+     *
+     * @return the new grid state with updated cell states
      */
     @Override
     public Cell[][] calculateNextGeneration() {
         copyGrid(grid, previousGrid);
-        /*for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 Cell cell = grid[row][col];
-                ArrayList<Cell> neighbors = neighborCalculationStrategy.getNeighbors(cell);
-                boolean newIsAlive = stateCalculationStrategy.calculateAlive(cell, neighbors);
+                ArrayList<Cell> neighbors = neighborCalculationStrategy.getNeighbors(cell, this);
+                boolean newIsAlive;
+                if (cell.getIsAlive()) {
+                    newIsAlive = stateCalculationStrategy.staysAlive(cell, neighbors);
+                } else {
+                    newIsAlive = !stateCalculationStrategy.staysDead(cell, neighbors);
+                }
                 cell.setIsAlive(newIsAlive);
             }
-        }*/
-        return null;
+        }
+        return grid;
     }
 
     /**
      * Returns the cell located at the specified coordinates in the grid.
+     *
      * @param x the row index of the cell
      * @param y the column index of the cell
      * @return the cell located at the specified (x, y) coordinates
@@ -86,12 +126,16 @@ public class ClassicGrid implements IGrid<Cell[][]>{
      */
     @Override
     public Cell getCellByCoordinates(int x, int y) {
+        if (x < 0 || x >= rows || y < 0 || y >= columns) {
+            throw new IndexOutOfBoundsException("Coordinates out of bounds: (" + x + ", " + y + ")");
+        }
         return grid[x][y];
     }
 
     /**
      * Returns a string representation of the grid, where each cell's state is represented
      * by its toString method. A newline is added after each row to separate the rows.
+     *
      * @return a string representation of the current state of the grid
      */
     @Override
@@ -109,6 +153,7 @@ public class ClassicGrid implements IGrid<Cell[][]>{
 
     /**
      * Checks if grid is in a stable constellation
+     *
      * @return true: when the grid has not changed
      */
     @Override
