@@ -153,5 +153,19 @@ public class LogConsoleTests {
         LogConsole logConsole = new LogConsole();
         assertThrows(IllegalArgumentException.class, () -> logConsole.writeLog(wantedStringHeaderAndBody, -5));
     }
+
+    /**
+     * Tests the {@link LogConsole#writeLog(String)} method to ensure it correctly writes the end message to the console.
+     * This test verifies that the {@code writeLog} method outputs the expected end message to the console.
+     * The output is captured and compared to the provided {@code endMessage} to ensure accuracy.
+     */
+    @Test
+    public void testWriteLog_EndMessage() {
+        LogConsole logConsole = new LogConsole();
+        String endMessage =  "Experiment stopped: Reached 100 iterations.";
+        outputStreamCaptor.reset();
+        logConsole.writeLog(endMessage);
+        Assertions.assertEquals(endMessage, outputStreamCaptor.toString().trim());
+    }
     //endregion
 }

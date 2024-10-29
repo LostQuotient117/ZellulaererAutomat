@@ -58,7 +58,8 @@ public class LogTests {
             wantedStringHeaderAndBody100Iterations = wantedStringBuilder.toString();
         }
         if (test.equals("log_gridStringAndIteration_LogConsoleOutput()") ||
-                test.equals("log_gridStringAndIteration_LogConsoleOutput100Iterations()")){
+                test.equals("log_gridStringAndIteration_LogConsoleOutput100Iterations()") ||
+                test.equals("logEndMessage_EndMessage_LogConsoleOutput()")){
             System.setOut(new PrintStream(outputStreamCaptor));
         }
     }
@@ -174,6 +175,48 @@ public class LogTests {
             throw new RuntimeException(e);
         }
         Assertions.assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
+    }
+    /**
+     * Tests the {@link Log#logEndMessage(String)} method to ensure it correctly writes the end message to the log file.
+     * This test verifies that the {@code logEndMessage} method outputs the expected end message to the log file.
+     * The output is captured and compared to the provided {@code endMessage} to ensure accuracy.
+     */
+    @Test
+    public void logEndMessage_EndMessage_LogFileOutput() {
+        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        File file = new File(filename);
+        file.delete();
+
+        LoggerFactory loggerFactory = new LoggerFactory();
+        ILogger log = loggerFactory.createLogger("1");
+        String endMessage = "Experiment stopped: Reached 100 iterations.";
+        log.logEndMessage(endMessage);
+
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assertions.assertEquals(endMessage.trim(), fileContent.toString().trim());
+    }
+
+    /**
+     * Tests the {@link Log#logEndMessage(String)} method to ensure it correctly writes the end message to the console.
+     * This test verifies that the {@code logEndMessage} method outputs the expected end message to the console.
+     * The output is captured and compared to the provided {@code endMessage} to ensure accuracy.
+     */
+    @Test
+    public void logEndMessage_EndMessage_LogConsoleOutput() {
+        LoggerFactory loggerFactory = new LoggerFactory();
+        ILogger log = loggerFactory.createLogger("2");
+        String endMessage = "Experiment stopped: Reached 100 iterations.";
+        outputStreamCaptor.reset();
+        log.logEndMessage(endMessage);
+        Assertions.assertEquals(endMessage, outputStreamCaptor.toString().trim());
     }
     //endregion
 }
