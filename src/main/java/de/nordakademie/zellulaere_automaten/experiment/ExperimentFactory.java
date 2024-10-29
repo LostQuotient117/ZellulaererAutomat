@@ -4,10 +4,12 @@ import de.nordakademie.zellulaere_automaten.experiment.gameOfLife.*;
 import de.nordakademie.zellulaere_automaten.experiment.parity.*;
 
 public class ExperimentFactory {
-    public IExperiment createExperiment(String userInput) {
-        int chosenExperimentMode = Integer.parseInt(userInput); // not needed if Jannick gives input as int
-        ExperimentTypes experimentTypes = ExperimentTypes.getType(chosenExperimentMode);
-        return switch (experimentTypes) {
+    public IExperiment createExperiment(String experimentName) {
+        ExperimentTypes experimentType = ExperimentTypes.getByName(experimentName);
+        if (experimentType == null) {
+            throw new IllegalArgumentException("Invalid experiment name: " + experimentName);
+        }
+        return switch (experimentType) {
             case GameOfLifeExperiment1Structure1 -> new GameOfLifeExperiment1Structure1();
             case GameOfLifeExperiment1Structure2 -> new GameOfLifeExperiment1Structure2();
             case GameOfLifeExperiment2Structure1 -> new GameOfLifeExperiment2Structure1();

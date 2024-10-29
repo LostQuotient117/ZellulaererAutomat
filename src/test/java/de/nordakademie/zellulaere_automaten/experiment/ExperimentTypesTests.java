@@ -6,6 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExperimentTypesTests {
 
     @Test
+    void getByName_WithValidName_ShouldReturnCorrectExperimentType() {
+        assertEquals(ExperimentTypes.GameOfLifeExperiment1Structure1, ExperimentTypes.getByName("GameOfLifeExperiment1Structure1"));
+        assertEquals(ExperimentTypes.ParityExperiment2Structure2, ExperimentTypes.getByName("ParityExperiment2Structure2"));
+    }
+
+    @Test
+    void getByName_WithInvalidName_ShouldReturnNull() {
+        assertNull(ExperimentTypes.getByName("NonExistentExperiment"));
+    }
+
+    /*
+    @Test
     void getType_WithValidValue_ShouldReturnCorrectExperimentType() {
         assertEquals(ExperimentTypes.GameOfLifeExperiment1Structure1, ExperimentTypes.getType(1));
         assertEquals(ExperimentTypes.ParityExperiment2Structure2, ExperimentTypes.getType(10));
@@ -24,4 +36,5 @@ class ExperimentTypesTests {
         assertEquals(1, ExperimentTypes.GameOfLifeExperiment1Structure1.getValue());
         assertEquals(10, ExperimentTypes.ParityExperiment2Structure2.getValue());
     }
+     */
 }
