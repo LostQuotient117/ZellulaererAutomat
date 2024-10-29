@@ -9,7 +9,7 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 import java.util.Set;
 
 public class BaseExperiment implements IExperiment {
-    protected IGrid grid;
+    public IGrid grid;
     public Set<Cell> startConfig;
     protected String logExperimentName;
     protected ILogger logger;

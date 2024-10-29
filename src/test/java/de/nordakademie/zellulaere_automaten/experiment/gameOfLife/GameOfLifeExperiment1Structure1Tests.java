@@ -2,8 +2,6 @@ package de.nordakademie.zellulaere_automaten.experiment.gameOfLife;
 
 import de.nordakademie.zellulaere_automaten.grid.ClassicGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
-import de.nordakademie.zellulaere_automaten.strategy.neighbors.Moore;
-import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.GameOfLife;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +18,8 @@ public class GameOfLifeExperiment1Structure1Tests {
     @BeforeEach
     void setUp() {
         experiment = new GameOfLifeExperiment1Structure1();
-        grid = new ClassicGrid(40, 41, new Moore(), new GameOfLife());
         experiment.initializeGrid();
+        grid = (ClassicGrid) experiment.grid;
     }
 
     @Test
@@ -30,9 +28,59 @@ public class GameOfLifeExperiment1Structure1Tests {
         assertNotNull(startConfig);
         assertFalse(startConfig.isEmpty());
 
-        // Check specific cells in the pattern
+        // Check starting config cells in the pattern (row 1)
         assertFalse(grid.getCellByCoordinates(17, 17).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(17, 18).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(17, 19).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(17, 20).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(17, 21).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(17, 22).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(17, 23).getIsAlive());
+
+        // Check starting config cells in the pattern (row 2)
         assertFalse(grid.getCellByCoordinates(18, 17).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(18, 18).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(18, 19).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(18, 20).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(18, 21).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(18, 22).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(18, 23).getIsAlive());
+
+        // Check starting config cells in the pattern (row 3)
+        assertFalse(grid.getCellByCoordinates(19, 17).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(19, 18).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(19, 19).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(19, 20).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(19, 21).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(19, 22).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(19, 23).getIsAlive());
+
+        // Check starting config cells in the pattern (row 4)
+        assertTrue(grid.getCellByCoordinates(20, 17).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(20, 18).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(20, 19).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(20, 20).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(20, 21).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(20, 22).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(20, 23).getIsAlive());
+
+        // Check starting config cells in the pattern (row 5)
+        assertTrue(grid.getCellByCoordinates(21, 17).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(21, 18).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(21, 19).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(21, 20).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(21, 21).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(21, 22).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(21, 23).getIsAlive());
+
+        // Check starting config cells in the pattern (row 6)
+        assertTrue(grid.getCellByCoordinates(22, 17).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(22, 18).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(22, 19).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(22, 20).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(22, 21).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(22, 22).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(22, 23).getIsAlive());
 
     }
 
