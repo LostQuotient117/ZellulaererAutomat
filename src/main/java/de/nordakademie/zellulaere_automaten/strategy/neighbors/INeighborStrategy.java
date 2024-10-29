@@ -7,12 +7,12 @@ import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public interface INeighborStrategy {
 
     public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid);
 
+    ArrayList<Cell> getDirectNeighbors(Cell cell, IGrid grid);
 }
 
