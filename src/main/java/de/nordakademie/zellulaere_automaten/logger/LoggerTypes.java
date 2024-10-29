@@ -15,7 +15,7 @@ public enum LoggerTypes {
 
     LogConsole(2),
 
-    Both(3);
+    LogConsoleAndFile(3);
 
     private final int value;
 
