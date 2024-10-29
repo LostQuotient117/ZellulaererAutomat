@@ -162,4 +162,33 @@ public class LogFileTests {
         }
         Assertions.assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
     }
+    /**
+     * Tests the {@link LogFile#writeLog(String)} method with an end message.
+     * This test verifies that the method correctly writes the end message to the log file.
+     * It deletes any existing log file before the test, writes the end message, and then
+     * reads the file to ensure the content matches the expected end message.
+     */
+    @Test
+    public void writeLog_EndMessage_EndMessageAsFile() {
+        LogFile logFile = new LogFile();
+        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        String endMessage = "Experiment stopped: Reached 100 iterations.";
+
+        // Deletion of old file for the new test
+        File file = new File(filename);
+        file.delete();
+
+        logFile.writeLog(endMessage);
+
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assertions.assertEquals(endMessage.trim(), fileContent.toString().trim());
+    }
 }
