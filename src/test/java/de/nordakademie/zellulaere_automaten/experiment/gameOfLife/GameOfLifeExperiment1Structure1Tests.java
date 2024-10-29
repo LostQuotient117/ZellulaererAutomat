@@ -81,7 +81,6 @@ public class GameOfLifeExperiment1Structure1Tests {
         assertFalse(grid.getCellByCoordinates(22, 21).getIsAlive());
         assertTrue(grid.getCellByCoordinates(22, 22).getIsAlive());
         assertTrue(grid.getCellByCoordinates(22, 23).getIsAlive());
-
     }
 
     @Test

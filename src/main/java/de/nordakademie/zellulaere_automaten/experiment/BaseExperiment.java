@@ -22,7 +22,6 @@ public class BaseExperiment implements IExperiment {
 
     public void initializeGrid() {}
 
-    @Override
     public void runExperiment(LoggerTypes loggerType) {
         LoggerFactory loggerFactory = new LoggerFactory();
         this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
