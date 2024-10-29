@@ -4,11 +4,9 @@ import de.nordakademie.zellulaere_automaten.logger.loggerImpl.*;
 
 /**
  * A factory class for creating instances of {@link ILogger}.
- * <p>
  * This class provides a method to retrieve the appropriate logger
  * implementation based on a specified parameter. It supports the
  * creation of either a {@code LogFile} or a {@code LogConsole}.
- * </p>
  * @author Jannick.Gottschalk
  */
 public class LoggerFactory {
