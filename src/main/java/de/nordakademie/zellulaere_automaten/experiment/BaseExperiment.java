@@ -30,12 +30,12 @@ public class BaseExperiment implements IExperiment {
         for (int i = 0; i <= 100; i++) {
             logger.log(grid.toString(), i);
             if (grid.isStable()) {
-                logger.log("Experiment stopped: Grid is stable.", i);
+                logger.logEndMessage("Experiment stopped: Grid is stable. \n");
                 break;
             }
             grid.calculateNextGeneration();
         }
-        logger.logEndMessage("Experiment stopped: Reached 100 iterations.");
+        logger.logEndMessage("Experiment stopped: Reached 100 iterations. \n");
     }
 
 
