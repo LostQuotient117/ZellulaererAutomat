@@ -174,9 +174,9 @@ public class SetGrid implements IGrid{
             for (int col = 0; col < columns; col++) {
                 Cell tempCell = new Cell(row, col, true);
                 if (activeCells.contains(tempCell))
-                    stringBuilder.append("1 ");
+                    stringBuilder.append("1");
                 else
-                    stringBuilder.append("0 ");
+                    stringBuilder.append("0");
             }
             stringBuilder.append("\n");
         }
