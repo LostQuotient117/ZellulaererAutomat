@@ -51,7 +51,7 @@ public class AbstractNeighbors implements INeighborStrategy {
             neighbors.add(grid.getCellByCoordinates(nextRow, currentColumn));
 
         //left
-        if (priorColumn <= 0)
+        if (priorColumn >= 0)
             neighbors.add(grid.getCellByCoordinates(currentRow, priorColumn));
 
         //right
