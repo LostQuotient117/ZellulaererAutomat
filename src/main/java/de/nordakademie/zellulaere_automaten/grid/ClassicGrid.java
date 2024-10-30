@@ -113,7 +113,6 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 stringBuilder.append(grid[row][col].toString());
-                stringBuilder.append(" ");
             }
             stringBuilder.append("\n");
         }
