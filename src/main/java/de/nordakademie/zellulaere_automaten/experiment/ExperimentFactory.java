@@ -3,7 +3,18 @@ package de.nordakademie.zellulaere_automaten.experiment;
 import de.nordakademie.zellulaere_automaten.experiment.gameOfLife.*;
 import de.nordakademie.zellulaere_automaten.experiment.parity.*;
 
+/**
+ * The {@code ExperimentFactory} class is responsible for creating instances of experiments based on their names.
+ */
 public class ExperimentFactory {
+
+    /**
+     * Creates an experiment instance based on the specified experiment name.
+     *
+     * @param experimentName the name of the experiment to be created
+     * @return an instance of {@link IExperiment} corresponding to the specified experiment name
+     * @throws IllegalArgumentException if the experiment name is invalid
+     */
     public IExperiment createExperiment(String experimentName) {
         ExperimentTypes experimentType = ExperimentTypes.getByName(experimentName);
         if (experimentType == null) {

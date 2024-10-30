@@ -10,11 +10,19 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The {@code GameOfLifeExperiment2Structure1Tests} class contains unit tests for the {@link GameOfLifeExperiment2Structure1} class.
+ * It verifies the correct initialization of the grid and the dimensions of the grid.
+ */
 public class GameOfLifeExperiment2Structure1Tests {
 
     private GameOfLifeExperiment2Structure1 experiment;
     private ClassicGrid grid;
 
+    /**
+     * Sets up the test environment before each test.
+     * Initializes the experiment and the grid.
+     */
     @BeforeEach
     void setUp() {
         experiment = new GameOfLifeExperiment2Structure1();
@@ -22,6 +30,10 @@ public class GameOfLifeExperiment2Structure1Tests {
         grid = (ClassicGrid) experiment.grid;
     }
 
+    /**
+     * Tests the initialization of the grid.
+     * Verifies that the start configuration is set correctly.
+     */
     @Test
     void initializeGrid_WhenCalled_ShouldSetStartConfig() {
         Set<Cell> startConfig = experiment.getStartConfig();
@@ -37,6 +49,10 @@ public class GameOfLifeExperiment2Structure1Tests {
         }
     }
 
+    /**
+     * Tests the dimensions of the grid.
+     * Verifies that the grid has the correct number of rows and columns.
+     */
     @Test
     void getGridDimensions_WhenCalled_ShouldReturnCorrectDimensions() {
         assertEquals(100, grid.getRows());

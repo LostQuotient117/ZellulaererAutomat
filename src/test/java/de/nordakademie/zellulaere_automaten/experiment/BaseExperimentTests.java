@@ -13,12 +13,20 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The {@code BaseExperimentTests} class contains unit tests for the {@link BaseExperiment} class.
+ * It verifies the correct initialization of the grid, the dimensions of the grid, and the behavior of the experiment.
+ */
 public class BaseExperimentTests {
 
     private BaseExperiment baseExperiment;
     private ClassicGrid grid;
     private Set<Cell> startConfig;
 
+    /**
+     * Sets up the test environment before each test.
+     * Initializes the experiment, the grid, and the start configuration.
+     */
     @BeforeEach
     void setUp() {
         startConfig = new HashSet<>();
@@ -37,6 +45,10 @@ public class BaseExperimentTests {
         };
     }
 
+    /**
+     * Tests the initialization of the grid.
+     * Verifies that the start configuration is set correctly.
+     */
     @Test
     void initializeGrid_WhenCalled_ShouldSetCellsAlive() {
         baseExperiment.initializeGrid();
@@ -45,6 +57,10 @@ public class BaseExperimentTests {
         assertTrue(grid.getCellByCoordinates(3, 2).getIsAlive());
     }
 
+    /**
+     * Tests the behavior of the experiment when run.
+     * Verifies that the grid becomes stable after running the experiment.
+     */
     @Test
     void runExperiment_WhenCalled_ShouldMakeGridStable() {
         baseExperiment.initializeGrid();
