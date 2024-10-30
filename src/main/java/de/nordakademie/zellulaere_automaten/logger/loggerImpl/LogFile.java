@@ -27,6 +27,22 @@ public class LogFile extends Log {
         }
     }
     /**
+ * Writes the end message to a log file.
+ * This method writes the provided end message to the log file. If an
+ * {@code IOException} occurs during the file writing process, it is
+ * caught and the stack trace is printed.
+ *
+ * @param endMessage the end message to be logged
+ */
+@Override
+protected void writeLog(String endMessage) {
+    try {
+        exportGridToFile(endMessage);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    /**
      * Builds a string for logging to a file.
      * This method constructs a string that includes the iteration number
      * and the formatted grid, separated by a line separator.

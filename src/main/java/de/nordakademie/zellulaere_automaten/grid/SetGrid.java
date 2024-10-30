@@ -6,6 +6,7 @@ import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellState
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,9 +24,9 @@ public class SetGrid implements IGrid{
     /** Set of active cells from the previous generation, used to determine grid stability. */
     Set<Cell> activeCellsLastIteration;
     /** Strategy for calculating the next state of a cell based on its neighbors. */
-    private ICellStateCalculation stateCalculationStrategy;
+    private final ICellStateCalculation stateCalculationStrategy;
     /** Strategy for determining the neighbors of a cell. */
-    private INeighborStrategy neighborStrategy;
+    private final INeighborStrategy neighborStrategy;
 
     /**
      * Constructs a new SetGrid with specified dimensions, initial active cells,
@@ -47,6 +48,15 @@ public class SetGrid implements IGrid{
 
         this.stateCalculationStrategy = stateCalculationStrategy;
         this.neighborStrategy = neighborStrategy;
+    }
+
+    /**
+     * Sets the active cells in the grid to the specified start configuration.
+     *
+     * @param startConfig the set of cells to be set as active in the grid
+     */
+    public void setActiveCells(Set<Cell> startConfig) {
+        this.activeCells = new HashSet<>(startConfig);
     }
 
     /**
@@ -95,12 +105,12 @@ public class SetGrid implements IGrid{
         Set<Cell> cellsToCheck = new HashSet<>(activeCells);
 
         for (Cell cell : activeCells) {
-            ArrayList<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
+            List<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
             cellsToCheck.addAll(neighbors);
         }
 
         for (Cell cell : cellsToCheck) {
-            ArrayList<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
+            List<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
 
             if (cell.getIsAlive()) {
                 if (stateCalculationStrategy.staysAlive(cell, neighbors)) {

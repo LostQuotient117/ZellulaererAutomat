@@ -3,6 +3,7 @@ import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Moore extends AbstractNeighbors{
 
@@ -16,8 +17,8 @@ public class Moore extends AbstractNeighbors{
      * @return list of neighboring Moore cells
      */
     @Override
-    public ArrayList<Cell> getNeighbors(Cell cell, IGrid iGrid){
-        ArrayList<Cell> mooreNeighbors = getDirectNeighbors(cell, iGrid);
+    public List<Cell> getNeighbors(Cell cell, IGrid iGrid){
+        List<Cell> mooreNeighbors = getDirectNeighbors(cell, iGrid);
         int priorRow = cell.getRow()-1;
         int priorColumn = cell.getColumn()-1;
         int nextRow = cell.getRow()+1;

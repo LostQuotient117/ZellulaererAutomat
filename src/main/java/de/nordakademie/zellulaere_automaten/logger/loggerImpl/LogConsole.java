@@ -2,13 +2,35 @@ package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
 import de.nordakademie.zellulaere_automaten.model.*;
 
+/**
+ * The {@code LogConsole} class extends the {@link Log} class to provide
+ * functionality for writing log data to the console.
+ * This class implements methods to log the formatted grid and iteration number,
+ * as well as the end message, to the console.
+ */
 public class LogConsole extends Log {
 
-    @Override
-    protected void writeLog(String formattedGrid, int iteration) {
-        stepWriterConsole(iteration);
-        writeLogBody(formattedGrid);
-    }
+    /**
+ * Writes the formatted grid and iteration number to the console.
+ * This method formats the log data and writes it to the console.
+ *
+ * @param formattedGrid the formatted grid string to be logged
+ * @param iteration the iteration number to be included in the log
+ */
+@Override
+protected void writeLog(String formattedGrid, int iteration) {
+    stepWriterConsole(iteration);
+    writeLogBody(formattedGrid);
+}/**
+ * Writes the end message to the console.
+ * This method writes the provided end message to the console.
+ *
+ * @param endMessage the end message to be logged
+ */
+@Override
+protected void writeLog(String endMessage){
+    System.out.println(endMessage);
+}
 
     //region used Functions
     /**

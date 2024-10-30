@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface INeighborStrategy {
 
-    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid);
-
+    public List<Cell> getNeighbors(Cell cell, IGrid grid);
 }
 

@@ -13,4 +13,10 @@ public interface ILogger {
      * This method logs the cellular automata.
      */
     void log(String gridInput, int iteration);
+    /**
+     * Logs the end message to the log output.
+     * This method is used to log a final message indicating the end of the logging process.
+     * @param endMessage the end message to be logged
+     */
+    void logEndMessage(String endMessage);
 }

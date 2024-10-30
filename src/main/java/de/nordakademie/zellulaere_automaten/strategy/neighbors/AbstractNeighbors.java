@@ -1,13 +1,10 @@
 package de.nordakademie.zellulaere_automaten.strategy.neighbors;
 
-import de.nordakademie.zellulaere_automaten.grid.ClassicGrid;
 import de.nordakademie.zellulaere_automaten.grid.IGrid;
-import de.nordakademie.zellulaere_automaten.grid.SetGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class AbstractNeighbors implements INeighborStrategy{
 
@@ -21,7 +18,7 @@ public class AbstractNeighbors implements INeighborStrategy{
      * @return a list of direct neighboring cells
      */
     @Override
-    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid) {
+    public List<Cell> getNeighbors(Cell cell, IGrid grid) {
         return getDirectNeighbors(cell, grid);
     }
 
@@ -34,7 +31,7 @@ public class AbstractNeighbors implements INeighborStrategy{
      * @param iGrid the grid containing all cells
      * @return a list of direct neighboring cells
      */
-    public ArrayList<Cell> getDirectNeighbors(Cell cell, IGrid iGrid) {
+    public List<Cell> getDirectNeighbors(Cell cell, IGrid iGrid) {
         ArrayList<Cell> neighbors = new ArrayList<>();
         int priorRow = cell.getRow()-1;
         int priorColumn = cell.getColumn()-1;

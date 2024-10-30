@@ -140,7 +140,7 @@ class ClassicGridTest {
         }
 
         @Test
-        void calculateNextGeneration_PartiyAndDeadGrid_ReturnFalse() {
+        void calculateNextGeneration_ParityAndDeadGrid_ReturnFalse() {
             grid.calculateNextGeneration();
 
             for (int row = 0; row < grid.getRows(); row++) {
@@ -151,7 +151,7 @@ class ClassicGridTest {
         }
 
         @Test
-        void calculateNextGeneration_PartiyAndOneALiveCell_ReturnTrue() {
+        void calculateNextGeneration_ParityAndOneALiveCell_ReturnTrue() {
             Cell initialCell = new Cell(1, 1, true);
             grid.getDataStructure()[1][1] = initialCell;
 
@@ -212,14 +212,12 @@ class ClassicGridTest {
 
         @Test
         void calculateNextGeneration_BlinkerPattern_AlternatesCorrectly() {
-            // Setze eine Blinker-Konfiguration (vertikal) in der Mitte des Grids
             grid.getDataStructure()[1][2].setIsAlive(true);
             grid.getDataStructure()[2][2].setIsAlive(true);
             grid.getDataStructure()[3][2].setIsAlive(true);
 
             grid.calculateNextGeneration();
 
-            // Erwartete Zellen, die in der nächsten Generation leben
             List<Cell> expectedAliveCells = Arrays.asList(
                     new Cell(2, 1, true),
                     new Cell(2, 2, true),

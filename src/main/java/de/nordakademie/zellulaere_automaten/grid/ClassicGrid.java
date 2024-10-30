@@ -5,19 +5,20 @@ import de.nordakademie.zellulaere_automaten.strategy.neighbors.INeighborStrategy
 import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellStateCalculation;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ClassicGrid implements IGrid<Cell[][]>{
 
     //region variables
-    private int rows;
-    private int columns;
+    private final int rows;
+    private final int columns;
 
     private Cell[][] grid;
     private Cell[][] previousGrid;
 
-    private INeighborStrategy neighborCalculationStrategy;
-    private ICellStateCalculation stateCalculationStrategy;
+    private final INeighborStrategy neighborCalculationStrategy;
+    private final ICellStateCalculation stateCalculationStrategy;
     //endregion
 
     //region Constructors
@@ -70,7 +71,7 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 Cell cell = previousGrid[row][col];
-                ArrayList<Cell> neighbors = neighborCalculationStrategy.getNeighbors(cell, this);
+                List<Cell> neighbors = neighborCalculationStrategy.getNeighbors(cell, this);
 
                 boolean newIsAlive;
                 if (cell.getIsAlive())
