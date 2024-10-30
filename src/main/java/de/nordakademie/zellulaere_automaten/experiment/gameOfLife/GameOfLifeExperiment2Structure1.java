@@ -13,7 +13,7 @@ import java.util.Set;
 public class GameOfLifeExperiment2Structure1 extends BaseExperiment implements IExperiment {
 
     public GameOfLifeExperiment2Structure1() {
-        super(new ClassicGrid(100, 100, new Moore(), new GameOfLife()), new HashSet<>(), "GameOfLifeExperiment2Structure1");
+        super(new ClassicGrid(100, 100, new HashSet<>(), new GameOfLife(), new Moore()), new HashSet<>(), "GameOfLifeExperiment2Structure1");
     }
 
     @Override

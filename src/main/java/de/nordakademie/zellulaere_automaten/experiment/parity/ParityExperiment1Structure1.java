@@ -13,7 +13,7 @@ import java.util.Set;
 public class ParityExperiment1Structure1 extends BaseExperiment implements IExperiment {
 
     public ParityExperiment1Structure1() {
-        super(new ClassicGrid(400, 400, new Neumann(), new Parity()), new HashSet<>(), "ParityExperiment1Structure1");
+        super(new ClassicGrid(400, 400, new HashSet<>(), new Parity(), new Neumann()), new HashSet<>(), "ParityExperiment1Structure1");
     }
 
     @Override

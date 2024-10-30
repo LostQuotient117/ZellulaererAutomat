@@ -14,7 +14,7 @@ public class GameOfLifeExperiment1Structure1 extends BaseExperiment implements I
 
     //defintion of what the grid should use as parameters
     public GameOfLifeExperiment1Structure1() {
-        super(new ClassicGrid(40, 41, new Moore(), new GameOfLife()), new HashSet<>(), "GameOfLifeExperiment1Structure1");
+        super(new ClassicGrid(40, 41, new HashSet<>(), new GameOfLife(), new Moore()),new HashSet<>(), "GameOfLifeExperiment1Structure1");
     }
 
     @Override

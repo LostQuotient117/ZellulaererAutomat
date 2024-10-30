@@ -12,6 +12,7 @@ public interface IGrid<T> {
     public int getRows();
     public int getColumns();
     public T getDataStructure();
+    public T getPreviousGrid();
 
     /**
      * This method goes through the grid data-structure and recalculates the alive value of its cells.
@@ -28,6 +29,7 @@ public interface IGrid<T> {
      * @throws IndexOutOfBoundsException if the specified coordinates are out of bounds
      */
     public Cell getCellByCoordinates(int x, int y);
+    public Cell getCellByCoordinatesFromPreviousGrid(int x, int y);
 
     /**
      * Checks if grid is in a stable constellation

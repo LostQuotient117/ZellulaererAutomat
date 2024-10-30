@@ -6,6 +6,7 @@ import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellState
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,9 +24,9 @@ public class SetGrid implements IGrid{
     /** Set of active cells from the previous generation, used to determine grid stability. */
     Set<Cell> activeCellsLastIteration;
     /** Strategy for calculating the next state of a cell based on its neighbors. */
-    private ICellStateCalculation stateCalculationStrategy;
+    private final ICellStateCalculation stateCalculationStrategy;
     /** Strategy for determining the neighbors of a cell. */
-    private INeighborStrategy neighborStrategy;
+    private final INeighborStrategy neighborStrategy;
 
     /**
      * Constructs a new SetGrid with specified dimensions, initial active cells,
@@ -85,6 +86,11 @@ public class SetGrid implements IGrid{
         return activeCells;
     }
 
+    @Override
+    public Set<Cell> getPreviousGrid(){
+        return activeCellsLastIteration;
+    }
+
     /**
      * Calculates the next generation of cells in the grid based on the state calculation and neighbor strategies.
      * Updates the set of active cells to reflect the new generation.
@@ -99,12 +105,12 @@ public class SetGrid implements IGrid{
         Set<Cell> cellsToCheck = new HashSet<>(activeCells);
 
         for (Cell cell : activeCells) {
-            ArrayList<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
+            List<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
             cellsToCheck.addAll(neighbors);
         }
 
         for (Cell cell : cellsToCheck) {
-            ArrayList<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
+            List<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
 
             if (cell.getIsAlive()) {
                 if (stateCalculationStrategy.staysAlive(cell, neighbors)) {
@@ -132,6 +138,15 @@ public class SetGrid implements IGrid{
     public Cell getCellByCoordinates(int x, int y) {
         Cell tempCell = new Cell(x, y, true);
         return activeCells.stream()
+                .filter(cell ->  cell.equals(tempCell))
+                .findFirst()
+                .orElse(new Cell(x, y, false));
+    }
+
+    @Override
+    public Cell getCellByCoordinatesFromPreviousGrid(int x, int y) {
+        Cell tempCell = new Cell(x, y, true);
+        return activeCellsLastIteration.stream()
                 .filter(cell ->  cell.equals(tempCell))
                 .findFirst()
                 .orElse(new Cell(x, y, false));
