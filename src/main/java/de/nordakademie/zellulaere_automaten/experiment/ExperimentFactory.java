@@ -16,10 +16,15 @@ public class ExperimentFactory {
             case GameOfLifeExperiment2Structure2 -> new GameOfLifeExperiment2Structure2();
             case GameOfLifeExperiment3Structure1 -> new GameOfLifeExperiment3Structure1();
             case GameOfLifeExperiment3Structure2 -> new GameOfLifeExperiment3Structure2();
+
             case ParityExperiment1Structure1 -> new ParityExperiment1Structure1();
             case ParityExperiment1Structure2 -> new ParityExperiment1Structure2();
             case ParityExperiment2Structure1 -> new ParityExperiment2Structure1();
             case ParityExperiment2Structure2 -> new ParityExperiment2Structure2();
+
+
+            case TestGameOfLifeExperiment1Structure1 -> new TestGameOfLifeExperiment1Structure1();
+            case TestGameOfLifeExperiment1Structure2 -> new TestGameOfLifeExperiment1Structure2();
         };
     }
 }
