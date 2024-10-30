@@ -25,17 +25,18 @@ public class BaseExperiment implements IExperiment {
     public void runExperiment(LoggerTypes loggerType) {
         LoggerFactory loggerFactory = new LoggerFactory();
         this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
+        String className = this.getClass().getSimpleName();
 
         initializeGrid();
         for (int i = 0; i <= 100; i++) {
-            logger.log(grid.toString(), i);
+            logger.log(grid.toString(), i, className);
             if (grid.isStable()) {
-                logger.logEndMessage("Experiment stopped: Grid is stable. \n");
+                logger.logEndMessage("Experiment stopped: Grid is stable.", className);
                 break;
             }
             grid.calculateNextGeneration();
         }
-        logger.logEndMessage("Experiment stopped: Reached 100 iterations. \n");
+        logger.logEndMessage("Experiment stopped: Reached 100 iterations.", className);
     }
 
 
