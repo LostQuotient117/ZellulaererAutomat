@@ -76,6 +76,11 @@ public class SetGrid implements IGrid{
         return activeCells;
     }
 
+    @Override
+    public Set<Cell> getPreviousGrid(){
+        return activeCellsLastIteration;
+    }
+
     /**
      * Calculates the next generation of cells in the grid based on the state calculation and neighbor strategies.
      * Updates the set of active cells to reflect the new generation.
@@ -123,6 +128,15 @@ public class SetGrid implements IGrid{
     public Cell getCellByCoordinates(int x, int y) {
         Cell tempCell = new Cell(x, y, true);
         return activeCells.stream()
+                .filter(cell ->  cell.equals(tempCell))
+                .findFirst()
+                .orElse(new Cell(x, y, false));
+    }
+
+    @Override
+    public Cell getCellByCoordinatesFromPreviousGrid(int x, int y) {
+        Cell tempCell = new Cell(x, y, true);
+        return activeCellsLastIteration.stream()
                 .filter(cell ->  cell.equals(tempCell))
                 .findFirst()
                 .orElse(new Cell(x, y, false));

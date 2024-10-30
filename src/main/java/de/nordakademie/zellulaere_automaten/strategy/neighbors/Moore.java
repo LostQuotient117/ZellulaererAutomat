@@ -16,28 +16,28 @@ public class Moore extends AbstractNeighbors{
      * @return list of neighboring Moore cells
      */
     @Override
-    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid){
-        ArrayList<Cell> mooreNeighbors = getDirectNeighbors(cell, grid);
+    public ArrayList<Cell> getNeighbors(Cell cell, IGrid iGrid){
+        ArrayList<Cell> mooreNeighbors = getDirectNeighbors(cell, iGrid);
         int priorRow = cell.getRow()-1;
         int priorColumn = cell.getColumn()-1;
-        int nextRow = cell.getColumn()+1;
+        int nextRow = cell.getRow()+1;
         int nextColumn = cell.getColumn()+1;
 
         //diagonal top right
         if (priorRow >= 0 && priorColumn >= 0)
-            mooreNeighbors.add(grid.getCellByCoordinates(priorRow, priorColumn));
+            mooreNeighbors.add(iGrid.getCellByCoordinatesFromPreviousGrid(priorRow, priorColumn));
 
         //diagonal top left
-        if (priorRow >= 0 && nextColumn < grid.getColumns())
-            mooreNeighbors.add(grid.getCellByCoordinates(priorRow, nextColumn));
+        if (priorRow >= 0 && nextColumn < iGrid.getColumns())
+            mooreNeighbors.add(iGrid.getCellByCoordinatesFromPreviousGrid(priorRow, nextColumn));
 
         //diagonal bottom right
-        if (nextRow < grid.getRows() && priorColumn >= 0)
-            mooreNeighbors.add(grid.getCellByCoordinates(nextRow, priorColumn));
+        if (nextRow < iGrid.getRows() && priorColumn >= 0)
+            mooreNeighbors.add(iGrid.getCellByCoordinatesFromPreviousGrid(nextRow, priorColumn));
 
         //diagonal bottom left
-        if (nextRow < grid.getRows() && nextColumn < grid.getColumns())
-            mooreNeighbors.add(grid.getCellByCoordinates(nextRow, nextColumn));
+        if (nextRow < iGrid.getRows() && nextColumn < iGrid.getColumns())
+            mooreNeighbors.add(iGrid.getCellByCoordinatesFromPreviousGrid(nextRow, nextColumn));
 
         return mooreNeighbors;
     }

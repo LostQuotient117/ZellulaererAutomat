@@ -1,19 +1,17 @@
 package de.nordakademie.zellulaere_automaten.grid;
 
 import de.nordakademie.zellulaere_automaten.model.Cell;
+import de.nordakademie.zellulaere_automaten.strategy.neighbors.INeighborStrategy;
+import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.ICellStateCalculation;
 
 import java.util.Set;
 
 public class GridFactory {
-    public void createGrid(String userInputTypeOfGrid, String userInputCountRows, String userInputCountColumns, Set<Cell> startConfig){
-        int chosenGridMode = Integer.parseInt(userInputTypeOfGrid);
-        int chosenRowCount = Integer.parseInt(userInputCountRows);
-        int chosenColumnCount = Integer.parseInt(userInputCountColumns);
-
-        GridType loggerTypes = GridType.getType(chosenGridMode);
-       /* return switch (loggerTypes) {
-            case ClassicGrid -> new ClassicGrid(chosenRowCount, chosenColumnCount);
-            case HashMapGrid -> new ListGrid(chosenRowCount, chosenColumnCount, startConfig);
-        };*/
+    public IGrid createGrid(int typeOfGrid, int countRows, int countColumns, Set<Cell> startConfig, ICellStateCalculation stateCalculationStrategy, INeighborStrategy neighborStrategy){
+        GridType loggerTypes = GridType.getType(typeOfGrid);
+        return switch (loggerTypes) {
+            case ClassicGrid -> new ClassicGrid(countRows, countColumns, startConfig, stateCalculationStrategy, neighborStrategy);
+            case HashMapGrid -> new SetGrid(countRows, countColumns, startConfig, stateCalculationStrategy, neighborStrategy);
+        };
     }
 }
