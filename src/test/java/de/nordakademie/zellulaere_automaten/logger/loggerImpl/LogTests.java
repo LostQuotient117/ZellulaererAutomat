@@ -5,6 +5,7 @@ import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
 import org.junit.jupiter.api.*;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
@@ -78,7 +79,7 @@ public class LogTests {
         ILogger log = loggerFactory.createLogger("2");
         //99 for testing
         outputStreamCaptor.reset();
-        log.log(givenString100x100.trim(), 99);
+        log.log(givenString100x100.trim(), 99, "Test");
         Assertions.assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
     }
 
@@ -96,7 +97,7 @@ public class LogTests {
         ILogger log = loggerFactory.createLogger("2");
         outputStreamCaptor.reset();
         for (int i = 1; i <= 100; i++) {
-            log.log(givenString100x100.trim(), i);
+            log.log(givenString100x100.trim(), i, "Test");
         }
         String assertString = outputStreamCaptor.toString();
         String[] wantedStringLines = wantedStringHeaderAndBody100Iterations.split("\r\n");
@@ -112,7 +113,7 @@ public class LogTests {
     }
 
     /**
-     * Tests the logging functionality of {@link Log#log(String, int)} by creating a log file and logging a trimmed string with an iteration count.
+     * Tests the logging functionality of {@link Log#log(String, int, String)} by creating a log file and logging a trimmed string with an iteration count.
      * Deletes any existing log file, creates a logger, logs the string with 99 as iteration,
      * and compares the file content to the expected output.
      * This test uses {@link LoggerFactory} to create a logger and logs the trimmed string
@@ -121,18 +122,19 @@ public class LogTests {
      */
     @Test
     public void log_GridStringAndIteration_LogFileOutput() {
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
 
         //deletion of old file for the new test
-        File file = new File(filename);
+        File file = new File(downloadPath);
         file.delete();
 
         LoggerFactory loggerFactory = new LoggerFactory();
         ILogger log = loggerFactory.createLogger("1");
-        log.log(givenString100x100, 99);
+        log.log(givenString100x100, 99, "Test");
 
         StringBuilder fileContent = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
             String line;
             while ((line = reader.readLine()) != null){
                 fileContent.append(line).append(System.lineSeparator());
@@ -144,7 +146,7 @@ public class LogTests {
     }
 
     /**
-     * Tests the logging functionality of {@link Log#log(String, int)} by creating a log file with a header and body.
+     * Tests the logging functionality of {@link Log#log(String, int, String)} by creating a log file with a header and body.
      * Deletes any existing log file, creates a Log.log-file, logs a string 100 times,
      * and compares the file content to the expected output.
      * This test uses {@link LoggerFactory} to create a logger and logs the string
@@ -153,20 +155,21 @@ public class LogTests {
      */
     @Test
     public void log_gridWithHeaderAndBody_ShouldWriteFile(){
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
 
         //deletion of old file for the new test
-        File file = new File(filename);
+        File file = new File(downloadPath);
         file.delete();
 
         LoggerFactory loggerFactory = new LoggerFactory();
         ILogger log = loggerFactory.createLogger("1");
         for (int i = 1; i <= 100; i++) {
-            log.log(givenString100x100, i);
+            log.log(givenString100x100, i, "Test");
         }
 
         StringBuilder fileContent = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
             String line;
             while ((line = reader.readLine()) != null){
                 fileContent.append(line).append(System.lineSeparator());
@@ -177,23 +180,25 @@ public class LogTests {
         Assertions.assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
     }
     /**
-     * Tests the {@link Log#logEndMessage(String)} method to ensure it correctly writes the end message to the log file.
+     * Tests the {@link Log#logEndMessage(String, String)} method to ensure it correctly writes the end message to the log file.
      * This test verifies that the {@code logEndMessage} method outputs the expected end message to the log file.
      * The output is captured and compared to the provided {@code endMessage} to ensure accuracy.
      */
     @Test
     public void logEndMessage_EndMessage_LogFileOutput() {
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
-        File file = new File(filename);
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+
+        File file = new File(downloadPath);
         file.delete();
 
         LoggerFactory loggerFactory = new LoggerFactory();
         ILogger log = loggerFactory.createLogger("1");
         String endMessage = "Experiment stopped: Reached 100 iterations.";
-        log.logEndMessage(endMessage);
+        log.logEndMessage(endMessage, "Test");
 
         StringBuilder fileContent = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 fileContent.append(line).append(System.lineSeparator());
@@ -205,7 +210,7 @@ public class LogTests {
     }
 
     /**
-     * Tests the {@link Log#logEndMessage(String)} method to ensure it correctly writes the end message to the console.
+     * Tests the {@link Log#logEndMessage(String, String)} method to ensure it correctly writes the end message to the console.
      * This test verifies that the {@code logEndMessage} method outputs the expected end message to the console.
      * The output is captured and compared to the provided {@code endMessage} to ensure accuracy.
      */
@@ -215,7 +220,7 @@ public class LogTests {
         ILogger log = loggerFactory.createLogger("2");
         String endMessage = "Experiment stopped: Reached 100 iterations.";
         outputStreamCaptor.reset();
-        log.logEndMessage(endMessage);
+        log.logEndMessage(endMessage, "Test");
         Assertions.assertEquals(endMessage, outputStreamCaptor.toString().trim());
     }
     //endregion
