@@ -24,11 +24,11 @@ public class ZellulaereAutomatenApplication {
 		ExperimentFactory experimentFactory = new ExperimentFactory();
 
 		// Run an experiment by name for testing purposes(to be changed)
-		IExperiment experiment1 = experimentFactory.createExperiment("GameOfLifeExperiment1Structure1");
+		IExperiment experiment1 = experimentFactory.createExperiment("TestGameOfLifeExperiment1Structure1");
 		experiment1.runExperiment(LoggerTypes.LogFile);
 
 		// Run an experiment by name for testing purposes(to be changed)
-		IExperiment experiment2 = experimentFactory.createExperiment("GameOfLifeExperiment1Structure2");
+		IExperiment experiment2 = experimentFactory.createExperiment("TestGameOfLifeExperiment1Structure2");
 		experiment2.runExperiment(LoggerTypes.LogFile);
 
 	}

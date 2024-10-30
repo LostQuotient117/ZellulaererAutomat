@@ -22,7 +22,7 @@ public class BaseExperimentTests {
     @BeforeEach
     void setUp() {
         startConfig = new HashSet<>();
-        grid = new ClassicGrid(5, 5, new Moore(), new GameOfLife());
+        grid = new ClassicGrid(5, 5, new HashSet<>(), new GameOfLife(), new Moore());
         baseExperiment = new BaseExperiment(grid, startConfig, "TestExperiment") {
             @Override
             public void initializeGrid() {
