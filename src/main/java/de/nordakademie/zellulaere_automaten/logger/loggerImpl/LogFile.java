@@ -2,6 +2,7 @@ package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  * The {@link LogFile} class extends the {@link Log} class to provide
@@ -19,9 +20,9 @@ public class LogFile extends Log {
      * @param iteration the iteration number to be included in the log
      */
     @Override
-    protected void writeLog(String formattedGrid, int iteration) {
+    protected void writeLog(String formattedGrid, int iteration, String className) {
         try {
-            exportGridToFile(buildStringForFile(formattedGrid, iteration));
+            exportGridToFile(buildStringForFile(formattedGrid, iteration), className);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,9 +36,9 @@ public class LogFile extends Log {
  * @param endMessage the end message to be logged
  */
 @Override
-protected void writeLog(String endMessage) {
+protected void writeLog(String endMessage, String className) {
     try {
-        exportGridToFile(endMessage);
+        exportGridToFile(endMessage, className);
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -64,9 +65,10 @@ protected void writeLog(String endMessage) {
      * @param buildedStringForFile the string to be written to the file
      * @throws IOException if an I/O error occurs
      */
-    private void exportGridToFile(String buildedStringForFile) throws IOException {
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
-        FileWriter fileWriter = new FileWriter(filename, true);
+    private void exportGridToFile(String buildedStringForFile, String className) throws IOException {
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", (className +".log")).toString();
+        FileWriter fileWriter = new FileWriter(downloadPath, true);
         fileWriter.write(buildedStringForFile);
         fileWriter.write(System.lineSeparator());
         fileWriter.close();

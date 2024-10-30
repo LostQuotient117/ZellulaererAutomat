@@ -18,20 +18,15 @@ public class LogConsole extends Log {
  * @param iteration the iteration number to be included in the log
  */
 @Override
-protected void writeLog(String formattedGrid, int iteration) {
-    stepWriterConsole(iteration);
+protected void writeLog(String formattedGrid, int iteration, String className) {
+    stepWriterConsole(iteration, className);
     writeLogBody(formattedGrid);
-}/**
- * Writes the end message to the console.
- * This method writes the provided end message to the console.
- *
- * @param endMessage the end message to be logged
- */
-@Override
-protected void writeLog(String endMessage){
-    System.out.println(endMessage);
 }
 
+    @Override
+    protected void writeLog(String endMessage, String className) {
+        writeLogBody(endMessage);
+    }
     //region used Functions
     /**
      * Writes the formatted grid string to the console.
@@ -48,9 +43,12 @@ protected void writeLog(String endMessage){
      *which indicates the current iteration
      * @param step int
      */
-    public void stepWriterConsole(int step) {
+    public void stepWriterConsole(int step, String className) {
         if (step < 0){
             throw new IllegalArgumentException("Step number must be a positive integer");
+        }
+        if (step == 1){
+            System.out.println(className + ":");
         }
         System.out.println("### (" + step + ")");
     }
