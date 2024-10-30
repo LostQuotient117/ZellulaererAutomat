@@ -10,12 +10,24 @@ import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.GameOfLife
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The {@code GameOfLifeExperiment1Structure2} class represents an experiment for the Game of Life with a specific structure.
+ * It extends the {@link BaseExperiment} class and implements the {@link IExperiment} interface.
+ */
 public class GameOfLifeExperiment1Structure2 extends BaseExperiment implements IExperiment {
 
+    /**
+     * Constructs a new {@code GameOfLifeExperiment1Structure2} experiment.
+     * Initializes the grid with a specific size and configuration.
+     */
     public GameOfLifeExperiment1Structure2() {
         super(new SetGrid(40, 41, new HashSet<>(), new GameOfLife(), new Moore()), new HashSet<>(), "GameOfLifeExperiment1Structure2");
     }
 
+    /**
+     * Initializes the grid with a specific starting pattern.
+     * The pattern is placed in the middle of the grid.
+     */
     @Override
     public void initializeGrid() {
         int middleRow = grid.getRows() / 2;
@@ -43,8 +55,11 @@ public class GameOfLifeExperiment1Structure2 extends BaseExperiment implements I
         ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 
-    // for GameOfLifeExperiment1Structure2Tests
-    public Set<Cell> getStartConfig() {
+    /**
+     * Returns the start configuration of cells for testing purposes.
+     *
+     * @return the start configuration of cells
+     */    public Set<Cell> getStartConfig() {
         return startConfig;
     }
 

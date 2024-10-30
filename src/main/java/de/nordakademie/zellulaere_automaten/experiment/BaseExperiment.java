@@ -8,20 +8,42 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.Set;
 
+/**
+ * The {@code BaseExperiment} class provides a base implementation for experiments.
+ * It implements the {@link IExperiment} interface and provides common functionality
+ * for initializing and running experiments.
+ */
 public class BaseExperiment implements IExperiment {
     public IGrid grid;
     public Set<Cell> startConfig;
     protected String logExperimentName;
     protected ILogger logger;
 
+    /**
+     * Constructs a new {@code BaseExperiment} with the specified grid, start configuration, and log experiment name.
+     *
+     * @param grid the grid to be used in the experiment
+     * @param startConfig the initial configuration of cells
+     * @param logExperimentName the name of the experiment for logging purposes
+     */
     public BaseExperiment(IGrid grid, Set<Cell> startConfig, String logExperimentName) {
         this.grid = grid;
         this.startConfig = startConfig;
         this.logExperimentName = logExperimentName;
     }
 
+    /**
+     * Initializes the grid with the start configuration.
+     * This method should be overridden by subclasses to provide specific initialization logic.
+     */
     public void initializeGrid() {}
 
+    /**
+     * Runs the experiment with the specified logger type.
+     * This method initializes the grid, logs the grid state for each iteration, and stops when the grid is stable or reaches 100 iterations.
+     *
+     * @param loggerType the type of logger to be used for logging the experiment
+     */
     public void runExperiment(LoggerTypes loggerType) {
         LoggerFactory loggerFactory = new LoggerFactory();
         this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
