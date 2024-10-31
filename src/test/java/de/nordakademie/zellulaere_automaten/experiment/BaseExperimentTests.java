@@ -121,6 +121,7 @@ public class BaseExperimentTests {
 
         experiment.runExperiment(LoggerTypes.LogConsole);
 
+        // 101 because of iteration 0 (start config)
         verify(mockLogger, times(101)).log(anyString(), anyInt(), eq("TestExperiment"));
         verify(mockLogger).logEndMessage("Experiment stopped: Reached 100 iterations.", "TestExperiment");
     }

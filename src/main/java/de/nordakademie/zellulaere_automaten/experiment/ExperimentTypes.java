@@ -18,13 +18,7 @@ public enum ExperimentTypes {
     ParityExperiment1Structure1,
     ParityExperiment1Structure2,
     ParityExperiment2Structure1,
-    ParityExperiment2Structure2,
-
-    TestGameOfLifeExperiment1Structure1,
-    TestGameOfLifeExperiment1Structure2,
-
-    TestParityExperiment1Structure1,
-    TestParityExperiment1Structure2;
+    ParityExperiment2Structure2;
 
     private static final Map<String, ExperimentTypes> NAME_MAP = new HashMap<>();
 

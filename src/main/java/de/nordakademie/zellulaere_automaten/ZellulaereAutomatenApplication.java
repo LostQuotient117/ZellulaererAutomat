@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
+import java.time.Duration;
+import java.time.Instant;
 
 @SpringBootApplication
 public class ZellulaereAutomatenApplication {
@@ -14,34 +16,32 @@ public class ZellulaereAutomatenApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZellulaereAutomatenApplication.class, args);
 
-		String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
-
-		/*
-		//deletion of old file for the new test
-		File file = new File(filename);
-		file.delete();
-
-		 */
-
-		// Create an instance of ExperimentFactory for testing purposes(to be changed)
 		ExperimentFactory experimentFactory = new ExperimentFactory();
 
-		// Run an experiment by name for testing purposes(to be changed)
-		IExperiment experiment1 = experimentFactory.createExperiment("TestGameOfLifeExperiment1Structure1");
-		experiment1.runExperiment(LoggerTypes.LogFile);
+		IExperiment[] experiments = {
+				experimentFactory.createExperiment("GameOfLifeExperiment1Structure1"),
+				experimentFactory.createExperiment("GameOfLifeExperiment1Structure2"),
+				experimentFactory.createExperiment("GameOfLifeExperiment2Structure1"),
+				experimentFactory.createExperiment("GameOfLifeExperiment2Structure2"),
+				experimentFactory.createExperiment("GameOfLifeExperiment3Structure1"),
+				experimentFactory.createExperiment("GameOfLifeExperiment3Structure2"),
+				experimentFactory.createExperiment("ParityExperiment1Structure1"),
+				experimentFactory.createExperiment("ParityExperiment1Structure2"),
+				experimentFactory.createExperiment("ParityExperiment2Structure1"),
+				experimentFactory.createExperiment("ParityExperiment2Structure2")
+		};
 
-		// Run an experiment by name for testing purposes(to be changed)
-		IExperiment experiment2 = experimentFactory.createExperiment("TestGameOfLifeExperiment1Structure2");
-		experiment2.runExperiment(LoggerTypes.LogFile);
+		for (IExperiment experiment : experiments) {
+			Instant start = Instant.now();
+			experiment.runExperiment(LoggerTypes.LogFile);
+			Instant end = Instant.now();
+			Duration timeElapsed = Duration.between(start, end);
+			System.out.println("Time taken for " + experiment.getClass().getSimpleName() + ": " + timeElapsed.toMillis() + " milliseconds");
+		}
 
-		// Run an experiment by name for testing purposes(to be changed)
-		IExperiment experiment3 = experimentFactory.createExperiment("TestParityExperiment1Structure1");
-		experiment3.runExperiment(LoggerTypes.LogFile);
+		System.out.println("All experiments have been created and run.");
 
-		// Run an experiment by name for testing purposes(to be changed)
-		IExperiment experiment4 = experimentFactory.createExperiment("TestParityExperiment1Structure2");
-		experiment4.runExperiment(LoggerTypes.LogFile);
+
 
 	}
-
 }

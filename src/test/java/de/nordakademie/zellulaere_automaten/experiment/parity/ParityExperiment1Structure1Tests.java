@@ -48,6 +48,47 @@ public class ParityExperiment1Structure1Tests {
     }
 
     /**
+     * Tests the first step generation of the grid.
+     * Verifies that the grid matches the expected pattern after the first generation.
+     */
+    @Test
+    void firstStepGeneration_ShouldMatchExpectedPattern() {
+        Set<Cell> startConfig = experiment.getStartConfig();
+        assertNotNull(startConfig);
+        assertFalse(startConfig.isEmpty());
+
+        grid.calculateNextGeneration();
+
+        int middleRow = grid.getRows() / 2 - 1;
+        int middleColumn = grid.getColumns() / 2 - 1;
+
+        // row 1 in the middle
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn - 1).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow - 1, middleColumn).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow - 1, middleColumn + 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 2).getIsAlive());
+
+        // row 2 in the middle
+        assertTrue(grid.getCellByCoordinates(middleRow, middleColumn - 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 1).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow, middleColumn + 2).getIsAlive());
+
+        // row 3 in the middle
+        assertTrue(grid.getCellByCoordinates(middleRow + 1, middleColumn - 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 1).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 1, middleColumn + 2).getIsAlive());
+
+        // row 4 in the middle
+        assertFalse(grid.getCellByCoordinates(middleRow + 2, middleColumn - 1).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 2, middleColumn + 2).getIsAlive());
+    }
+
+
+    /**
      * Tests the dimensions of the grid.
      * Verifies that the grid has the correct number of rows and columns.
      */

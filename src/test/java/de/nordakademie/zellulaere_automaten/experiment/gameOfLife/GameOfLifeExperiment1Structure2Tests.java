@@ -100,6 +100,77 @@ public class GameOfLifeExperiment1Structure2Tests {
     }
 
     /**
+     * Tests the first step generation of the grid.
+     * Verifies that the grid matches the expected pattern after the first generation.
+     */
+    @Test
+    void firstStepGeneration_ShouldMatchExpectedPattern() {
+        Set<Cell> startConfig = experiment.getStartConfig();
+        assertNotNull(startConfig);
+        assertFalse(startConfig.isEmpty());
+
+        grid.calculateNextGeneration();
+
+        int middleRow = grid.getRows() / 2 - 1;
+        int middleColumn = grid.getColumns() / 2 - 4;
+
+        assertFalse(grid.getCellByCoordinates(middleRow - 2, middleColumn).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 2, middleColumn + 1).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 2).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 3).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 2, middleColumn + 4).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 5).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 6).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 2, middleColumn + 7).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 2, middleColumn + 8).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 2).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 3).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 4).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 5).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 6).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 7).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow - 1, middleColumn + 8).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 2).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow, middleColumn + 3).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 4).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow, middleColumn + 5).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 6).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 7).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow, middleColumn + 8).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 2).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 1, middleColumn + 3).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 4).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 1, middleColumn + 5).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 6).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 7).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 1, middleColumn + 8).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 1).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 2, middleColumn + 2).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 3).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 2, middleColumn + 4).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 5).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 2, middleColumn + 6).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 7).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 8).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 3, middleColumn).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 1).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 2).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 3, middleColumn + 3).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 3, middleColumn + 4).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 3, middleColumn + 5).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 6).getIsAlive());
+        assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 7).getIsAlive());
+        assertFalse(grid.getCellByCoordinates(middleRow + 3, middleColumn + 8).getIsAlive());
+    }
+
+    /**
      * Tests the dimensions of the grid.
      * Verifies that the grid has the correct number of rows and columns.
      */
