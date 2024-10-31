@@ -9,8 +9,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * This Test-Class tests the methods of the {@link LogFile}-class
@@ -120,7 +119,7 @@ public class LogFileTests {
      */
     @Test
     public void writeLog_GridStringAndIteration_ShouldWriteFile(){
-        LogFile logFile = new LogFile();
+        LogFile mockLogFile = mock(LogFile.class);
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
@@ -158,7 +157,7 @@ public class LogFileTests {
      */
     @Test
     public void writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile(){
-        LogFile logFile = new LogFile();
+        LogFile mockLogFile = mock(LogFile.class);
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
@@ -199,7 +198,7 @@ public class LogFileTests {
      */
     @Test
     public void writeLog_EndMessage_EndMessageAsFile() {
-        LogFile logFile = new LogFile();
+        LogFile mockLogFile = mock(LogFile.class);
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         String endMessage = "Experiment stopped: Reached 100 iterations.";

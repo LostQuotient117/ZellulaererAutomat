@@ -143,8 +143,8 @@ public class LogTests {
     @Test
     public void log_GridStringAndIteration_LogFileOutput() {
         LogFile mockLogFile = Mockito.mock(LogFile.class);
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
         // Deletion of old file for the new test
         File file = new File(downloadPath);
@@ -185,8 +185,8 @@ public class LogTests {
     @Test
     public void log_gridWithHeaderAndBody_ShouldWriteFile(){
         LogFile mockLogFile = Mockito.mock(LogFile.class);
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
         // Deletion of old file for the new test
         File file = new File(downloadPath);
@@ -225,8 +225,8 @@ public class LogTests {
     @Test
     public void logEndMessage_EndMessage_LogFileOutput() {
         LogFile mockLogFile = Mockito.mock(LogFile.class);
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         String endMessage = "Experiment stopped: Reached 100 iterations.";
 
         // Deletion of old file for the new test
