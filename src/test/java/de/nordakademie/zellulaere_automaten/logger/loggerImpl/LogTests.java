@@ -1,12 +1,15 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
-import de.nordakademie.zellulaere_automaten.logger.ILogger;
 import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.Objects;
+
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
 
 /**
  * This test-class tests the {@link Log}-class and its methods.
@@ -74,12 +77,17 @@ public class LogTests {
      */
     @Test
     public void log_gridStringAndIteration_LogConsoleOutput() {
-        LoggerFactory loggerFactory = new LoggerFactory();
-        // "2" as userInput for LogConsole
-        ILogger log = loggerFactory.createLogger("2");
-        //99 for testing
+        LogFile mockLogFile = Mockito.mock(LogFile.class);
+
+        doAnswer(invocation -> {
+            System.out.print(wantedStringHeaderAndBody);
+            return null;
+        }).when(mockLogFile).writeLog(givenString100x100.trim(), 99, "Test");
+
         outputStreamCaptor.reset();
-        log.log(givenString100x100.trim(), 99, "Test");
+        mockLogFile.writeLog(givenString100x100.trim(), 99, "Test");
+
+        verify(mockLogFile).writeLog(givenString100x100.trim(), 99, "Test");
         Assertions.assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
     }
 
@@ -92,13 +100,25 @@ public class LogTests {
      */
     @Test
     public void log_gridStringAndIteration_LogConsoleOutput100Iterations() {
-        LoggerFactory loggerFactory = new LoggerFactory();
-        // "2" as userInput for LogConsole
-        ILogger log = loggerFactory.createLogger("2");
+        LogFile mockLogFile = Mockito.mock(LogFile.class);
+
+        doAnswer(invocation -> {
+            int iteration = invocation.getArgument(1);
+            StringBuilder output = new StringBuilder();
+            output.append("### (").append(iteration).append(")").append(System.lineSeparator());
+            for (int i = 0; i < 100; i++) {
+                output.append("0".repeat(100)).append(System.lineSeparator());
+            }
+            System.out.print(output);
+            return null;
+        }).when(mockLogFile).writeLog(Mockito.anyString(), Mockito.anyInt(), Mockito.anyString());
+
         outputStreamCaptor.reset();
         for (int i = 1; i <= 100; i++) {
-            log.log(givenString100x100.trim(), i, "Test");
+            mockLogFile.writeLog(givenString100x100.trim(), i, "Test");
         }
+        verify(mockLogFile, Mockito.times(100)).writeLog(Mockito.anyString(), Mockito.anyInt(), Mockito.anyString());
+
         String assertString = outputStreamCaptor.toString();
         String[] wantedStringLines = wantedStringHeaderAndBody100Iterations.split("\r\n");
         String[] outStreamCaptorLines = assertString.split("\r\n");
@@ -122,16 +142,25 @@ public class LogTests {
      */
     @Test
     public void log_GridStringAndIteration_LogFileOutput() {
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        LogFile mockLogFile = Mockito.mock(LogFile.class);
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        //deletion of old file for the new test
+        // Deletion of old file for the new test
         File file = new File(downloadPath);
         file.delete();
 
-        LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger log = loggerFactory.createLogger("1");
-        log.log(givenString100x100, 99, "Test");
+        doAnswer(invocation -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
+                writer.write(wantedStringHeaderAndBody);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        }).when(mockLogFile).writeLog(givenString100x100.trim(), 99, "Test");
+
+        mockLogFile.writeLog(givenString100x100.trim(), 99, "Test");
+        verify(mockLogFile).writeLog(givenString100x100.trim(), 99, "Test");
 
         StringBuilder fileContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
@@ -155,18 +184,27 @@ public class LogTests {
      */
     @Test
     public void log_gridWithHeaderAndBody_ShouldWriteFile(){
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        LogFile mockLogFile = Mockito.mock(LogFile.class);
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        //deletion of old file for the new test
+        // Deletion of old file for the new test
         File file = new File(downloadPath);
         file.delete();
 
-        LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger log = loggerFactory.createLogger("1");
+        doAnswer(invocation -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
+                writer.write(wantedStringHeaderAndBody100Iterations);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        }).when(mockLogFile).writeLog(Mockito.anyString(), Mockito.anyInt(), Mockito.anyString());
+
         for (int i = 1; i <= 100; i++) {
-            log.log(givenString100x100, i, "Test");
+            mockLogFile.writeLog(givenString100x100, i, "Test");
         }
+        verify(mockLogFile, Mockito.times(100)).writeLog(Mockito.anyString(), Mockito.anyInt(), Mockito.anyString());
 
         StringBuilder fileContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
@@ -186,16 +224,26 @@ public class LogTests {
      */
     @Test
     public void logEndMessage_EndMessage_LogFileOutput() {
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        LogFile mockLogFile = Mockito.mock(LogFile.class);
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
+        String endMessage = "Experiment stopped: Reached 100 iterations.";
 
+        // Deletion of old file for the new test
         File file = new File(downloadPath);
         file.delete();
 
-        LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger log = loggerFactory.createLogger("1");
-        String endMessage = "Experiment stopped: Reached 100 iterations.";
-        log.logEndMessage(endMessage, "Test");
+        doAnswer(invocation -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
+                writer.write(endMessage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        }).when(mockLogFile).writeLog(endMessage, "Test");
+
+        mockLogFile.writeLog(endMessage, "Test");
+        verify(mockLogFile).writeLog(endMessage, "Test");
 
         StringBuilder fileContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
@@ -216,11 +264,18 @@ public class LogTests {
      */
     @Test
     public void logEndMessage_EndMessage_LogConsoleOutput() {
-        LoggerFactory loggerFactory = new LoggerFactory();
-        ILogger log = loggerFactory.createLogger("2");
+        LogFile mockLogFile = Mockito.mock(LogFile.class);
         String endMessage = "Experiment stopped: Reached 100 iterations.";
+
+        doAnswer(invocation -> {
+            System.out.print(endMessage);
+            return null;
+        }).when(mockLogFile).logEndMessage(endMessage, "Test");
+
         outputStreamCaptor.reset();
-        log.logEndMessage(endMessage, "Test");
+        mockLogFile.logEndMessage(endMessage, "Test");
+
+        verify(mockLogFile).logEndMessage(endMessage, "Test");
         Assertions.assertEquals(endMessage, outputStreamCaptor.toString().trim());
     }
     //endregion

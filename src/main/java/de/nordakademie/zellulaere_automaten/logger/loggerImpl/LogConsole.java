@@ -34,7 +34,7 @@ protected void writeLog(String formattedGrid, int iteration, String className) {
      * It is intended to log the formatted grid representation of a {@link Cell} array.
      * @param formattedGrid the string representation of the grid to be logged
      */
-    public void writeLogBody(String formattedGrid) {
+    private void writeLogBody(String formattedGrid) {
         System.out.print(formattedGrid);
         System.out.print(System.lineSeparator());
     }
@@ -43,7 +43,7 @@ protected void writeLog(String formattedGrid, int iteration, String className) {
      *which indicates the current iteration
      * @param step int
      */
-    public void stepWriterConsole(int step, String className) {
+    private void stepWriterConsole(int step, String className) {
         if (step < 0){
             throw new IllegalArgumentException("Step number must be a positive integer");
         }
