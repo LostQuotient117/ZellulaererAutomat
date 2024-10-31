@@ -29,8 +29,6 @@ public class TestGameOfLifeExperiment1Structure2Tests {
         experiment.initializeGrid();
         grid.calculateNextGeneration();
 
-        System.out.println(grid);
-
         // Filled cells (true)
         assertTrue(grid.getCellByCoordinates(5, 6).getIsAlive());
         assertTrue(grid.getCellByCoordinates(5, 7).getIsAlive());

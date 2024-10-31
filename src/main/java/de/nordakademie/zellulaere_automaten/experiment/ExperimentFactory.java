@@ -36,6 +36,10 @@ public class ExperimentFactory {
 
             case TestGameOfLifeExperiment1Structure1 -> new TestGameOfLifeExperiment1Structure1();
             case TestGameOfLifeExperiment1Structure2 -> new TestGameOfLifeExperiment1Structure2();
+
+            case TestParityExperiment1Structure1 -> new TestParityExperiment1Structure1();
+            case TestParityExperiment1Structure2 -> new TestParityExperiment1Structure2();
+
         };
     }
 }

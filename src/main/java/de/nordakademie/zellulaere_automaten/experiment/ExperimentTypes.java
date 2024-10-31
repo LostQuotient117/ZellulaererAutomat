@@ -21,7 +21,10 @@ public enum ExperimentTypes {
     ParityExperiment2Structure2,
 
     TestGameOfLifeExperiment1Structure1,
-    TestGameOfLifeExperiment1Structure2;
+    TestGameOfLifeExperiment1Structure2,
+
+    TestParityExperiment1Structure1,
+    TestParityExperiment1Structure2;
 
     private static final Map<String, ExperimentTypes> NAME_MAP = new HashMap<>();
 

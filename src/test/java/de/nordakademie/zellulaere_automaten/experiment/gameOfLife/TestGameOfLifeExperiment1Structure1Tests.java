@@ -29,10 +29,6 @@ public class TestGameOfLifeExperiment1Structure1Tests {
 
         grid.calculateNextGeneration();
 
-        System.out.println(grid);
-
-        // Expected pattern after the first step based on the filled cells from the lower grid
-
         // Filled cells (true)
         assertTrue(grid.getCellByCoordinates(5, 6).getIsAlive());
         assertTrue(grid.getCellByCoordinates(5, 7).getIsAlive());

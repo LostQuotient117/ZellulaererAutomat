@@ -26,8 +26,8 @@ public class BaseExperiment implements IExperiment {
     /**
      * Constructs a new {@code BaseExperiment} with the specified grid, start configuration, and log experiment name.
      *
-     * @param grid the grid to be used in the experiment
-     * @param startConfig the initial configuration of cells
+     * @param grid              the grid to be used in the experiment
+     * @param startConfig       the initial configuration of cells
      * @param logExperimentName the name of the experiment for logging purposes
      */
     public BaseExperiment(IGrid grid, Set<Cell> startConfig, String logExperimentName) {
@@ -50,9 +50,11 @@ public class BaseExperiment implements IExperiment {
      * @param loggerType the type of logger to be used for logging the experiment
      */
     public void runExperiment(LoggerTypes loggerType) {
-        LoggerFactory loggerFactory = new LoggerFactory();
-        this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
-        String className = this.getClass().getSimpleName();
+        if (this.logger == null){
+            LoggerFactory loggerFactory = new LoggerFactory();
+            this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
+        }
+        String className = getClassName();
 
         initializeGrid();
 
@@ -70,16 +72,28 @@ public class BaseExperiment implements IExperiment {
             }
         }
 
+        boolean isStable = false;
         for (int i = 0; i <= 100; i++) {
             logger.log(grid.toString(), i, className);
             if (grid.isStable()) {
-                logger.logEndMessage("Experiment stopped: Grid is stable.", className);
+                isStable = true;
                 break;
             }
             grid.calculateNextGeneration();
         }
-        logger.logEndMessage("Experiment stopped: Reached 100 iterations.", className);
+        if (isStable) {
+            logger.logEndMessage("Experiment stopped: Grid is stable.", className);
+        } else {
+            logger.logEndMessage("Experiment stopped: Reached 100 iterations.", className);
+        }
     }
 
-
+    /**
+     * Returns the simple name of the class.
+     *
+     * @return the simple name of the class
+     */
+    public String getClassName() {
+        return this.getClass().getSimpleName();
+    }
 }
