@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.Mockito;
 import java.util.ArrayList;
+import java.util.List;
+
 import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Neumann;
@@ -37,7 +39,7 @@ class NeumannTest {
         Mockito.when(grid.getCellByCoordinates(1, 0)).thenReturn(new Cell(1, 0, true)); // left
         Mockito.when(grid.getCellByCoordinates(1, 2)).thenReturn(new Cell(1, 2, true)); // right
 
-        ArrayList<Cell> result = neumann.getNeighbors(cell, grid);
+        List<Cell> result = neumann.getNeighbors(cell, grid);
 
         assertEquals(4, result.size());
     }
@@ -55,7 +57,7 @@ class NeumannTest {
         Mockito.when(grid.getCellByCoordinates(2, 0)).thenReturn(new Cell(2, 0, true)); // below
         Mockito.when(grid.getCellByCoordinates(1, 1)).thenReturn(new Cell(1, 1, true)); // right
 
-        ArrayList<Cell> result = neumann.getNeighbors(cell, grid);
+        List<Cell> result = neumann.getNeighbors(cell, grid);
 
         assertEquals(3, result.size());
     }
@@ -72,7 +74,7 @@ class NeumannTest {
         Mockito.when(grid.getCellByCoordinates(1, 0)).thenReturn(new Cell(1, 0, true)); // below
         Mockito.when(grid.getCellByCoordinates(0, 1)).thenReturn(new Cell(0, 1, true)); // right
 
-        ArrayList<Cell> result = neumann.getNeighbors(cell, grid);
+        List<Cell> result = neumann.getNeighbors(cell, grid);
 
         assertEquals(2, result.size());
     }

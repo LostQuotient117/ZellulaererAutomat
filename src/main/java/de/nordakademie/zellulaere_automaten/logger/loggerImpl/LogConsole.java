@@ -2,14 +2,31 @@ package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
 import de.nordakademie.zellulaere_automaten.model.*;
 
+/**
+ * The {@code LogConsole} class extends the {@link Log} class to provide
+ * functionality for writing log data to the console.
+ * This class implements methods to log the formatted grid and iteration number,
+ * as well as the end message, to the console.
+ */
 public class LogConsole extends Log {
 
-    @Override
-    protected void writeLog(String formattedGrid, int iteration) {
-        stepWriterConsole(iteration);
-        writeLogBody(formattedGrid);
-    }
+    /**
+ * Writes the formatted grid and iteration number to the console.
+ * This method formats the log data and writes it to the console.
+ *
+ * @param formattedGrid the formatted grid string to be logged
+ * @param iteration the iteration number to be included in the log
+ */
+@Override
+protected void writeLog(String formattedGrid, int iteration, String className) {
+    stepWriterConsole(iteration, className);
+    writeLogBody(formattedGrid);
+}
 
+    @Override
+    protected void writeLog(String endMessage, String className) {
+        writeLogBody(endMessage);
+    }
     //region used Functions
     /**
      * Writes the formatted grid string to the console.
@@ -26,9 +43,12 @@ public class LogConsole extends Log {
      *which indicates the current iteration
      * @param step int
      */
-    public void stepWriterConsole(int step) {
+    public void stepWriterConsole(int step, String className) {
         if (step < 0){
             throw new IllegalArgumentException("Step number must be a positive integer");
+        }
+        if (step == 1){
+            System.out.println(className + ":");
         }
         System.out.println("### (" + step + ")");
     }

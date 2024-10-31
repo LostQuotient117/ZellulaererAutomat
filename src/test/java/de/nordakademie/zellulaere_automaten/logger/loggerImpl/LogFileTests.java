@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.file.Paths;
 
 /**
  * This Test-Class tests the methods of the {@link LogFile}-class
@@ -33,7 +34,8 @@ public class LogFileTests {
             wantedString100x100 = wantedStringBuilder.toString();
         }
         if (test.equals("exportGridToFile_GridWithHeaderAndBody_ShouldWriteFileWithGrid()") ||
-            test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()")){
+                test.equals("buildStringForFile_GridAndIteration_ShouldReturnGridStringWithIteration()") ||
+                test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()")){
             StringBuilder wantedStringBuilder = new StringBuilder();
             wantedStringBuilder.append("### (99)").append(System.lineSeparator());
             for (int i = 0; i < 100; i++) {
@@ -57,10 +59,8 @@ public class LogFileTests {
     }
     /**
      * Tests the private method {@code buildStringForFile} of the {@code LogFile} class.
-     * <p>
      * This test uses reflection to access the private method and verifies that the method
      * correctly builds a string with a header and a 100x100 grid of zeros.
-     * </p>
      *
      * @throws InvocationTargetException if the underlying method throws an exception
      * @throws IllegalAccessException if the underlying method is inaccessible
@@ -76,8 +76,8 @@ public class LogFileTests {
     }
     /**
      * Tests the private method {@code exportGridToFile} of the {@code LogFile} class.
-     * <p> This test uses reflection to access the private method and verifies that the method
-     * correctly exports a string with a header and a 100x100 grid of zeros to a file.</p>
+     * This test uses reflection to access the private method and verifies that the method
+     * correctly exports a string with a header and a 100x100 grid of zeros to a file.
      *
      * @throws NoSuchMethodException if the method cannot be found
      * @throws InvocationTargetException if the underlying method throws an exception
@@ -86,18 +86,19 @@ public class LogFileTests {
     @Test
     public void exportGridToFile_GridWithHeaderAndBody_ShouldWriteFileWithGrid() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         LogFile logFile = new LogFile();
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
 
         //deletion of old file for the new test
-        File file = new File(filename);
+        File file = new File(downloadPath);
         file.delete();
 
-        Method privateExportGridToFile = LogFile.class.getDeclaredMethod("exportGridToFile", String.class);
+        Method privateExportGridToFile = LogFile.class.getDeclaredMethod("exportGridToFile", String.class, String.class);
         privateExportGridToFile.setAccessible(true);
-        privateExportGridToFile.invoke(logFile, wantedStringHeaderAndBody);
+        privateExportGridToFile.invoke(logFile, wantedStringHeaderAndBody, "Test");
 
         StringBuilder fileContent = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
             String line;
             while ((line = reader.readLine()) != null){
                 fileContent.append(line).append(System.lineSeparator());
@@ -108,22 +109,23 @@ public class LogFileTests {
         Assertions.assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
     }
     /**
-     * Tests the {@link LogFile#writeLog(String formattedGrid, int iteration)}.
-     * <p> This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file.</p>
+     * Tests the {@link LogFile#writeLog(String, int, String)}.
+     * This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file.
      */
     @Test
     public void writeLog_GridStringAndIteration_ShouldWriteFile(){
         LogFile logFile = new LogFile();
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
 
         //deletion of old file for the new test
-        File file = new File(filename);
+        File file = new File(downloadPath);
         file.delete();
 
-        logFile.writeLog(wantedString100x100, 99);
+        logFile.writeLog(wantedString100x100, 99, "Test");
 
         StringBuilder fileContent = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
             String line;
             while ((line = reader.readLine()) != null){
                 fileContent.append(line).append(System.lineSeparator());
@@ -134,25 +136,26 @@ public class LogFileTests {
         Assertions.assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
     }
     /**
-     * Tests {@link LogFile#writeLog(String, int)} with 100 iterations.
-     * <p> This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file
-     * for 100 iterations.</p>
+     * Tests {@link LogFile#writeLog(String, int, String)} with 100 iterations.
+     * This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file
+     * for 100 iterations.
      */
     @Test
     public void writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile(){
         LogFile logFile = new LogFile();
-        String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
 
         //deletion of old file for the new test
-        File file = new File(filename);
+        File file = new File(downloadPath);
         file.delete();
 
         for (int i = 1; i <= 100; i++) {
-            logFile.writeLog(wantedString100x100, i);
+            logFile.writeLog(wantedString100x100, i, "Test");
         }
 
         StringBuilder fileContent = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
             String line;
             while ((line = reader.readLine()) != null){
                 fileContent.append(line).append(System.lineSeparator());
@@ -161,5 +164,35 @@ public class LogFileTests {
             throw new RuntimeException(e);
         }
         Assertions.assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
+    }
+    /**
+     * Tests the {@link LogFile#writeLog(String, String)} method with an end message.
+     * This test verifies that the method correctly writes the end message to the log file.
+     * It deletes any existing log file before the test, writes the end message, and then
+     * reads the file to ensure the content matches the expected end message.
+     */
+    @Test
+    public void writeLog_EndMessage_EndMessageAsFile() {
+        LogFile logFile = new LogFile();
+        String userHome = System.getProperty("user.home");
+        String downloadPath = Paths.get(userHome, "Downloads", ("Test.log")).toString();
+        String endMessage = "Experiment stopped: Reached 100 iterations.";
+
+        // Deletion of old file for the new test
+        File file = new File(downloadPath);
+        file.delete();
+
+        logFile.writeLog(endMessage, "Test");
+
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Assertions.assertEquals(endMessage.trim(), fileContent.toString().trim());
     }
 }

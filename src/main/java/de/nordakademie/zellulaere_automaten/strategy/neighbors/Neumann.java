@@ -1,7 +1,6 @@
 package de.nordakademie.zellulaere_automaten.strategy.neighbors;
 import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Neumann extends AbstractNeighbors {
@@ -14,7 +13,7 @@ public class Neumann extends AbstractNeighbors {
      * @return a list of direct neighboring cells (Neumann neighborhood)
      */
     @Override
-    public ArrayList<Cell> getNeighbors(Cell cell, IGrid grid) {
+    public List<Cell> getNeighbors(Cell cell, IGrid grid) {
         return super.getNeighbors(cell, grid);
     }
 }
