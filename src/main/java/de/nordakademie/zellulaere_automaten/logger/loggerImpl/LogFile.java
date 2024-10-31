@@ -66,8 +66,8 @@ protected void writeLog(String endMessage, String className) {
      * @throws IOException if an I/O error occurs
      */
     private void exportGridToFile(String buildedStringForFile, String className) throws IOException {
-        String userHome = System.getProperty("user.home");
-        String downloadPath = Paths.get(userHome, "Downloads", (className +".log")).toString();
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, (className +".log")).toString();
         FileWriter fileWriter = new FileWriter(downloadPath, true);
         fileWriter.write(buildedStringForFile);
         fileWriter.write(System.lineSeparator());
