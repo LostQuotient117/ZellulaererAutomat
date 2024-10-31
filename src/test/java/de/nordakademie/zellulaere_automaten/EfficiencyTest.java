@@ -11,6 +11,8 @@ import java.time.Instant;
 /**
  * The {@code EfficiencyTest} class contains unit tests to measure the efficiency of various algorithms and data structures.
  * It aims to ensure that the implementations perform within acceptable time and space limits.
+ *
+ * Note: GameOfLifeExperiment2Structure2, ParityExperiment1Structure2 and ParityExperiment2Structure2 take a bit longer.
  */
 public class EfficiencyTest {
 
