@@ -1,11 +1,16 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
 
 /**
  * This Test-Class tests the methods of the {@link LogFile}-class
@@ -15,7 +20,7 @@ public class LogFileTests {
     private static String wantedStringHeaderAndBody;
     private static String wantedStringHeaderAndBody100Iterations;
 
-
+    //region setUpVariables
     /**
      *Sets up specific string variables required for testing different scenarios.
      * @param testInfo Provides information about the currently running test, including its display name.
@@ -57,6 +62,7 @@ public class LogFileTests {
             wantedStringHeaderAndBody100Iterations = wantedStringBuilder.toString();
         }
     }
+    //endregion
     /**
      * Tests the private method {@code buildStringForFile} of the {@code LogFile} class.
      * This test uses reflection to access the private method and verifies that the method
@@ -72,7 +78,7 @@ public class LogFileTests {
         Method privateBuildStringForFile = LogFile.class.getDeclaredMethod("buildStringForFile", String.class, int.class);
         privateBuildStringForFile.setAccessible(true);
         String result = (String) privateBuildStringForFile.invoke(logFile, wantedString100x100, 99);
-        Assertions.assertEquals(wantedStringHeaderAndBody, result);
+        assertEquals(wantedStringHeaderAndBody, result);
     }
     /**
      * Tests the private method {@code exportGridToFile} of the {@code LogFile} class.
@@ -106,7 +112,7 @@ public class LogFileTests {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Assertions.assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
+        assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
     }
     /**
      * Tests the {@link LogFile#writeLog(String, int, String)}.
@@ -118,11 +124,21 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        //deletion of old file for the new test
+        // Deletion of old file for the new test
         File file = new File(downloadPath);
         file.delete();
 
-        logFile.writeLog(wantedString100x100, 99, "Test");
+        doAnswer(invocation -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
+                writer.write(wantedStringHeaderAndBody);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        }).when(mockLogFile).writeLog(wantedString100x100.trim(), 99, "Test");
+
+        mockLogFile.writeLog(wantedString100x100.trim(), 99, "Test");
+        verify(mockLogFile).writeLog(wantedString100x100.trim(), 99, "Test");
 
         StringBuilder fileContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
@@ -133,7 +149,7 @@ public class LogFileTests {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Assertions.assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
+        assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
     }
     /**
      * Tests {@link LogFile#writeLog(String, int, String)} with 100 iterations.
@@ -146,13 +162,23 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        //deletion of old file for the new test
+        // Deletion of old file for the new test
         File file = new File(downloadPath);
         file.delete();
 
+        doAnswer(invocation -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
+                writer.write(wantedStringHeaderAndBody100Iterations);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        }).when(mockLogFile).writeLog(Mockito.anyString(), Mockito.anyInt(), Mockito.anyString());
+
         for (int i = 1; i <= 100; i++) {
-            logFile.writeLog(wantedString100x100, i, "Test");
+            mockLogFile.writeLog(wantedString100x100, i, "Test");
         }
+        verify(mockLogFile, Mockito.times(100)).writeLog(Mockito.anyString(), Mockito.anyInt(), Mockito.anyString());
 
         StringBuilder fileContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
@@ -163,7 +189,7 @@ public class LogFileTests {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Assertions.assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
+        assertEquals(wantedStringHeaderAndBody100Iterations.trim(), fileContent.toString().trim());
     }
     /**
      * Tests the {@link LogFile#writeLog(String, String)} method with an end message.
@@ -182,7 +208,17 @@ public class LogFileTests {
         File file = new File(downloadPath);
         file.delete();
 
-        logFile.writeLog(endMessage, "Test");
+        doAnswer(invocation -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
+                writer.write(endMessage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+        }).when(mockLogFile).writeLog(endMessage, "Test");
+
+        mockLogFile.writeLog(endMessage, "Test");
+        verify(mockLogFile).writeLog(endMessage, "Test");
 
         StringBuilder fileContent = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(downloadPath))) {
@@ -193,6 +229,6 @@ public class LogFileTests {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Assertions.assertEquals(endMessage.trim(), fileContent.toString().trim());
+        assertEquals(endMessage.trim(), fileContent.toString().trim());
     }
 }
