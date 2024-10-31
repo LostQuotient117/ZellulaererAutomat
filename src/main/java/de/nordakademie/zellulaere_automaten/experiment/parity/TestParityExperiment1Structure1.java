@@ -2,6 +2,7 @@ package de.nordakademie.zellulaere_automaten.experiment.parity;
 
 import de.nordakademie.zellulaere_automaten.experiment.BaseExperiment;
 import de.nordakademie.zellulaere_automaten.experiment.IExperiment;
+import de.nordakademie.zellulaere_automaten.grid.ClassicGrid;
 import de.nordakademie.zellulaere_automaten.grid.SetGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Neumann;
@@ -13,7 +14,7 @@ import java.util.Set;
 public class TestParityExperiment1Structure1 extends BaseExperiment implements IExperiment {
 
     public TestParityExperiment1Structure1() {
-        super(new SetGrid(20, 20, new HashSet<>(), new Parity(), new Neumann()), new HashSet<>(), "TestParityExperiment1Structure1");
+        super(new ClassicGrid(20, 20, new HashSet<>(), new Parity(), new Neumann()), new HashSet<>(), "TestParityExperiment1Structure1");
     }
 
     @Override

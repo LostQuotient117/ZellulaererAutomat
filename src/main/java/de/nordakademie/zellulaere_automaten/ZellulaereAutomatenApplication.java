@@ -16,9 +16,12 @@ public class ZellulaereAutomatenApplication {
 
 		String filename = "src/main/java/de/nordakademie/zellulaere_automaten/logger/loggerOutput/Log.log";
 
+		/*
 		//deletion of old file for the new test
 		File file = new File(filename);
 		file.delete();
+
+		 */
 
 		// Create an instance of ExperimentFactory for testing purposes(to be changed)
 		ExperimentFactory experimentFactory = new ExperimentFactory();
@@ -30,6 +33,14 @@ public class ZellulaereAutomatenApplication {
 		// Run an experiment by name for testing purposes(to be changed)
 		IExperiment experiment2 = experimentFactory.createExperiment("TestGameOfLifeExperiment1Structure2");
 		experiment2.runExperiment(LoggerTypes.LogFile);
+
+		// Run an experiment by name for testing purposes(to be changed)
+		IExperiment experiment3 = experimentFactory.createExperiment("TestParityExperiment1Structure1");
+		experiment3.runExperiment(LoggerTypes.LogFile);
+
+		// Run an experiment by name for testing purposes(to be changed)
+		IExperiment experiment4 = experimentFactory.createExperiment("TestParityExperiment1Structure2");
+		experiment4.runExperiment(LoggerTypes.LogFile);
 
 	}
 

@@ -14,7 +14,7 @@ import java.util.Set;
 public class TestParityExperiment1Structure2 extends BaseExperiment implements IExperiment {
 
     public TestParityExperiment1Structure2() {
-        super(new ClassicGrid(20, 20, new HashSet<>(), new Parity(), new Neumann()), new HashSet<>(), "TestParityExperiment1Structure2");
+        super(new SetGrid(20, 20, new HashSet<>(), new Parity(), new Neumann()), new HashSet<>(), "TestParityExperiment1Structure2");
     }
 
     @Override
