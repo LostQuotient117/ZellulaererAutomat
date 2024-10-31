@@ -51,6 +51,50 @@ public class ParityExperiment2Structure1Tests {
     }
 
     /**
+     * Tests the first step generation of the grid.
+     * Verifies that the grid matches the expected pattern after the first generation.
+     */
+    @Test
+    void firstStepGeneration_WhenCalled_ShouldMatchExpectedPattern() {
+        experiment.initializeGrid();
+        grid.calculateNextGeneration();
+
+        // Expected pattern for the first generation
+        boolean[][] expectedPattern = new boolean[100][100];
+
+        // First row pattern
+        for (int col = 0; col < 100; col++) {
+            expectedPattern[0][col] = (col != 0 && col % 2 == 0);
+        }
+
+        // Last row pattern (mirrored version of the first row)
+        for (int col = 0; col < 100; col++) {
+            expectedPattern[99][col] = expectedPattern[0][99 - col];
+        }
+
+        // Middle rows pattern
+        for (int row = 1; row < 99; row++) {
+            if (row % 2 == 0) {
+                for (int col = 0; col < 100; col++) {
+                    expectedPattern[row][col] = (col == 0);
+                }
+            } else {
+                for (int col = 0; col < 100; col++) {
+                    expectedPattern[row][col] = (col == 99);
+                }
+            }
+        }
+
+        // Verify the grid matches the expected pattern
+        for (int row = 0; row < 100; row++) {
+            for (int col = 0; col < 100; col++) {
+                assertEquals(expectedPattern[row][col], grid.getCellByCoordinates(row, col).getIsAlive(),
+                        String.format("Cell at (%d, %d) does not match the expected state", row, col));
+            }
+        }
+    }
+
+    /**
      * Tests the dimensions of the grid.
      * Verifies that the grid has the correct number of rows and columns.
      */

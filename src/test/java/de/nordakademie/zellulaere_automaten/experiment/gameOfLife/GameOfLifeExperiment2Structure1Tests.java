@@ -54,7 +54,7 @@ public class GameOfLifeExperiment2Structure1Tests {
      * Verifies that the grid matches the expected pattern after the first generation.
      */
     @Test
-    void firstStepGeneration_ShouldMatchExpectedPattern() {
+    void firstStepGeneration_WhenCalled_ShouldMatchExpectedPattern() {
         experiment.initializeGrid();
         grid.calculateNextGeneration();
 

@@ -104,7 +104,7 @@ public class GameOfLifeExperiment1Structure2Tests {
      * Verifies that the grid matches the expected pattern after the first generation.
      */
     @Test
-    void firstStepGeneration_ShouldMatchExpectedPattern() {
+    void firstStepGeneration_WhenCalled_ShouldMatchExpectedPattern() {
         Set<Cell> startConfig = experiment.getStartConfig();
         assertNotNull(startConfig);
         assertFalse(startConfig.isEmpty());
