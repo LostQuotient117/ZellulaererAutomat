@@ -1,4 +1,4 @@
-# Projektdokumentation: hausarbeit\_i143\_2024\_i22c\_c7
+# Projekt: hausarbeit\_i143\_2024\_i22c\_c7
 
 ## Projektübersicht
 
