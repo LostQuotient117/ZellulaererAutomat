@@ -50,6 +50,36 @@ public class GameOfLifeExperiment2Structure1Tests {
     }
 
     /**
+     * Tests the first step generation of the grid.
+     * Verifies that the grid matches the expected pattern after the first generation.
+     */
+    @Test
+    void firstStepGeneration_ShouldMatchExpectedPattern() {
+        experiment.initializeGrid();
+        grid.calculateNextGeneration();
+
+        // Expected pattern for the first generation
+        boolean[][] expectedPattern = new boolean[100][100];
+        for (int row = 0; row < 100; row++) {
+            for (int col = 0; col < 100; col++) {
+                if (row == 0 || row == 99) {
+                    expectedPattern[row][col] = (col != 0 && col != 99);
+                } else {
+                    expectedPattern[row][col] = (col == 0 || col == 99);
+                }
+            }
+        }
+
+        // Verify the grid matches the expected pattern
+        for (int row = 0; row < 100; row++) {
+            for (int col = 0; col < 100; col++) {
+                assertEquals(expectedPattern[row][col], grid.getCellByCoordinates(row, col).getIsAlive(),
+                        String.format("Cell at (%d, %d) does not match the expected state", row, col));
+            }
+        }
+    }
+
+    /**
      * Tests the dimensions of the grid.
      * Verifies that the grid has the correct number of rows and columns.
      */
