@@ -57,14 +57,16 @@ public class BaseExperiment implements IExperiment {
         initializeGrid();
 
         // Clear the log file if it exists
-        String projectRoot = Paths.get("").toAbsolutePath().toString();
-        String downloadPath = Paths.get(projectRoot, (className + ".log")).toString();
-        File file = new File(downloadPath);
-        if (file.exists()) {
-            try {
-                new FileWriter(file, false).close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (loggerType == LoggerTypes.LogFile) {
+            String projectRoot = Paths.get("").toAbsolutePath().toString();
+            String downloadPath = Paths.get(projectRoot, (className + ".log")).toString();
+            File file = new File(downloadPath);
+            if (file.exists()) {
+                try {
+                    new FileWriter(file, false).close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
