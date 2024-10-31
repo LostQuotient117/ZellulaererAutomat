@@ -6,6 +6,10 @@ import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
 import de.nordakademie.zellulaere_automaten.logger.LoggerTypes;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Set;
 
 /**
@@ -41,6 +45,7 @@ public class BaseExperiment implements IExperiment {
     /**
      * Runs the experiment with the specified logger type.
      * This method initializes the grid, logs the grid state for each iteration, and stops when the grid is stable or reaches 100 iterations.
+     * It also clears any existing log file before starting the experiment.
      *
      * @param loggerType the type of logger to be used for logging the experiment
      */
@@ -50,6 +55,19 @@ public class BaseExperiment implements IExperiment {
         String className = this.getClass().getSimpleName();
 
         initializeGrid();
+
+        // Clear the log file if it exists
+        String projectRoot = Paths.get("").toAbsolutePath().toString();
+        String downloadPath = Paths.get(projectRoot, (className + ".log")).toString();
+        File file = new File(downloadPath);
+        if (file.exists()) {
+            try {
+                new FileWriter(file, false).close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         for (int i = 0; i <= 100; i++) {
             logger.log(grid.toString(), i, className);
             if (grid.isStable()) {
