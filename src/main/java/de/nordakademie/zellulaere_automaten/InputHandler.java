@@ -1,9 +1,13 @@
 package de.nordakademie.zellulaere_automaten;
 
+import de.nordakademie.zellulaere_automaten.experiment.ExperimentFactory;
+import de.nordakademie.zellulaere_automaten.experiment.IExperiment;
 import de.nordakademie.zellulaere_automaten.grid.GridType;
 import de.nordakademie.zellulaere_automaten.logger.LoggerTypes;
 import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.CalculationType;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -30,7 +34,7 @@ public class InputHandler {
         System.out.printf((askForCalcType) + "%n", CalculationType.getAvailableCalculationTypesForUserInput());
         calcType = scanner.nextLine();
         if (Objects.equals(calcType, "all")){
-            executeAllExperiments(); //Todo: Implementieren
+            executeAllExperiments(logType); //Todo: Implementieren
         }
         while (true){
             try{
@@ -93,6 +97,7 @@ public class InputHandler {
         executeChosenExperiment(calcType, configType, gridType, logType);
 
     }
+
     //endregion
     private String getUserInfo(){
         return System.getProperty("user.name");
@@ -100,7 +105,36 @@ public class InputHandler {
     private void executeChosenExperiment(String calcType, String configType, String gridType, String logType){
         System.out.print("chosen"); //Todo: Implementieren
     }
-    private void executeAllExperiments(){
-        System.out.print("all"); //Todo: Implementieren
+
+    void executeAllExperiments(String logTypeInput) {
+        LoggerTypes loggerType = LoggerTypes.getType(Integer.parseInt(logTypeInput));
+        ExperimentFactory experimentFactory = new ExperimentFactory();
+
+        IExperiment[] experiments = {
+                experimentFactory.createExperiment("GameOfLifeExperiment1Structure1"),
+                experimentFactory.createExperiment("GameOfLifeExperiment1Structure2"),
+                experimentFactory.createExperiment("GameOfLifeExperiment2Structure1"),
+                experimentFactory.createExperiment("GameOfLifeExperiment2Structure2"),
+                experimentFactory.createExperiment("GameOfLifeExperiment3Structure1"),
+                experimentFactory.createExperiment("GameOfLifeExperiment3Structure2"),
+                experimentFactory.createExperiment("ParityExperiment1Structure1"),
+                experimentFactory.createExperiment("ParityExperiment1Structure2"),
+                experimentFactory.createExperiment("ParityExperiment2Structure1"),
+                experimentFactory.createExperiment("ParityExperiment2Structure2")
+        };
+
+        Instant start = Instant.now();
+
+        for (IExperiment experiment : experiments) {
+            Instant experimentStart = Instant.now();
+            experiment.runExperiment(loggerType);
+            Instant experimentEnd = Instant.now();
+            Duration experimentTimeElapsed = Duration.between(experimentStart, experimentEnd);
+            System.out.println("Time taken for " + experiment.getClass().getSimpleName() + ": " + experimentTimeElapsed.toMillis() + " milliseconds");
+        }
+
+        Instant end = Instant.now();
+        Duration totalTimeElapsed = Duration.between(start, end);
+        System.out.println("Total time taken for all experiments: " + totalTimeElapsed.toMillis() + " milliseconds");
     }
 }
