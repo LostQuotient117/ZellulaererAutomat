@@ -40,7 +40,6 @@ public class ParityExperiment2Structure2Tests {
         assertNotNull(startConfig);
         assertFalse(startConfig.isEmpty());
 
-        // Check alternating pattern for even and odd rows
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
                 boolean expectedState = (row % 2 == 0) ? (col % 2 == 1) : (col % 2 == 0);
@@ -64,17 +63,14 @@ public class ParityExperiment2Structure2Tests {
         int columns = grid.getColumns();
         boolean[][] expectedPattern = new boolean[rows][columns];
 
-        // First row pattern
         for (int col = 0; col < columns; col++) {
             expectedPattern[0][col] = (col != 0 && col % 2 == 0);
         }
 
-        // Last row pattern
         for (int col = 0; col < columns; col++) {
             expectedPattern[rows -1][col] = expectedPattern[0][(rows - 1) - col];
         }
 
-        // Middle rows pattern
         for (int row = 1; row < rows - 1; row++) {
             if (row % 2 == 0) {
                 for (int col = 0; col < columns - 1; col++) {
@@ -87,7 +83,6 @@ public class ParityExperiment2Structure2Tests {
             }
         }
 
-        // Verify the grid matches the expected pattern
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 assertEquals(expectedPattern[row][col], grid.getCellByCoordinates(row, col).getIsAlive(),

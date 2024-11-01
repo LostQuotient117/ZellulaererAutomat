@@ -42,7 +42,6 @@ public class GameOfLifeExperiment3Structure1Tests {
         assertNotNull(startConfig);
         assertTrue(startConfig.isEmpty());
 
-        // Check that all cells are dead
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
                 assertFalse(grid.getCellByCoordinates(row, col).getIsAlive());
@@ -59,7 +58,6 @@ public class GameOfLifeExperiment3Structure1Tests {
         experiment.initializeGrid();
         grid.calculateNextGeneration();
 
-        // Verify that all cells are dead
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
                 assertFalse(grid.getCellByCoordinates(row, col).getIsAlive());

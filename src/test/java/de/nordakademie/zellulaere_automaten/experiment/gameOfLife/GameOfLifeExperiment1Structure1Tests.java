@@ -72,7 +72,6 @@ public class GameOfLifeExperiment1Structure1Tests {
         assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 7).getIsAlive());
 
 
-        // Check all other cells to be dead
         Set<Integer> aliveCellsHashCodes = Arrays.stream(grid.getDataStructure())
                 .flatMap(Arrays::stream)
                 .filter(Objects::nonNull)
@@ -122,7 +121,6 @@ public class GameOfLifeExperiment1Structure1Tests {
         assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 6).getIsAlive());
         assertTrue(grid.getCellByCoordinates(middleRow + 3, middleColumn + 7).getIsAlive());
 
-        // Check all other cells to be dead
         Set<Integer> aliveCellsHashCodes = Arrays.stream(grid.getDataStructure())
                 .flatMap(Arrays::stream)
                 .filter(Objects::nonNull)
