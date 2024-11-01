@@ -5,6 +5,8 @@ import de.nordakademie.zellulaere_automaten.logger.LoggerTypes;
 /**
  * The {@code IExperiment} interface defines the contract for experiments.
  * It requires implementing classes to provide a method for running the experiment.
+ *
+ * @author Lars Nicht
  */
 public interface IExperiment {
 

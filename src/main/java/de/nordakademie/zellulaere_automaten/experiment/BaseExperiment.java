@@ -16,6 +16,8 @@ import java.util.Set;
  * The {@code BaseExperiment} class provides a base implementation for experiments.
  * It implements the {@link IExperiment} interface and provides common functionality
  * for initializing and running experiments.
+ *
+ * @author Lars Nicht
  */
 public class BaseExperiment implements IExperiment {
     public IGrid grid;
@@ -40,7 +42,8 @@ public class BaseExperiment implements IExperiment {
      * Initializes the grid with the start configuration.
      * This method should be overridden by subclasses to provide specific initialization logic.
      */
-    public void initializeGrid() {}
+    public void initializeGrid() {
+    }
 
     /**
      * Runs the experiment with the specified logger type.
@@ -50,7 +53,7 @@ public class BaseExperiment implements IExperiment {
      * @param loggerType the type of logger to be used for logging the experiment
      */
     public void runExperiment(LoggerTypes loggerType) {
-        if (this.logger == null){
+        if (this.logger == null) {
             LoggerFactory loggerFactory = new LoggerFactory();
             this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
         }

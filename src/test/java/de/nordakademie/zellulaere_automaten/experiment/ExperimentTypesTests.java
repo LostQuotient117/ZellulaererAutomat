@@ -1,11 +1,14 @@
 package de.nordakademie.zellulaere_automaten.experiment;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The {@code ExperimentTypesTests} class contains unit tests for the {@link ExperimentTypes} enum.
  * It verifies the correct retrieval of experiment types based on their names.
+ *
+ * @author Lars Nicht
  */
 class ExperimentTypesTests {
 

@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * The {@code ParityExperiment1Structure1Tests} class contains unit tests for the {@link ParityExperiment1Structure1} class.
  * It verifies the correct initialization of the grid and the dimensions of the grid.
+ *
+ * @author Lars Nicht
  */
 public class ParityExperiment1Structure1Tests {
 

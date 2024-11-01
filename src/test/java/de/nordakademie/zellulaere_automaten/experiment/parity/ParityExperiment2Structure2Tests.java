@@ -52,6 +52,8 @@ public class ParityExperiment2Structure2Tests {
     /**
      * Tests the first step generation of the grid.
      * Verifies that the grid matches the expected pattern after the first generation.
+     *
+     * @author Lars Nicht
      */
     @Test
     void firstStepGeneration_WhenCalled_ShouldMatchExpectedPattern() {

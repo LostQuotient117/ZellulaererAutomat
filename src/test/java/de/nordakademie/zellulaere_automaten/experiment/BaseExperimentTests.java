@@ -23,6 +23,8 @@ import static org.mockito.Mockito.*;
 /**
  * The {@code BaseExperimentTests} class contains unit tests for the {@link BaseExperiment} class.
  * It verifies the correct initialization of the grid, the dimensions of the grid, and the behavior of the experiment.
+ *
+ * @author Lars Nicht
  */
 public class BaseExperimentTests {
 

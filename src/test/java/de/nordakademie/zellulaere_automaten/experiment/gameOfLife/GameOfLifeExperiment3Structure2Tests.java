@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * The {@code GameOfLifeExperiment3Structure2Tests} class contains unit tests for the {@link GameOfLifeExperiment3Structure2} class.
  * It verifies the correct initialization of the grid and the dimensions of the grid.
+ *
+ * @author Lars Nicht
  */
 public class GameOfLifeExperiment3Structure2Tests {
 

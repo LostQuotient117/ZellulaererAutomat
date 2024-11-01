@@ -5,6 +5,8 @@ import de.nordakademie.zellulaere_automaten.experiment.parity.*;
 
 /**
  * The {@code ExperimentFactory} class is responsible for creating instances of experiments based on their names.
+ *
+ * @author Lars Nicht
  */
 public class ExperimentFactory {
 

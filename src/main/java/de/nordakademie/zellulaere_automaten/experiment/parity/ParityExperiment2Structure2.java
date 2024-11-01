@@ -13,6 +13,8 @@ import java.util.Set;
 /**
  * The {@code ParityExperiment2Structure2} class represents an experiment for the Parity automaton with a specific structure.
  * It extends the {@link BaseExperiment} class and implements the {@link IExperiment} interface.
+ *
+ * @author Lars Nicht
  */
 public class ParityExperiment2Structure2 extends BaseExperiment implements IExperiment {
 

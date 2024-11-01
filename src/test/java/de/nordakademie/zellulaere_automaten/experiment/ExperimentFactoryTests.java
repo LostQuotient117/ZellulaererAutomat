@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * The {@code ExperimentFactoryTests} class contains unit tests for the {@link ExperimentFactory} class.
  * It verifies the correct creation of experiments based on valid and invalid input.
+ *
+ * @author Lars Nicht
  */
 class ExperimentFactoryTests {
 

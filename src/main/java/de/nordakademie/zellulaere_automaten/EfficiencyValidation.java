@@ -9,20 +9,28 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
- * The {@code EfficiencyTest} class contains unit tests to measure the efficiency of various algorithms and data structures.
- * It aims to ensure that the implementations perform within acceptable time and space limits.
+ * The {@code EfficiencyValidation} class contains unit tests to measure and verify the efficiency
+ * of various grid implementations and experiments.
  *
- * Note: GameOfLifeExperiment2Structure2, ParityExperiment1Structure2 and ParityExperiment2Structure2 take a bit longer.
+ * <p>This class is designed to evaluate the time complexity and resource usage of the
+ * experiments, including initialization, state calculation and grid usage.</p>
+ *
+ * <p>Each experiment initializes a grid with a specific configuration, performs a series of
+ * operations, and measures the time taken to complete these operations.</p>
+ *
+ * <p>Note: The EfficiencyTest is intended to be run in a controlled environment to
+ * minimize external factors that could affect the performance measurements.</p>
+ *
+ * @Author: Lars Nicht
  */
-public class EfficiencyTest {
+public class EfficiencyValidation {
 
     public static void main(String[] args) {
         SpringApplication.run(ZellulaereAutomatenApplication.class, args);
 
-        // Create an instance of the ExperimentFactory to generate experiments
+        Instant start = Instant.now();
         ExperimentFactory experimentFactory = new ExperimentFactory();
 
-        // Define an array of experiments to be run
         IExperiment[] experiments = {
                 experimentFactory.createExperiment("GameOfLifeExperiment1Structure1"),
                 experimentFactory.createExperiment("GameOfLifeExperiment1Structure2"),
@@ -36,15 +44,19 @@ public class EfficiencyTest {
                 experimentFactory.createExperiment("ParityExperiment2Structure2")
         };
 
-        // Iterate over each experiment(LogConsole), run it, and log the execution time
         for (IExperiment experiment : experiments) {
-            Instant start = Instant.now();
-            experiment.runExperiment(LoggerTypes.LogFile);
-            Instant end = Instant.now();
-            Duration timeElapsed = Duration.between(start, end);
-            System.out.println("Time taken for " + experiment.getClass().getSimpleName() + ": " + timeElapsed.toMillis() + " milliseconds");
+            Instant experimentStart = Instant.now();
+            experiment.runExperiment(LoggerTypes.getType(1));
+            Instant experimentEnd = Instant.now();
+            Duration experimentTimeElapsed = Duration.between(experimentStart, experimentEnd);
+            System.out.println("Time taken for " + experiment.getClass().getSimpleName() + ": " + experimentTimeElapsed.toMillis() + " milliseconds");
         }
 
-        System.out.println("All experiments have been created and run.");
+        Instant end = Instant.now();
+        Duration totalTimeElapsed = Duration.between(start, end);
+        System.out.println("\nTotal time taken for all experiments: " + totalTimeElapsed.toMillis() + " milliseconds or "
+                + totalTimeElapsed.toSeconds() + " seconds!");
+
+
     }
 }

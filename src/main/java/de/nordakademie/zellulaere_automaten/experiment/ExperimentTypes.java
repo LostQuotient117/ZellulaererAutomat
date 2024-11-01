@@ -6,6 +6,8 @@ import java.util.Map;
 /**
  * An enumeration representing different types of experiments.
  * Each enum constant corresponds to a specific experiment type.
+ *
+ * @author Lars Nicht
  */
 public enum ExperimentTypes {
     GameOfLifeExperiment1Structure1,

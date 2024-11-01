@@ -13,6 +13,8 @@ import java.util.Set;
 /**
  * The {@code GameOfLifeExperiment3Structure1} class represents an experiment for the Game of Life with a specific structure.
  * It extends the {@link BaseExperiment} class and implements the {@link IExperiment} interface.
+ *
+ * @author Lars Nicht
  */
 public class GameOfLifeExperiment3Structure1 extends BaseExperiment implements IExperiment {
 
@@ -21,7 +23,7 @@ public class GameOfLifeExperiment3Structure1 extends BaseExperiment implements I
      * Initializes the grid with a specific size and configuration.
      */
     public GameOfLifeExperiment3Structure1() {
-        super(new ClassicGrid(300, 300, new HashSet<>() , new GameOfLife(), new Moore()), new HashSet<>(), "GameOfLifeExperiment3Structure1");
+        super(new ClassicGrid(300, 300, new HashSet<>(), new GameOfLife(), new Moore()), new HashSet<>(), "GameOfLifeExperiment3Structure1");
     }
 
     /**
