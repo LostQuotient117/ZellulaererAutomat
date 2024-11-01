@@ -7,6 +7,8 @@ import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
  * This class extends the Log class and provides functionality to log messages
  * to both the console and a file. It uses the LoggerFactory to create instances
  * of ILogger for logging.
+ *
+ * @author Jannick Gottschalk
  */
 public class LogConsoleAndFile extends Log{
     /**
