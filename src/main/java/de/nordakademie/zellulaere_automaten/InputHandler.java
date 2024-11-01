@@ -32,9 +32,9 @@ public class InputHandler {
         //region labels
         final String welcomeMessage = "Willkommen zum Zellulären Automaten der Gruppe c7 der I22c.";
         final String askForCalcType = "Falls sie jedes der zur Verfügung stehenden Experimente ausführen wollen, geben Sie 'all' ein. Andernfalls wählen Sie bitte ein Calculation Type." + System.lineSeparator() + "Bitte geben Sie die Zahl für einen Type ein. Folgende stehen zur Verfügung:" + System.lineSeparator() + "%s";
-        final String askForLogType = "Bitte wählen Sie einen Log-Type. Diese Log-Types stehen zur Verfügung:" + System.lineSeparator() + "%s";
-        final String askForConfig = "Bitte geben Sie ihr gewolltes Experiment ein. Es stehen folgende Experimente zur Verfügung:" + System.lineSeparator() + "%s";
-        final String askForGridType = "Bitte geben Sie ihr gewolltes Grid ein. Es stehen folgende Grids zur Verfügung:" + System.lineSeparator() + "%s";
+        final String askForLogType = System.lineSeparator() + "Bitte wählen Sie einen Log-Type. Diese Log-Types stehen zur Verfügung:" + System.lineSeparator() + "%s";
+        final String askForConfig = System.lineSeparator() + "Bitte geben Sie ihr gewolltes Experiment ein. Es stehen folgende Experimente zur Verfügung:" + System.lineSeparator() + "%s";
+        final String askForGridType = System.lineSeparator() + "Bitte geben Sie ihr gewolltes Grid ein. Es stehen folgende Grids zur Verfügung:" + System.lineSeparator() + "%s";
         final String typeInvalid = " bitte geben Sie einen validen Parameter ein. Die Eingabe wird wiederholt.";
         //endregion
         //region variables
@@ -43,7 +43,7 @@ public class InputHandler {
         String configType = "";
         String gridType;
         //endregion
-        System.out.println(welcomeMessage);
+        System.out.println(System.lineSeparator() + welcomeMessage + System.lineSeparator());
         Scanner scanner = new Scanner(System.in);
         //
         System.out.printf((askForCalcType) + "%n", CalculationType.getAvailableCalculationTypesForUserInput());
@@ -61,7 +61,7 @@ public class InputHandler {
             }
         }
         if (Objects.equals(calcType, "1")){
-            System.out.printf((askForConfig) + "%n", "1 für Startkonfiguration 1," + System.lineSeparator() + "2 für Startkonfiguration 2," + System.lineSeparator() + "3 für Startkonfiguration 3");
+            System.out.printf((askForConfig) + "%n", "1 für Startkonfiguration 1" + System.lineSeparator() + "2 für Startkonfiguration 2" + System.lineSeparator() + "3 für Startkonfiguration 3");
             configType = scanner.nextLine();
             while (true){
                 if (Objects.equals(configType, "1") || Objects.equals(configType, "2") || Objects.equals(configType, "3")){
@@ -108,7 +108,7 @@ public class InputHandler {
                 logType = scanner.nextLine();
             }
         }
-        System.out.println("Die Eingaben waren erfolgreich. Das Programm wird nun gestartet.");
+        System.out.println(System.lineSeparator() + "Die Eingaben waren erfolgreich. Das Programm wird nun gestartet.");
         executeChosenExperiment(calcType, configType, gridType, logType);
 
     }
