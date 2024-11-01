@@ -9,6 +9,7 @@ import java.util.Objects;
  * The class provides getter and setter methods to access and modify these properties.
  *
  * @author Lars Nicht
+ * @author Daria Stolarczyk
  */
 public class Cell {
     private int row;

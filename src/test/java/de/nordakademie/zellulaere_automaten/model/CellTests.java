@@ -2,8 +2,6 @@ package de.nordakademie.zellulaere_automaten.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -13,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * It also includes a test for the {@code isEqualCell} method.
  *
  * @author Lars Nicht
+ * @author Daria Stolarczyk
  */
 class CellTests {
 

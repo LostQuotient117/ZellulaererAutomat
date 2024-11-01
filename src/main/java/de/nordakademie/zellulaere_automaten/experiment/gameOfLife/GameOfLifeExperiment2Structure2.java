@@ -13,6 +13,8 @@ import java.util.Set;
 /**
  * The {@code GameOfLifeExperiment2Structure2} class represents an experiment for the Game of Life with a specific structure.
  * It extends the {@link BaseExperiment} class and implements the {@link IExperiment} interface.
+ *
+ * @author Lars Nicht
  */
 public class GameOfLifeExperiment2Structure2 extends BaseExperiment implements IExperiment {
 
@@ -37,7 +39,6 @@ public class GameOfLifeExperiment2Structure2 extends BaseExperiment implements I
             }
         }
 
-        // Update the grid with the new startConfig
         ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 

@@ -52,41 +52,44 @@ public class ParityExperiment2Structure2Tests {
     /**
      * Tests the first step generation of the grid.
      * Verifies that the grid matches the expected pattern after the first generation.
+     *
+     * @author Lars Nicht
      */
     @Test
     void firstStepGeneration_WhenCalled_ShouldMatchExpectedPattern() {
         experiment.initializeGrid();
         grid.calculateNextGeneration();
 
-        // Expected pattern for the first generation
-        boolean[][] expectedPattern = new boolean[100][100];
+        int rows = grid.getRows();
+        int columns = grid.getColumns();
+        boolean[][] expectedPattern = new boolean[rows][columns];
 
         // First row pattern
-        for (int col = 0; col < 100; col++) {
+        for (int col = 0; col < columns; col++) {
             expectedPattern[0][col] = (col != 0 && col % 2 == 0);
         }
 
-        // Last row pattern (mirrored version of the first row)
-        for (int col = 0; col < 100; col++) {
-            expectedPattern[99][col] = expectedPattern[0][99 - col];
+        // Last row pattern
+        for (int col = 0; col < columns; col++) {
+            expectedPattern[rows -1][col] = expectedPattern[0][(rows - 1) - col];
         }
 
         // Middle rows pattern
-        for (int row = 1; row < 99; row++) {
+        for (int row = 1; row < rows - 1; row++) {
             if (row % 2 == 0) {
-                for (int col = 0; col < 100; col++) {
+                for (int col = 0; col < columns - 1; col++) {
                     expectedPattern[row][col] = (col == 0);
                 }
             } else {
-                for (int col = 0; col < 100; col++) {
-                    expectedPattern[row][col] = (col == 99);
+                for (int col = 0; col < columns; col++) {
+                    expectedPattern[row][col] = (col == columns -1);
                 }
             }
         }
 
         // Verify the grid matches the expected pattern
-        for (int row = 0; row < 100; row++) {
-            for (int col = 0; col < 100; col++) {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
                 assertEquals(expectedPattern[row][col], grid.getCellByCoordinates(row, col).getIsAlive(),
                         String.format("Cell at (%d, %d) does not match the expected state", row, col));
             }

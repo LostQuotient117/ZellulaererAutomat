@@ -13,6 +13,8 @@ import java.util.Set;
 /**
  * The {@code ParityExperiment1Structure2} class represents an experiment for the Parity automaton with a specific structure.
  * It extends the {@link BaseExperiment} class and implements the {@link IExperiment} interface.
+ *
+ * @author Lars Nicht
  */
 public class ParityExperiment1Structure2 extends BaseExperiment implements IExperiment {
 
@@ -37,7 +39,6 @@ public class ParityExperiment1Structure2 extends BaseExperiment implements IExpe
         startConfig.add(new Cell(middleRow, middleColumn - 1, true));
         startConfig.add(new Cell(middleRow - 1, middleColumn - 1, true));
 
-        // Update the grid with the new startConfig
         ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 

@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * The {@code GameOfLifeExperiment3Structure2Tests} class contains unit tests for the {@link GameOfLifeExperiment3Structure2} class.
  * It verifies the correct initialization of the grid and the dimensions of the grid.
+ *
+ * @author Lars Nicht
  */
 public class GameOfLifeExperiment3Structure2Tests {
 
@@ -60,8 +62,7 @@ public class GameOfLifeExperiment3Structure2Tests {
         // Verify that all cells are dead
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
-                assertFalse(grid.getCellByCoordinates(row, col).getIsAlive(),
-                        String.format("Cell at (%d, %d) is not dead", row, col));
+                assertFalse(grid.getCellByCoordinates(row, col).getIsAlive());
             }
         }
     }
