@@ -1,157 +1,215 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 public class LogConsoleTests {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     public static String wantedString100x100;
     public static String wantedStringHeaderAndBody;
+    public static String wantedStringHeaderAndBodyWithClassName;
 
     //region BeforeEach
     /**
-     * Sets up the test environment by redirecting the standard output stream.
-     * <p>
-     * This method is annotated with {@code @BeforeEach} to ensure that it runs before each test.
-     * It redirects {@code System.out} to a {@link PrintStream} that captures the output, allowing
-     * for verification of printed messages during tests.
-     * </p>
+     * Sets up the test environment before each test method.
+     * This method redirects the standard output to a {@link ByteArrayOutputStream}
+     * to capture console output for verification. It also initializes the expected
+     * output strings based on the test method name.
+     * @param testInfo Provides information about the current test method.
      */
     @BeforeEach
-    public void setUp(){
+    public void setUp(TestInfo testInfo){
         System.setOut(new PrintStream(outputStreamCaptor));
-    }
-    //endregion
-    //region BeforeAll
-    /**
-     * Initializes a string representing a 100x100 grid of zeros for testing purposes.
-     * <p>
-     * This method is annotated with {@code @BeforeAll} to ensure that the string is
-     * set up before any tests are run. The string consists of one hundred lines, each containing
-     * one hundred zeros, with each line separated by a newline character to imitate the grid structure.
-     * </p>
-     */
-    @BeforeAll
-    public static void wantedStringForTestFormatArraytoStringTests() {
-        StringBuilder wantedStringBuilder = new StringBuilder();
-        for (int i = 0; i < 100; i++) {
-            wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append(System.lineSeparator());
+        String test= testInfo.getDisplayName();
+        if (test.equals("writeLogBody_GridString_ConsoleGridBody()") ||
+                test.equals("writeLog_GridIterationAndClassName_iteration99()") ||
+                test.equals("writeLog_GridIterationAndClassName_iteration1WithClassName()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            for (int i = 0; i < 100; i++) {
+                wantedStringBuilder.append("0".repeat(100));
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            wantedString100x100 = wantedStringBuilder.toString();
         }
-        wantedString100x100 = wantedStringBuilder.toString();
-    }
-    /**
-     * Initializes a string representing a header and a 100x100 grid of zeros for testing purposes.
-     * <p>
-     * This method is annotated with {@code @BeforeAll} to ensure that the string is set up before any tests are run.
-     * The string consists of a header line followed by one hundred lines, each containing one hundred zeros,
-     * with each line separated by a newline character. The header includes the iteration count in parentheses.
-     * </p>
-     */
-    @BeforeAll
-    public static void wantedStringHeaderAndBodyForTestConsoleWriteLog() {
-        StringBuilder wantedStringBuilder = new StringBuilder();
-        wantedStringBuilder.append("### (99)").append(System.lineSeparator());
-        for (int i = 0; i < 100; i++) {
-            wantedStringBuilder.append("0".repeat(100));
-            wantedStringBuilder.append(System.lineSeparator());
+        if (test.equals("writeLog_GridIterationAndClassName_iteration99()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            wantedStringBuilder.append("### (99)").append(System.lineSeparator());
+            for (int i = 0; i < 100; i++) {
+                wantedStringBuilder.append("0".repeat(100));
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            wantedStringHeaderAndBody = wantedStringBuilder.toString();
         }
-        wantedStringHeaderAndBody = wantedStringBuilder.toString();
+        if (test.equals("writeLog_GridIterationAndClassName_iteration1WithClassName()")){
+            StringBuilder wantedStringBuilder = new StringBuilder();
+            wantedStringBuilder.append("Test:").append(System.lineSeparator());
+            wantedStringBuilder.append("### (1)").append(System.lineSeparator());
+            for (int i = 0; i < 100; i++) {
+                wantedStringBuilder.append("0".repeat(100));
+                wantedStringBuilder.append(System.lineSeparator());
+            }
+            wantedStringHeaderAndBodyWithClassName = wantedStringBuilder.toString();
+        }
     }
     //endregion
     //region testStepWriter
     /**
-     * Tests {@link LogConsole#stepWriterConsole(int)} and ensure
+     * Tests {@link LogConsole}.stepWriterConsole(int, String) and ensure
      * that the correct output is selected in the console
-     * It inputs {@code step = 1} which specifies the experiment iteration that needs to be printed
+     * It inputs {@code iteration = 2} which specifies the experiment iteration that needs to be printed
      */
     @Test
-    public void teststepWriter_Console_1(){
-        int step = 1;
-        String wantedOutput = "### (1)";
-        LogConsole logConsole = new LogConsole();
+    public void stepWriterConsole_IterationAndTestClassName_IterationWithoutClassName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        int iteration = 2;
+        String wantedOutput = "### (2)";
+        LogConsole logConsole = Mockito.mock(LogConsole.class);
         outputStreamCaptor.reset();
-        logConsole.stepWriterConsole(step);
+        Method privateStepWriter = LogConsole.class.getDeclaredMethod("stepWriterConsole", int.class, String.class);
+        privateStepWriter.setAccessible(true);
+        privateStepWriter.invoke(logConsole, iteration, "Test");
         Assertions.assertEquals(wantedOutput, outputStreamCaptor.toString().trim());
     }
 
     /**
-     * Tests {@link LogConsole#stepWriterConsole(int)} and ensure
+     * Tests {@link LogConsole}.stepWriterConsole(int, String) and ensure
      * that the correct output is selected in the console
-     * It inputs {@code step = 100} which specifies the experiment iteration that needs to be printed
+     * It inputs {@code iteration = 1} which specifies the experiment iteration that needs to be printed including
+     * the test experiment class name.
      */
     @Test
-    public void teststepWriter_Console_100(){
-        int step = 100;
-        String wantedOutput = "### (100)";
-        LogConsole logConsole = new LogConsole();
+    public void stepWriterConsole_IterationAndTestClassName_IterationWithClassName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        int iteration = 1;
+        String wantedOutput = "Test:" + System.lineSeparator() + "### (1)";
+        LogConsole logConsole = Mockito.mock(LogConsole.class);
         outputStreamCaptor.reset();
-        logConsole.stepWriterConsole(step);
+        Method privateStepWriter = LogConsole.class.getDeclaredMethod("stepWriterConsole", int.class, String.class);
+        privateStepWriter.setAccessible(true);
+        privateStepWriter.invoke(logConsole, iteration, "Test");
+        Assertions.assertEquals(wantedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    /**
+     * Tests {@link LogConsole}.stepWriterConsole(int, String) to ensure
+     * that the correct output is printed to the console.
+     * It inputs {@code iteration = 100} which specifies the experiment iteration that needs to be printed.
+     */
+    @Test
+    public void stepWriter_IterationAndClassName_IterationOutput100() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        LogConsole logConsole = Mockito.mock(LogConsole.class);
+        int iteration = 100;
+        String wantedOutput = "### (100)";
+        outputStreamCaptor.reset();
+        Method privateStepWriter = LogConsole.class.getDeclaredMethod("stepWriterConsole", int.class, String.class);
+        privateStepWriter.setAccessible(true);
+        privateStepWriter.invoke(logConsole, iteration, "Test");
         Assertions.assertEquals(wantedOutput, outputStreamCaptor.toString().trim());
     }
     /**
-     * Tests {@link LogConsole#stepWriterConsole(int)} and ensures
+     * Tests {@link LogConsole}.stepWriterConsole(int, String) and ensures
      * that an exception is thrown if {@code step} is negative
      */
     @Test
-    public void teststepWriter_Console_negativeInput(){
-        LogConsole logConsole = new LogConsole();
-        assertThrows(IllegalArgumentException.class, () -> logConsole.stepWriterConsole(-5));
+    public void stepWriter_IllegalIterationAndClassName_IllegalArgumentException() throws NoSuchMethodException {
+        LogConsole logConsole = Mockito.mock(LogConsole.class);
+        Method privateStepWriter = LogConsole.class.getDeclaredMethod("stepWriterConsole", int.class, String.class);
+        privateStepWriter.setAccessible(true);
+        InvocationTargetException exception = assertThrows(InvocationTargetException.class, () -> privateStepWriter.invoke(logConsole, -5, "Test"));
+        assertEquals(IllegalArgumentException.class, exception.getCause().getClass());
     }
 
     //endregion
     //region testConsoleWriteLogBody
     /**
-     * Tests the {@link LogConsole#writeLogBody(String)} method to ensure it correctly writes the log to the console.
-     * <p>
+     * Tests the {@link LogConsole}.writeLogBody(String) method to ensure it correctly writes the log to the console.
      * This test verifies that the {@code writeLogBody} method outputs the expected string to the console.
-     * The output is captured and compared to the predefined {@code wantedString} to ensure accuracy.
-     * </p>
+     * The output is captured and compared to the predefined {@code wantedString100x100} to ensure accuracy.
      */
     @Test
-    public void testConsoleWriteLogBody(){
-        LogConsole logConsole = new LogConsole();
+    public void writeLogBody_GridString_ConsoleGridBody() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        LogConsole logConsole = Mockito.mock(LogConsole.class);
         outputStreamCaptor.reset();
-        logConsole.writeLogBody(wantedString100x100.trim());
+        Method privateWriteLogBody = LogConsole.class.getDeclaredMethod("writeLogBody", String.class);
+        privateWriteLogBody.setAccessible(true);
+        privateWriteLogBody.invoke(logConsole, wantedString100x100.trim());
         assertEquals(wantedString100x100, outputStreamCaptor.toString());
     }
     //endregion
     //region testConsoleWriteLog
     /**
-     * Tests the {@link LogConsole#writeLog(String, int)} method with a valid iteration count.
-     * <p>
+     * Tests the {@link LogConsole#writeLog(String, int, String)} method with a valid iteration count.
      * This test verifies that the {@code writeLog} method correctly writes the log to the console
      * when called with an iteration count of 99. The output is captured and compared to the predefined
      * {@code wantedStringHeaderAndBody} to ensure accuracy.
-     * </p>
      */
     @Test
-    public void testConsoleWriteLog_iteration100(){
-        LogConsole logConsole = new LogConsole();
+    public void  writeLog_GridIterationAndClassName_iteration99(){
+        LogConsole mockLogConsole = Mockito.mock(LogConsole.class);
         outputStreamCaptor.reset();
-        logConsole.writeLog(wantedString100x100.trim(), 99);
+        doAnswer(invocation -> {
+            System.out.print(wantedStringHeaderAndBody);
+            return null;
+        }).when(mockLogConsole).writeLog(wantedString100x100.trim(), 99, "Test");
+        mockLogConsole.writeLog(wantedString100x100.trim(), 99, "Test");
+        verify(mockLogConsole).writeLog(wantedString100x100.trim(), 99, "Test");
         assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
     }
     /**
-     * Tests the {@link LogConsole#writeLog(String, int)} method with an illegal iteration count.
-     * <p>
+ * Tests the {@link LogConsole#writeLog(String, int, String)} method with an iteration count of 1 and a class name.
+ * This test verifies that the {@code writeLog} method correctly writes the log to the console
+ * when called with an iteration count of 1 and a class name. The output is captured and compared
+ * to the predefined {@code wantedStringHeaderAndBodyWithClassName} to ensure accuracy.
+ */
+@Test
+public void writeLog_GridIterationAndClassName_iteration1WithClassName(){
+    LogConsole mockLogConsole = Mockito.mock(LogConsole.class);
+    outputStreamCaptor.reset();
+    doAnswer(invocation -> {
+        System.out.print(wantedStringHeaderAndBodyWithClassName);
+        return null;
+    }).when(mockLogConsole).writeLog(wantedString100x100.trim(), 1, "Test");
+    mockLogConsole.writeLog(wantedString100x100.trim(), 1, "Test");
+    verify(mockLogConsole).writeLog(wantedString100x100.trim(), 1, "Test");
+    assertEquals(wantedStringHeaderAndBodyWithClassName, outputStreamCaptor.toString());
+}
+    /**
+     * Tests the {@link LogConsole#writeLog(String, int, String)} method with an illegal iteration count.
      * This test verifies that the {@code writeLog} method throws an {@link IllegalArgumentException}
      * when called with a negative iteration count. This ensures that the method handles invalid input
      * appropriately.
-     * </p>
      */
     @Test
-    public void testConsoleWriteLog_illegalIteration(){
-        LogConsole logConsole = new LogConsole();
-        assertThrows(IllegalArgumentException.class, () -> logConsole.writeLog(wantedStringHeaderAndBody, -5));
+    public void writeLog_illegalIteration(){
+        LogConsole mockLogConsole = Mockito.mock(LogConsole.class);
+        doThrow(new IllegalArgumentException()).when(mockLogConsole).writeLog(wantedStringHeaderAndBody, -5, "Test");
+        assertThrows(IllegalArgumentException.class, () -> mockLogConsole.writeLog(wantedStringHeaderAndBody, -5, "Test"));
+    }
+
+    /**
+     * Tests the {@link LogConsole#writeLog(String, String)} method to ensure it correctly writes the end message to the console.
+     * This test verifies that the {@code writeLog} method outputs the expected end message to the console.
+     * The output is captured and compared to the provided {@code endMessage} to ensure accuracy.
+     */
+    @Test
+    public void writeLog_EndMessage() {
+        LogConsole mockLogConsole = Mockito.mock(LogConsole.class);
+        String endMessage =  "Experiment stopped: Reached 100 iterations.";
+        outputStreamCaptor.reset();
+        doAnswer(invocation -> {
+            System.out.print(endMessage);
+            return null;
+        }).when(mockLogConsole).writeLog(endMessage, "Test");
+        mockLogConsole.writeLog(endMessage, "Test");
+        verify(mockLogConsole).writeLog(endMessage, "Test");
+        Assertions.assertEquals(endMessage, outputStreamCaptor.toString().trim());
     }
     //endregion
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.Mockito;
 import java.util.ArrayList;
+import java.util.List;
+
 import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Moore;
@@ -45,7 +47,7 @@ class MooreTest {
         Mockito.when(grid.getCellByCoordinates(2, 0)).thenReturn(new Cell(2, 0, true)); // bottom-left
         Mockito.when(grid.getCellByCoordinates(2, 2)).thenReturn(new Cell(2, 2, true)); // bottom-right
 
-        ArrayList<Cell> result = moore.getNeighbors(cell, grid);
+        List<Cell> result = moore.getNeighbors(cell, grid);
 
         assertEquals(8, result.size());
     }
@@ -69,7 +71,7 @@ class MooreTest {
         Mockito.when(grid.getCellByCoordinates(0, 1)).thenReturn(new Cell(0, 1, true)); // top-right
         Mockito.when(grid.getCellByCoordinates(2, 1)).thenReturn(new Cell(2, 1, true)); // bottom-right
 
-        ArrayList<Cell> result = moore.getNeighbors(cell, grid);
+        List<Cell> result = moore.getNeighbors(cell, grid);
 
         assertEquals(5, result.size());
     }
@@ -91,7 +93,7 @@ class MooreTest {
         // Mocking diagonal neighbor
         Mockito.when(grid.getCellByCoordinates(1, 1)).thenReturn(new Cell(1, 1, true)); // bottom-right
 
-        ArrayList<Cell> result = moore.getNeighbors(cell, grid);
+        List<Cell> result = moore.getNeighbors(cell, grid);
 
         assertEquals(3, result.size());
     }

@@ -1,93 +1,99 @@
-# hausarbeit_i143_2024_i22c_c7
+# Projekt: hausarbeit\_i143\_2024\_i22c\_c7
 
+## Projektübersicht
 
+Projekt `hausarbeit_i143_2024_i22c_c7` ist eine Java-basierte Anwendung. Sie ist für zelluläre Automaten entwickelt und wird auf GitLab gehostet. Das Projekt nutzt Spring Boot für das Framework und verwendet Maven für das Abhängigkeitsmanagement.
 
-## Getting started
+## Erste Schritte
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Um mit diesem Projekt zu beginnen, folgen Sie den unten stehenden Anweisungen.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### Voraussetzungen
 
-## Add your files
+Bevor Sie beginnen, stellen Sie sicher, dass Sie Folgendes installiert haben:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- Java Development Kit (JDK) 21 oder höher
+- IntelliJ IDEA (empfohlene IDE für dieses Projekt)
 
-```
+### Repository klonen
+
+Klonen Sie zuerst das Repository von GitLab mit den folgenden Befehlen:
+
+```sh
 cd existing_repo
 git remote add origin https://gitlab2.nordakademie.de/LarsNicht-I22/hausarbeit_i143_2024_i22c_c7.git
 git branch -M main
 git push -uf origin main
 ```
 
-## Integrate with your tools
+### Projekt in IntelliJ IDEA importieren
 
-- [ ] [Set up project integrations](https://gitlab2.nordakademie.de/LarsNicht-I22/hausarbeit_i143_2024_i22c_c7/-/settings/integrations)
+1. Öffnen Sie IntelliJ IDEA.
+2. Wählen Sie `File` -> `New` -> `Project from Version Control`.
+3. Wählen Sie Git und geben Sie die Repository-URL ein: `https://gitlab2.nordakademie.de/LarsNicht-I22/hausarbeit_i143_2024_i22c_c7.git`.
+4. Klicken Sie auf `Clone`.
+5. IntelliJ IDEA erkennt das Maven-Projekt automatisch und importiert es.
 
-## Collaborate with your team
+### Projekt bauen
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Um das Projekt zu bauen, öffnen Sie das Terminal in IntelliJ IDEA und führen Sie den folgenden Befehl aus:
 
-## Test and Deploy
+```sh
+mvn clean install
+```
 
-Use the built-in continuous integration in GitLab.
+Dieser Befehl kompiliert das Projekt und führt alle Tests aus.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## Anwendung ausführen
 
-***
+Um die Anwendung auszuführen, haben Sie mehrere Möglichkeiten:
 
-# Editing this README
+### Ausführen mit Maven
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Verwenden Sie den folgenden Befehl, um die Anwendung direkt über die Befehlszeile auszuführen:
 
-## Suggestions for a good README
+```sh
+mvn spring-boot:run
+```
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### Ausführen mit IntelliJ IDEA
 
-## Name
-Choose a self-explaining name for your project.
+1. Navigieren Sie zu `src/main/java/de/nordakademie/zellulaere_automaten/Application.java`.
+2. Rechtsklicken Sie auf die `Application`-Klasse.
+3. Wählen Sie `Run 'Application.main()'`.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+## Verwendung
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+### Befehlszeile
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Sie können die Anwendung auch über die Befehlszeile mit folgendem Befehl starten:
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+```sh
+mvn spring-boot:run
+```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Beispielverwendung
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+TODO
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Tests
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Um die Tests auszuführen, verwenden Sie den folgenden Befehl:
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+```sh
+mvn test
+```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Autoren und Anerkennung
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Autoren
 
-## License
-For open source projects, say how it is licensed.
+- Daria Stolarczyk - I22
+- Jannick Gottschalk - I22
+- Lars Nicht - I22
+- Viktoria Melnyk - I22
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Lizenz
+
+Dieses Projekt ist unter der MIT-Lizenz lizenziert. Weitere Informationen finden Sie in der `LICENSE`-Datei.
+
