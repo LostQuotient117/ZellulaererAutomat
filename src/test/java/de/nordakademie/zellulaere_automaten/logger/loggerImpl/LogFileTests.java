@@ -118,7 +118,7 @@ public class LogFileTests {
      * This test verifies that the method correctly writes a string with a header and a 100x100 grid of zeros to a file.
      */
     @Test
-    public void writeLog_GridStringAndIteration_ShouldWriteFile(){
+    public void writeLog_GridStringIterationAndClassName_ShouldWriteFile(){
         LogFile mockLogFile = mock(LogFile.class);
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
