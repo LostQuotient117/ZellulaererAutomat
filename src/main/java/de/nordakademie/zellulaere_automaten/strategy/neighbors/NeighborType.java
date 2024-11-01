@@ -2,8 +2,8 @@ package de.nordakademie.zellulaere_automaten.strategy.neighbors;
 import java.util.Arrays;
 
 public enum NeighborType {
-    Neumann(1),
-    Moore(2);
+    Moore(1),
+    Neumann(2);
     private final int value;
 
     NeighborType(int value) {

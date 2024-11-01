@@ -1,7 +1,9 @@
 package de.nordakademie.zellulaere_automaten.strategy.stateCalculation;
 
-import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.CalculationType;
+import de.nordakademie.zellulaere_automaten.strategy.neighbors.NeighborType;
+
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Enum representing the different types of state calculations available.
@@ -37,5 +39,17 @@ public enum CalculationType {
                 .findFirst()
                 .orElseThrow(() ->
                         new EnumConstantNotPresentException(CalculationType.class, "This calculation-type is not existent."));
+    }
+
+    /**
+     * Returns a string representation of all available calculation types for user input.
+     * Each line contains the integer value and the name of a calculation type.
+     *
+     * @return a string listing all available calculation types.
+     */
+    public static String getAvailableCalculationTypesForUserInput() {
+        return Arrays.stream(CalculationType.values())
+                .map(calculationType -> calculationType.getValue() + " für " + calculationType.name() + " mit " + NeighborType.getType(calculationType.getValue()).name())
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

@@ -1,6 +1,7 @@
 package de.nordakademie.zellulaere_automaten.grid;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public enum GridType {
     ClassicGrid(1),
@@ -21,5 +22,10 @@ public enum GridType {
                 .findFirst()
                 .orElseThrow(() ->
                         new EnumConstantNotPresentException(GridType.class, "This grid-type is not existent."));
+    }
+    public static String getAvailableGridTypesForUserInput() {
+        return Arrays.stream(GridType.values())
+                .map(gridType -> gridType.getValue() + " für " + gridType.name())
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

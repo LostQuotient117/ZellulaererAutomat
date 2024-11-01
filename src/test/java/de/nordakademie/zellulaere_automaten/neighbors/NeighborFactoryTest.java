@@ -22,7 +22,7 @@ class NeighborStrategyFactoryTest {
      */
     @Test
     void createNeighborStrategy_InputOne_ReturnsNeumannInstance() {
-        INeighborStrategy strategy = factory.createNeighborStrategy("1");
+        INeighborStrategy strategy = factory.createNeighborStrategy("2");
         assertInstanceOf(Neumann.class, strategy, "Expected Neumann instance");
     }
 
@@ -32,7 +32,7 @@ class NeighborStrategyFactoryTest {
      */
     @Test
     void createNeighborStrategy_InputTwo_ReturnsMooreInstance() {
-        INeighborStrategy strategy = factory.createNeighborStrategy("2");
+        INeighborStrategy strategy = factory.createNeighborStrategy("1");
         assertInstanceOf(Moore.class, strategy, "Expected Moore instance");
     }
 

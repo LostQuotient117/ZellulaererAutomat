@@ -11,7 +11,7 @@ class NeighborTypeTest {
      */
     @Test
     void getType_ValidValueOne_ReturnsNeumann() {
-        NeighborType result = NeighborType.getType(1);
+        NeighborType result = NeighborType.getType(2);
         assertEquals(NeighborType.Neumann, result);
     }
 
@@ -21,7 +21,7 @@ class NeighborTypeTest {
      */
     @Test
     void getType_ValidValueTwo_ReturnsMoore() {
-        NeighborType result = NeighborType.getType(2);
+        NeighborType result = NeighborType.getType(1);
         assertEquals(NeighborType.Moore, result);
     }
 
