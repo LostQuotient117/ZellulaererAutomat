@@ -16,9 +16,6 @@ public class ZellulaereAutomatenApplication {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(ZellulaereAutomatenApplication.class, args);
-
-		InputHandler inputHandler = new InputHandler();
-		inputHandler.getUserInputs();
 		// here scanner logic begin
 
 	}
