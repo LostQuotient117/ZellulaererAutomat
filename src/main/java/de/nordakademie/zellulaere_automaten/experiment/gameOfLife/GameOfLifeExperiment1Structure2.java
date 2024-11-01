@@ -44,7 +44,6 @@ public class GameOfLifeExperiment1Structure2 extends BaseExperiment implements I
                 {1, 1, 0, 0, 0, 1, 1}
         };
 
-        //placement in the middle
         for (int rowIndex = 0; rowIndex < pattern.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < pattern[rowIndex].length; columnIndex++) {
                 if (pattern[rowIndex][columnIndex] == 1) {
@@ -53,7 +52,6 @@ public class GameOfLifeExperiment1Structure2 extends BaseExperiment implements I
             }
         }
 
-        // Update the grid with the new startConfig
         ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 

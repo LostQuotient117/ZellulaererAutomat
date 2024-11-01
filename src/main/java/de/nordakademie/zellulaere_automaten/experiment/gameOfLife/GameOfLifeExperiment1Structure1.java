@@ -35,7 +35,6 @@ public class GameOfLifeExperiment1Structure1 extends BaseExperiment implements I
         int middleRow = grid.getRows() / 2;
         int middleColumn = grid.getColumns() / 2;
 
-        //starting pattern
         int[][] pattern = {
                 {0, 1, 1, 0, 1, 1, 0},
                 {0, 1, 1, 0, 1, 1, 0},
@@ -45,7 +44,6 @@ public class GameOfLifeExperiment1Structure1 extends BaseExperiment implements I
                 {1, 1, 0, 0, 0, 1, 1}
         };
 
-        //placement in the middle
         for (int rowIndex = 0; rowIndex < pattern.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < pattern[rowIndex].length; columnIndex++) {
                 if (pattern[rowIndex][columnIndex] == 1) {
@@ -54,7 +52,6 @@ public class GameOfLifeExperiment1Structure1 extends BaseExperiment implements I
             }
         }
 
-        // adding the cells to the start config
         for (Cell cell : startConfig) {
             grid.getCellByCoordinates(cell.getRow(), cell.getColumn()).setIsAlive(cell.getIsAlive());
         }

@@ -61,7 +61,6 @@ public class ParityExperiment2Structure1Tests {
         experiment.initializeGrid();
         grid.calculateNextGeneration();
 
-        // Expected pattern for the first generation
         boolean[][] expectedPattern = new boolean[100][100];
 
         // First row pattern
@@ -69,7 +68,7 @@ public class ParityExperiment2Structure1Tests {
             expectedPattern[0][col] = (col != 0 && col % 2 == 0);
         }
 
-        // Last row pattern (mirrored version of the first row)
+        // Last row pattern
         for (int col = 0; col < 100; col++) {
             expectedPattern[99][col] = expectedPattern[0][99 - col];
         }

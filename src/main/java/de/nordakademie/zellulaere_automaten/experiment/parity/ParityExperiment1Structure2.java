@@ -39,7 +39,6 @@ public class ParityExperiment1Structure2 extends BaseExperiment implements IExpe
         startConfig.add(new Cell(middleRow, middleColumn - 1, true));
         startConfig.add(new Cell(middleRow - 1, middleColumn - 1, true));
 
-        // Update the grid with the new startConfig
         ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 

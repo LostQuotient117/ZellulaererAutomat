@@ -39,7 +39,6 @@ public class GameOfLifeExperiment2Structure2 extends BaseExperiment implements I
             }
         }
 
-        // Update the grid with the new startConfig
         ((SetGrid) this.grid).setActiveCells(startConfig);
     }
 
