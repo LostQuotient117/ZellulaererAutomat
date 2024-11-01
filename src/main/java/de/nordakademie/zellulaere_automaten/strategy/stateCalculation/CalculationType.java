@@ -1,5 +1,7 @@
 package de.nordakademie.zellulaere_automaten.strategy.stateCalculation;
 
+import de.nordakademie.zellulaere_automaten.strategy.neighbors.NeighborType;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -47,7 +49,7 @@ public enum CalculationType {
      */
     public static String getAvailableCalculationTypesForUserInput() {
         return Arrays.stream(CalculationType.values())
-                .map(calculationType -> calculationType.getValue() + " für " + calculationType.name())
+                .map(calculationType -> calculationType.getValue() + " für " + calculationType.name() + " mit " + NeighborType.getType(calculationType.getValue()).name())
                 .collect(Collectors.joining(System.lineSeparator()));
     }
 }

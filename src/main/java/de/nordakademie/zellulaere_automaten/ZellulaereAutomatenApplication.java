@@ -3,6 +3,8 @@ package de.nordakademie.zellulaere_automaten;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.logging.Logger;
+
 @SpringBootApplication
 public class ZellulaereAutomatenApplication {
 
@@ -15,6 +17,8 @@ public class ZellulaereAutomatenApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZellulaereAutomatenApplication.class, args);
 
+		InputHandler inputHandler = new InputHandler();
+		inputHandler.getUserInputs();
 		// here scanner logic begin
 
 	}
