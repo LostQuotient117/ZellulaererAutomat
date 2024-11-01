@@ -48,7 +48,6 @@ public class GameOfLifeExperiment1Structure1Tests {
         int middleRow = grid.getRows() / 2 - 1;
         int middleColumn = grid.getColumns() / 2 - 4;
 
-        // Check alive cells
         assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 2).getIsAlive());
         assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 3).getIsAlive());
         assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 5).getIsAlive());
@@ -104,7 +103,6 @@ public class GameOfLifeExperiment1Structure1Tests {
         int middleRow = grid.getRows() / 2 - 1;
         int middleColumn = grid.getColumns() / 2 - 4;
 
-        // Check alive cells
         assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 2).getIsAlive());
         assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 3).getIsAlive());
         assertTrue(grid.getCellByCoordinates(middleRow - 2, middleColumn + 5).getIsAlive());

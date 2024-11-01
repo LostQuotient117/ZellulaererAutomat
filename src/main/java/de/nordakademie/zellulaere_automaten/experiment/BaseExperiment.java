@@ -57,11 +57,10 @@ public class BaseExperiment implements IExperiment {
             LoggerFactory loggerFactory = new LoggerFactory();
             this.logger = loggerFactory.createLogger(String.valueOf(loggerType.getValue()));
         }
-        String className = getClassName();
 
+        String className = getClassName();
         initializeGrid();
 
-        // Clear the log file if it exists
         if (loggerType == LoggerTypes.LogFile) {
             String projectRoot = Paths.get("").toAbsolutePath().toString();
             String downloadPath = Paths.get(projectRoot, (className + ".log")).toString();
