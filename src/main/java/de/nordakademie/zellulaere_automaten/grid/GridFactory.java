@@ -11,7 +11,7 @@ public class GridFactory {
         GridType loggerTypes = GridType.getType(typeOfGrid);
         return switch (loggerTypes) {
             case ClassicGrid -> new ClassicGrid(countRows, countColumns, startConfig, stateCalculationStrategy, neighborStrategy);
-            case HashMapGrid -> new SetGrid(countRows, countColumns, startConfig, stateCalculationStrategy, neighborStrategy);
+            case SetGrid -> new SetGrid(countRows, countColumns, startConfig, stateCalculationStrategy, neighborStrategy);
         };
     }
 }
