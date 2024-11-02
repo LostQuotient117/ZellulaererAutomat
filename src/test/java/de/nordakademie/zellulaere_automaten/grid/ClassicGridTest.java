@@ -166,7 +166,7 @@ class ClassicGridTest {
                 for (int col = 0; col < grid.getDataStructure()[0].length; col++) {
                     Cell cell = grid.getDataStructure()[row][col];
                     boolean shouldBeAlive = expectedAliveCells.contains(cell);
-                    assertEquals(shouldBeAlive, cell.getIsAlive(),
+                    assertTrue(shouldBeAlive == cell.getIsAlive(),
                             "Cell at (" + row + ", " + col + ") state mismatch.");
                 }
             }
@@ -228,7 +228,7 @@ class ClassicGridTest {
                 for (int col = 0; col < grid.getColumns(); col++) {
                     Cell cell = grid.getDataStructure()[row][col];
                     boolean shouldBeAlive = expectedAliveCells.contains(cell);
-                    assertEquals(shouldBeAlive, cell.getIsAlive(),
+                    assertTrue(shouldBeAlive == cell.getIsAlive(),
                             "Cell at (" + row + ", " + col + ") state mismatch.");
                 }
             }
@@ -254,7 +254,7 @@ class ClassicGridTest {
                 for (int col = 0; col < grid.getColumns(); col++) {
                     Cell cell = grid.getDataStructure()[row][col];
                     boolean shouldBeAlive = expectedAliveCells.contains(cell);
-                    assertEquals(shouldBeAlive, cell.getIsAlive(),
+                    assertTrue(shouldBeAlive == cell.getIsAlive(),
                             "Cell at (" + row + ", " + col + ") state mismatch.");
                 }
             }
