@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public enum GridType {
     ClassicGrid(1),
-    HashMapGrid(2);
+    SetGrid(2);
     private final int value;
 
     GridType(int value) {
