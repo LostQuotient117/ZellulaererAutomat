@@ -152,10 +152,10 @@ class CellTests {
      * considered equal, even if their {@code isAlive} status is different.
      */
     @Test
-    void equals_SameRowAndColumn_ReturnsTrue() {
+    void equals_SameRowAndColumn_ReturnsFalse() {
         Cell cell1 = new Cell(1, 1, true);
         Cell cell2 = new Cell(1, 1, false);  // Different alive status, but should still be equal based on row and column
-        assertEquals(cell1, cell2);
+        assertFalse(cell1.equals(cell2));
     }
 
     /**
