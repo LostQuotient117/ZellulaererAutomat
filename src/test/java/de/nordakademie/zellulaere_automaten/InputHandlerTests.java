@@ -4,6 +4,8 @@ import de.nordakademie.zellulaere_automaten.experiment.IExperiment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -68,6 +70,33 @@ public class InputHandlerTests {
 
         assertNotNull(result, "The result should not be null.");
         assertEquals(expectedOutput, result, "The output string does not match the expected value.");
+    }
+    /**
+     * Tests the {@link InputHandler}{@code .askForLoggerType()} method to ensure that it returns a valid log type
+     * based on the provided user input.
+     * This test simulates user input by setting the {@code System.in} stream to a predefined value and verifies
+     * that the method returns the expected log type.
+     *
+     * @throws NoSuchMethodException if the method cannot be found
+     */
+    @Test
+    public void askForLoggerType_ShouldReturnValidLogType() throws NoSuchMethodException {
+        InputHandler inputHandler = new InputHandler();
+        String simulatedUserInput = "1\n";
+        InputStream originalIn = System.in;
+        System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
+
+        Method privateBuildStringForExperiment = InputHandler.class.getDeclaredMethod("askForLoggerType");
+        privateBuildStringForExperiment.setAccessible(true);
+
+        try {
+            String logType = (String) privateBuildStringForExperiment.invoke(inputHandler);
+            assertEquals("1", logType, "The log type should be 1");
+        } catch (InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.setIn(originalIn);
+        }
     }
     /**
      * Tests the {@link InputHandler}{@code .executeAllExperiments(String)} method to ensure that it generates the expected log files
