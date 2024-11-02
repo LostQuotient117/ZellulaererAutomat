@@ -16,7 +16,7 @@ class GridTypeTest {
     @Test
     void getType_WithValidValue_ShouldReturnCorrectGridType() {
         assertEquals(GridType.ClassicGrid, GridType.getType(1));
-        assertEquals(GridType.HashMapGrid, GridType.getType(2));
+        assertEquals(GridType.SetGrid, GridType.getType(2));
     }
 
     /**
@@ -38,6 +38,6 @@ class GridTypeTest {
     @Test
     void getValue_WhenCalled_ShouldReturnCorrectValue() {
         assertEquals(1, GridType.ClassicGrid.getValue());
-        assertEquals(2, GridType.HashMapGrid.getValue());
+        assertEquals(2, GridType.SetGrid.getValue());
     }
 }
