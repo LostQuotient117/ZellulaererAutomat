@@ -1,5 +1,7 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
+import de.nordakademie.zellulaere_automaten.InputHandler;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -24,7 +26,9 @@ public class LogFile extends Log {
         try {
             exportGridToFile(buildStringForFile(formattedGrid, iteration), className);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("An error occurred while writing the log data to the log file. This should not happen. Throwback to main method.");
+            InputHandler inputHandler = new InputHandler();
+            inputHandler.getUserInputs();
         }
     }
     /**
@@ -40,7 +44,9 @@ protected void writeLog(String endMessage, String className) {
     try {
         exportGridToFile(endMessage, className);
     } catch (IOException e) {
-        e.printStackTrace();
+        System.out.println("An error occurred while writing the end message to the log file. This should not happen. Throwback to main method.");
+        InputHandler inputHandler = new InputHandler();
+        inputHandler.getUserInputs();
     }
 }
     /**
