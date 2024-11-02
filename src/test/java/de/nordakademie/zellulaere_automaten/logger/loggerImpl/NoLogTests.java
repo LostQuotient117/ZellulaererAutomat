@@ -40,6 +40,7 @@ public class NoLogTests {
         String className = "TestClass";
 
         outputStreamCaptor.reset();
+        NoLog.clearLastMessage();
 
         noLog.writeLog(formattedGrid, iteration, className);
         noLog.writeLog(formattedGrid, iteration, className);
@@ -61,6 +62,7 @@ public class NoLogTests {
         String className = "TestClass";
 
         outputStreamCaptor.reset();
+        NoLog.clearLastMessage();
 
         noLog.writeLog(endMessage, className);
         noLog.writeLog(endMessage, className);
