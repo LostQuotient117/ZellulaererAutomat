@@ -51,6 +51,7 @@ public class InputHandler {
         if (Objects.equals(calcType, "all")){
             logType = askForLoggerType();
             executeAllExperiments(logType);
+            System.exit(0);
         }
         while (true){
             try{
@@ -134,7 +135,7 @@ public class InputHandler {
         final String askForLogType = System.lineSeparator() + "Bitte wählen Sie einen Log-Type. Diese Log-Types stehen zur Verfügung:" + System.lineSeparator() + "%s";
         String logType;
         Scanner scanner = new Scanner(System.in);
-        System.out.printf((askForLogType) + "%n", LoggerTypes.getAvailableLoggerTypesForUserInput() + System.lineSeparator() + "0 für das schreiben keines Logs");
+        System.out.printf((askForLogType) + "%n", LoggerTypes.getAvailableLoggerTypesForUserInput() + System.lineSeparator());
         logType = scanner.nextLine();
         while (true){
             try{

@@ -99,7 +99,6 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        //overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {
@@ -131,7 +130,6 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        // Overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {
@@ -172,7 +170,6 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        // Overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {

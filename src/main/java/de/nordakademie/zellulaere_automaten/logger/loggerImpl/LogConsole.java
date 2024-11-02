@@ -58,7 +58,7 @@ protected void writeLog(String formattedGrid, int iteration, String className) {
             throw new IllegalArgumentException("Step number must be a positive integer. This should not happen.");
         }
         if (step == 0){
-            System.out.println(className + ":");
+            System.out.println(System.lineSeparator() + className + ":");
         }
         System.out.println("### (" + step + ")");
     }
