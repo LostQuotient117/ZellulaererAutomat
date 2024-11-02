@@ -29,7 +29,8 @@ public class LogFileTests {
         String test = testInfo.getDisplayName();
         if (test.equals("buildStringForFile_GridAndIteration_ShouldReturnGridStringWithIteration()") ||
                 test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()") ||
-                (test.equals("writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile()"))){
+                (test.equals("writeLog100Iterations_gridWithHeaderAndBody_ShouldWriteFile()")) ||
+                (test.equals("writeLog_GridStringIterationAndClassName_ShouldWriteFile()"))){
             StringBuilder wantedStringBuilder = new StringBuilder();
             for (int i = 0; i < 100; i++) {
                 wantedStringBuilder.append("0".repeat(100));
@@ -39,7 +40,8 @@ public class LogFileTests {
         }
         if (test.equals("exportGridToFile_GridWithHeaderAndBody_ShouldWriteFileWithGrid()") ||
                 test.equals("buildStringForFile_GridAndIteration_ShouldReturnGridStringWithIteration()") ||
-                test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()")){
+                test.equals("writeLog_GridStringAndIteration_ShouldWriteFile()") ||
+                test.equals("writeLog_GridStringIterationAndClassName_ShouldWriteFile()")){
             StringBuilder wantedStringBuilder = new StringBuilder();
             wantedStringBuilder.append("### (99)").append(System.lineSeparator());
             for (int i = 0; i < 100; i++) {
@@ -94,9 +96,12 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        //deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        //overwriting of old file for the new test
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Method privateExportGridToFile = LogFile.class.getDeclaredMethod("exportGridToFile", String.class, String.class);
         privateExportGridToFile.setAccessible(true);
@@ -124,8 +129,11 @@ public class LogFileTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
         // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
@@ -162,8 +170,11 @@ public class LogFileTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
         // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
@@ -204,8 +215,11 @@ public class LogFileTests {
         String endMessage = "Experiment stopped: Reached 100 iterations.";
 
         // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
