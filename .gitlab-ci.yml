@@ -1,0 +1,17 @@
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - echo "Build complete."
+
+unit-test-job:
+  stage: test
+  script:
+    - echo "Running unit tests..."
+    - echo "This will simulate running tests."
+    - sleep 10
+    - echo "Tests complete."
