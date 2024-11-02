@@ -1,7 +1,6 @@
 package de.nordakademie.zellulaere_automaten.strategy.stateCalculation;
 
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.NeighborType;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,6 @@ public enum CalculationType {
     GameOfLife(1),
     Parity(2);
     private final int value;
-
     /**
      * Constructor for {@link CalculationType}.
      *
@@ -40,7 +38,6 @@ public enum CalculationType {
                 .orElseThrow(() ->
                         new EnumConstantNotPresentException(CalculationType.class, "This calculation-type is not existent."));
     }
-
     /**
      * Returns a string representation of all available calculation types for user input.
      * Each line contains the integer value and the name of a calculation type.

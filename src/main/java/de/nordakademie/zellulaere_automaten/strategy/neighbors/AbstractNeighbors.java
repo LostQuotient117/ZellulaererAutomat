@@ -5,7 +5,11 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * AbstractNeighbors provides the base implementation for determining neighbors of a cell in a grid structure.
+ * This class implements the INeighborStrategy interface and offers methods to find direct neighbors.
+ * Specific neighbor strategies (e.g., Moore, Neumann) can be implemented by extending this class.
+ */
 public class AbstractNeighbors implements INeighborStrategy{
 
     /**
