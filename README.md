@@ -12,37 +12,18 @@ Um mit diesem Projekt zu beginnen, folgen Sie den unten stehenden Anweisungen.
 
 Bevor Sie beginnen, stellen Sie sicher, dass Sie Folgendes installiert haben:
 
-- Java Development Kit (JDK) 21 oder höher
-- IntelliJ IDEA (empfohlene IDE für dieses Projekt)
-
-### Repository klonen
-
-Klonen Sie zuerst das Repository von GitLab mit den folgenden Befehlen:
-
-```sh
-cd existing_repo
-git remote add origin https://gitlab2.nordakademie.de/LarsNicht-I22/hausarbeit_i143_2024_i22c_c7.git
-git branch -M main
-git push -uf origin main
-```
+- [ Java Development Kit (JDK) 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) oder höher
+- [IntelliJ IDEA](https://www.jetbrains.com/de-de/idea/) (empfohlene IDE für dieses Projekt)
+- [Apache Maven](https://maven.apache.org/download.cgi) (für die mvn commands)
 
 ### Projekt in IntelliJ IDEA importieren
 
 1. Öffnen Sie IntelliJ IDEA.
-2. Wählen Sie `File` -> `New` -> `Project from Version Control`.
+2. Wählen Sie `File` -> `New` -> `Project from Version Control` oder `Get from VCS`.
 3. Wählen Sie Git und geben Sie die Repository-URL ein: `https://gitlab2.nordakademie.de/LarsNicht-I22/hausarbeit_i143_2024_i22c_c7.git`.
-4. Klicken Sie auf `Clone`.
+5. Klicken Sie auf `Clone`.
+4. Loggen Sie sich mit Ihren Daten ein.
 5. IntelliJ IDEA erkennt das Maven-Projekt automatisch und importiert es.
-
-### Projekt bauen
-
-Um das Projekt zu bauen, öffnen Sie das Terminal in IntelliJ IDEA und führen Sie den folgenden Befehl aus:
-
-```sh
-mvn clean install
-```
-
-Dieser Befehl kompiliert das Projekt und führt alle Tests aus.
 
 ## Anwendung ausführen
 
@@ -58,40 +39,45 @@ mvn spring-boot:run
 
 ### Ausführen mit IntelliJ IDEA
 
-1. Navigieren Sie zu `src/main/java/de/nordakademie/zellulaere_automaten/Application.java`.
-2. Rechtsklicken Sie auf die `Application`-Klasse.
-3. Wählen Sie `Run 'Application.main()'`.
+1. Navigieren Sie zu `src/main/java/de/nordakademie/zellulaere_automaten/ZellulaereAutomatenApplication.java`.
+2. Rechtsklicken Sie auf die `ZellulaereAutomatenApplication`-Klasse.
+3. Wählen Sie `Run 'ZellulaereAutomatenApplication.main()'`.
 
-## Verwendung
+## Tests ausführen
 
-### Befehlszeile
+Um die Tests auszuführen, haben Sie mehrere Möglichkeiten:
 
-Sie können die Anwendung auch über die Befehlszeile mit folgendem Befehl starten:
-
-```sh
-mvn spring-boot:run
-```
-
-### Beispielverwendung
-
-TODO
-
-## Tests
-
-Um die Tests auszuführen, verwenden Sie den folgenden Befehl:
+### Ausführen mit Maven
 
 ```sh
 mvn test
 ```
 
-## Autoren und Anerkennung
+### Tests ausführen mit IntelliJ IDEA
+
+1. Navigieren Sie zu `src/test/java`.
+2. Rechtsklicken Sie auf den `test`-Ordner.
+3. Wählen Sie `Run 'All Tests'`.
+
+
+### Projekt als .jar bauen
+
+Um das Projekt als .jar Datei zu bauen, öffnen Sie das Terminal in IntelliJ IDEA und führen Sie den folgenden Befehl aus:
+
+```sh
+mvn clean install
+```
+
+Dieser Befehl kompiliert das Projekt als .jar Datei in den 'Target' Ordner und führt alle Tests aus.
+
+## Autoren und Lizenz
 
 ### Autoren
 
-- Daria Stolarczyk - I22
-- Jannick Gottschalk - I22
-- Lars Nicht - I22
-- Viktoria Melnyk - I22
+- Daria Stolarczyk
+- Jannick Gottschalk
+- Lars Nicht
+- Viktoria Melnyk
 
 ## Lizenz
 
