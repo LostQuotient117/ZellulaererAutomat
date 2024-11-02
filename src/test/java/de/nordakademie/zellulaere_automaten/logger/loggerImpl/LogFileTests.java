@@ -128,7 +128,7 @@ public class LogFileTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        // Deletion of old file for the new test
+        // Overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {
