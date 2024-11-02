@@ -12,7 +12,11 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
- * This test-class tests the {@link Log}-class and its methods.
+ * The {@code LogTests} class contains unit tests for the {@link Log}-class.
+ * It verifies the correct logging behavior for both console and file outputs, ensuring that
+ * the log messages are correctly formatted and written.
+ *
+ * @author  Jannick Gottschalk
  */
 public class LogTests {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();

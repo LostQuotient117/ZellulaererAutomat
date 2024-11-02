@@ -11,7 +11,14 @@ import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-
+/**
+ * This class contains unit tests for the {@link LogConsole} class.
+ * It verifies the correct functionality of logging methods that output to the console.
+ * The tests use Mockito to mock the {@link LogConsole} class and capture console output
+ * using a {@link ByteArrayOutputStream}.
+ *
+ * @author Jannick Gottschalk
+ */
 public class LogConsoleTests {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     public static String wantedString100x100;

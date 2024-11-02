@@ -10,9 +10,12 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
 /**
- * This Test-Class tests the methods of the {@link LogFile}-class
+ * The {@code LogFileTests} class contains unit tests for the {@link LogFile}-class.
+ * These tests verify the functionality of methods responsible for writing log data to files.
+ * The tests cover various scenarios including writing formatted grid data, end messages, and handling multiple iterations.
+ *
+ * @author Jannick Gottschalk
  */
 public class LogFileTests {
     private static String wantedString100x100;

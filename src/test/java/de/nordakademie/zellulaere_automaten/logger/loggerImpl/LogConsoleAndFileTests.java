@@ -14,12 +14,17 @@ import static org.mockito.Mockito.*;
  * It verifies the functionality of logging messages to both the console and a file.
  * The tests ensure that the log methods in {@link LogConsoleAndFile} correctly write
  * the expected output to the console and the specified log file.
+ *
+ * @author Jannick Gottschalk
  */
 public class LogConsoleAndFileTests {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private static String wantedString100x100;
     private static String wantedStringHeaderAndBody;
 
+    /**
+     * Sets up the test environment
+     */
     @BeforeAll
     public static void setUP(){
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -38,6 +43,9 @@ public class LogConsoleAndFileTests {
         wantedStringHeaderAndBody = wantedStringBuilder2.toString();
     }
 
+    /**
+     * Tests the {@link LogConsoleAndFile#writeLog(String, int, String)} method to ensure that it writes the expected output to the console and the specified log file.
+     */
     @Test
     public void writeLog_FormattedGridIterationNumberAndClassName_ShouldWriteConsoleAndFile(){
         LogConsoleAndFile mockLogConsoleAndFile = mock(LogConsoleAndFile.class);
@@ -74,6 +82,10 @@ public class LogConsoleAndFileTests {
         assertEquals(wantedStringHeaderAndBody.trim(), fileContent.toString().trim());
         assertEquals(wantedStringHeaderAndBody, outputStreamCaptor.toString());
     }
+
+    /**
+     * Tests the {@link LogConsoleAndFile#writeLog(String, String)} method to ensure that it writes the expected output to the console and the specified log file.
+     */
     @Test
     public void writeLog_FormattedGridAndClassName_ShouldWriteConsoleAndFileEndMessage(){
         LogConsoleAndFile mockLogConsoleAndFile = mock(LogConsoleAndFile.class);
