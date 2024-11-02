@@ -27,6 +27,7 @@ public class LoggerFactory {
             case LogFile -> new LogFile();
             case LogConsole -> new LogConsole();
             case LogConsoleAndFile -> new LogConsoleAndFile();
+            case NoLog -> new NoLog();
         };
     }
 }

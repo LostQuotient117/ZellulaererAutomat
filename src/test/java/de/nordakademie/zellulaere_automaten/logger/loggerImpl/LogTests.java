@@ -239,7 +239,6 @@ public class LogTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         String endMessage = "Experiment stopped: Reached 100 iterations.";
 
-        // Overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {

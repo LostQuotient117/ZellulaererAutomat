@@ -22,7 +22,9 @@ import java.util.Scanner;
  * @author Lars Nicht
  */
 public class InputHandler {
-
+    //region globalLabels
+    final String typeInvalid = " bitte geben Sie einen validen Parameter ein. Die Eingabe wird wiederholt.";
+    //endregion
     /**
      * This method handles user inputs for selecting calculation type, log type, configuration type, and grid type.
      * It prompts the user for each input, validates the input, and then executes the chosen experiment or all experiments
@@ -32,14 +34,12 @@ public class InputHandler {
         //region labels
         final String welcomeMessage = "Willkommen zum Zellulären Automaten der Gruppe c7 der I22c.";
         final String askForCalcType = "Falls sie jedes der zur Verfügung stehenden Experimente ausführen wollen, geben Sie 'all' ein. Andernfalls wählen Sie bitte ein Calculation Type." + System.lineSeparator() + "Bitte geben Sie die Zahl für einen Type ein. Folgende stehen zur Verfügung:" + System.lineSeparator() + "%s";
-        final String askForLogType = System.lineSeparator() + "Bitte wählen Sie einen Log-Type. Diese Log-Types stehen zur Verfügung:" + System.lineSeparator() + "%s";
         final String askForConfig = System.lineSeparator() + "Bitte geben Sie ihr gewolltes Experiment ein. Es stehen folgende Experimente zur Verfügung:" + System.lineSeparator() + "%s";
         final String askForGridType = System.lineSeparator() + "Bitte geben Sie ihr gewolltes Grid ein. Es stehen folgende Grids zur Verfügung:" + System.lineSeparator() + "%s";
-        final String typeInvalid = " bitte geben Sie einen validen Parameter ein. Die Eingabe wird wiederholt.";
         //endregion
         //region variables
         String calcType;
-        String logType = "";
+        String logType;
         String configType = "";
         String gridType;
         //endregion
@@ -49,7 +49,9 @@ public class InputHandler {
         System.out.printf((askForCalcType) + "%n", CalculationType.getAvailableCalculationTypesForUserInput());
         calcType = scanner.nextLine();
         if (Objects.equals(calcType, "all")){
-            executeAllExperiments(logType); //Todo: Implementieren
+            logType = askForLoggerType();
+            executeAllExperiments(logType);
+            System.exit(0);
         }
         while (true){
             try{
@@ -94,20 +96,7 @@ public class InputHandler {
                 gridType = scanner.nextLine();
             }
         }
-
-        System.out.printf((askForLogType) + "%n", LoggerTypes.getAvailableLoggerTypesForUserInput() + System.lineSeparator() + "0 für das schreiben keines Logs");
-        logType = scanner.nextLine();
-        while (true){
-            try{
-                if (!Objects.equals(logType, "0")) {
-                    LoggerTypes.getType(Integer.parseInt(logType));
-                }
-                break;
-            } catch (IllegalArgumentException | EnumConstantNotPresentException e){
-                System.out.println(getUserInfo() + typeInvalid);
-                logType = scanner.nextLine();
-            }
-        }
+        logType = askForLoggerType();
         System.out.println(System.lineSeparator() + "Die Eingaben waren erfolgreich. Das Programm wird nun gestartet.");
         executeChosenExperiment(calcType, configType, gridType, logType);
 
@@ -133,6 +122,33 @@ public class InputHandler {
         LoggerTypes loggerType = LoggerTypes.getType(Integer.parseInt(logType));
         ExperimentFactory experimentFactory = new ExperimentFactory();
         experimentFactory.createExperiment(buildStringForExperiment(calcType, configType, gridType, logType)).runExperiment(loggerType);
+    }
+    /**
+     * Prompts the user to select a log type and validates the input.
+     * This method displays the available log types from {@link LoggerTypes}, reads the user's input,
+     * and ensures the input corresponds to a valid log type.
+     * If the input is invalid, the user is prompted to enter a valid log type.
+     *
+     * @return the selected log type as a string
+     */
+    private String askForLoggerType(){
+        final String askForLogType = System.lineSeparator() + "Bitte wählen Sie einen Log-Type. Diese Log-Types stehen zur Verfügung:" + System.lineSeparator() + "%s";
+        String logType;
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf((askForLogType) + "%n", LoggerTypes.getAvailableLoggerTypesForUserInput() + System.lineSeparator());
+        logType = scanner.nextLine();
+        while (true){
+            try{
+                if (!Objects.equals(logType, "0")) {
+                    LoggerTypes.getType(Integer.parseInt(logType));
+                }
+                break;
+            } catch (IllegalArgumentException | EnumConstantNotPresentException e){
+                System.out.println(getUserInfo() + typeInvalid);
+                logType = scanner.nextLine();
+            }
+        }
+        return logType;
     }
 
     /**

@@ -53,7 +53,6 @@ public class LogConsoleAndFileTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         outputStreamCaptor.reset();
 
-        // Overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {
@@ -97,7 +96,6 @@ public class LogConsoleAndFileTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         outputStreamCaptor.reset();
 
-        // Overwriting of old file for the new test
         try (FileWriter writer = new FileWriter(downloadPath, false)) {
             writer.write("");
         } catch (IOException e) {

@@ -94,8 +94,8 @@ public class LogConsoleTests {
      */
     @Test
     public void stepWriterConsole_IterationAndTestClassName_IterationWithClassName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        int iteration = 1;
-        String wantedOutput = "Test:" + System.lineSeparator() + "### (1)";
+        int iteration = 0;
+        String wantedOutput = "Test:" + System.lineSeparator() + "### (0)";
         LogConsole logConsole = Mockito.mock(LogConsole.class);
         outputStreamCaptor.reset();
         Method privateStepWriter = LogConsole.class.getDeclaredMethod("stepWriterConsole", int.class, String.class);

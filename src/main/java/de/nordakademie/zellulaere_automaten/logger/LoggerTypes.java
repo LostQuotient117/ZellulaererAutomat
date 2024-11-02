@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
  */
 public enum LoggerTypes {
 
+    NoLog(0),
+
     LogFile(1),
 
     LogConsole(2),
