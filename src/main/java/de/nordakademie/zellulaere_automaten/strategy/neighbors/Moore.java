@@ -4,7 +4,11 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Moore is an implementation of the AbstractNeighbors class, providing neighbors based on the Moore neighborhood.
+ * The Moore neighborhood includes all eight neighbors around a given cell: direct neighbors (up, down, left, right)
+ * as well as diagonal neighbors (top-left, top-right, bottom-left, bottom-right).
+ */
 public class Moore extends AbstractNeighbors{
 
     /**

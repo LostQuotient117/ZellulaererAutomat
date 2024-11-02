@@ -17,7 +17,7 @@ public class StateCalculationFactory {
      * Creates an instance of {@link ICellStateCalculation} based on the user-provided input.
      *
      * @param userInputCalculationType a String representing the calculation type selected by the user.
-     *                                 This should be a valid integer value.
+     *  This should be a valid integer value.
      * @return an instance of {@link ICellStateCalculation} that matches the user's chosen calculation type.
      * @throws NumberFormatException if the {@code userInputCalculationType} cannot be parsed as a valid integer.
      * @throws IllegalArgumentException if the parsed integer does not correspond to any valid {@link CalculationType}.
