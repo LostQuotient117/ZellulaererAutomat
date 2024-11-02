@@ -106,7 +106,7 @@ class ClassicGridTest {
             grid.getDataStructure()[2][1] = new Cell(2, 1, false);
             grid.getDataStructure()[2][2] = new Cell(2, 2, true);
 
-            String expectedOutput = "1 0 1 \n0 1 0 \n1 0 1 \n";
+            String expectedOutput = "101\n010\n101\n";
             assertEquals(expectedOutput, grid.toString());
         }
         //endregion
