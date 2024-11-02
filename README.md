@@ -53,14 +53,16 @@ Um die Tests auszuführen, haben Sie mehrere Möglichkeiten:
 mvn test
 ```
 
-### Tests ausführen mit IntelliJ IDEA
+### Ausführen mit IntelliJ IDEA
 
 1. Navigieren Sie zu `src/test/java`.
 2. Rechtsklicken Sie auf den `test`-Ordner.
 3. Wählen Sie `Run 'All Tests'`.
 
 
-### Projekt als .jar bauen
+## Projekt als .jar bauen
+
+### Ausführen mit Maven
 
 Um das Projekt als .jar Datei zu bauen, öffnen Sie das Terminal in IntelliJ IDEA und führen Sie den folgenden Befehl aus:
 
@@ -69,6 +71,12 @@ mvn clean install
 ```
 
 Dieser Befehl kompiliert das Projekt als .jar Datei in den 'Target' Ordner und führt alle Tests aus.
+
+### Ausführen mit IntelliJ IDEA
+
+1. Wählen Sie `View` -> `Tool Windows` -> `Maven`.
+2. Im Maven-Fenster, erweitern Sie das Projekt und navigieren Sie zu Lifecycle.
+3. Doppelklicken Sie auf `install`, um den Build-Prozess zu starten.
 
 ## Autoren und Lizenz
 
