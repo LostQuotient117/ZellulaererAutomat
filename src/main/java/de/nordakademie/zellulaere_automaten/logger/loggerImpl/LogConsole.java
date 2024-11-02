@@ -1,5 +1,6 @@
 package de.nordakademie.zellulaere_automaten.logger.loggerImpl;
 
+import de.nordakademie.zellulaere_automaten.InputHandler;
 import de.nordakademie.zellulaere_automaten.model.*;
 
 /**
@@ -19,7 +20,14 @@ public class LogConsole extends Log {
  */
 @Override
 protected void writeLog(String formattedGrid, int iteration, String className) {
-    stepWriterConsole(iteration, className);
+    try {
+        stepWriterConsole(iteration, className);
+    } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println("Throwback to main method");
+        InputHandler inputHandler = new InputHandler();
+        inputHandler.getUserInputs();
+    }
     writeLogBody(formattedGrid);
 }
 
@@ -45,7 +53,7 @@ protected void writeLog(String formattedGrid, int iteration, String className) {
      */
     private void stepWriterConsole(int step, String className) {
         if (step < 0){
-            throw new IllegalArgumentException("Step number must be a positive integer");
+            throw new IllegalArgumentException("Step number must be a positive integer. This should not happen.");
         }
         if (step == 1){
             System.out.println(className + ":");
