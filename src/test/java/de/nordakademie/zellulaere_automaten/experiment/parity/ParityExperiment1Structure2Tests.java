@@ -77,7 +77,6 @@ public class ParityExperiment1Structure2Tests {
         assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn).getIsAlive());
         assertTrue(grid.getCellByCoordinates(middleRow + 2, middleColumn + 1).getIsAlive());
 
-        // Check all other cells to be dead
         Set<Integer> aliveCellsHashCodes = ((Set<Cell>) grid.getDataStructure()).stream().map(Cell::hashCode).collect(Collectors.toSet());
         for (int row = 0; row < grid.getRows(); row++) {
             for (int col = 0; col < grid.getColumns(); col++) {
