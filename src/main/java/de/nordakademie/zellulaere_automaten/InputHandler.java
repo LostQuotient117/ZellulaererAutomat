@@ -145,7 +145,7 @@ public class InputHandler {
      */
     private String buildStringForExperiment(String calcType, String configType, String gridType, String logType){
         String output = CalculationType.getType(Integer.parseInt(calcType)).name() + "Experiment" + configType + "Structure" + gridType;
-        if (Objects.equals(logType, "1")){
+        if (Objects.equals(logType, "1") || Objects.equals(logType, "3")){
             System.out.println("Your file will be named: " + output + ".log");
         }
         return output;
