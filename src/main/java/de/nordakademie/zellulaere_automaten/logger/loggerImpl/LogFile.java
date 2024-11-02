@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 /**
  * The {@link LogFile} class extends the {@link Log} class to provide
  * functionality for writing log data to a file.
+ *
+ * @author Jannick Gottschalk
  */
 public class LogFile extends Log {
 

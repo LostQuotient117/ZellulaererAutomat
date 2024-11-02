@@ -6,7 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
+/**
+ * The {@code LoggerFactoryTests} class contains unit tests for the {@link LoggerFactory} class.
+ * It verifies the correct creation of different logger types and ensures that invalid inputs
+ * are handled appropriately.
+ *
+ * @author Jannick Gottschalk
+ */
 public class LoggerFactoryTests {
     /**
      * Tests the {@link LoggerFactory#createLogger(String)}} method,

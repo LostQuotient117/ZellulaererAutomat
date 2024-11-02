@@ -8,6 +8,8 @@ import de.nordakademie.zellulaere_automaten.model.*;
  * functionality for writing log data to the console.
  * This class implements methods to log the formatted grid and iteration number,
  * as well as the end message, to the console.
+ *
+ * @author Jannick Gottschalk
  */
 public class LogConsole extends Log {
 

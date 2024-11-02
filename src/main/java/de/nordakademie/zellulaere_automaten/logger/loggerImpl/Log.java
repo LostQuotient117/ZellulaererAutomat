@@ -7,6 +7,8 @@ import de.nordakademie.zellulaere_automaten.model.Cell;
  * Abstract base class for logging grid data and end messages.
  * This class provides a template for logging functionality, requiring subclasses
  * to implement the specific logging behavior.
+ *
+ * @author Jannick Gottschalk
  */
 public abstract class Log implements ILogger {
     /**

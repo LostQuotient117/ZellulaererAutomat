@@ -7,7 +7,9 @@ import de.nordakademie.zellulaere_automaten.logger.loggerImpl.*;
  * This class provides a method to retrieve the appropriate logger
  * implementation based on a specified parameter. It supports the
  * creation of either a {@code LogFile} or a {@code LogConsole}.
+ *
  * @author Jannick.Gottschalk
+ * @author Daria Stolarczyk
  */
 public class LoggerFactory {
     /**
