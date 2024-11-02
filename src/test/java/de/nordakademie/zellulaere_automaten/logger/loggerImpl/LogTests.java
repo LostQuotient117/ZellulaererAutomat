@@ -146,9 +146,12 @@ public class LogTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        // Overwriting of old file for the new test
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
@@ -188,9 +191,12 @@ public class LogTests {
         String projectRoot = Paths.get("").toAbsolutePath().toString();
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
 
-        // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        // Overwriting of old file for the new test
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {
@@ -229,9 +235,12 @@ public class LogTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         String endMessage = "Experiment stopped: Reached 100 iterations.";
 
-        // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        // Overwriting of old file for the new test
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(downloadPath))) {

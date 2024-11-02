@@ -45,9 +45,12 @@ public class LogConsoleAndFileTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         outputStreamCaptor.reset();
 
-        // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        // Overwriting of old file for the new test
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             System.out.print(wantedStringHeaderAndBody);
@@ -82,9 +85,12 @@ public class LogConsoleAndFileTests {
         String downloadPath = Paths.get(projectRoot, ("Test.log")).toString();
         outputStreamCaptor.reset();
 
-        // Deletion of old file for the new test
-        File file = new File(downloadPath);
-        file.delete();
+        // Overwriting of old file for the new test
+        try (FileWriter writer = new FileWriter(downloadPath, false)) {
+            writer.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         doAnswer(invocation -> {
             System.out.print(endMessage);
