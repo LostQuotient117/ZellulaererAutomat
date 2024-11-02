@@ -1,3 +1,5 @@
+image: openjdk:21-jdk
+
 stages:
   - build
   - test
@@ -5,13 +7,12 @@ stages:
 build-job:
   stage: build
   script:
-    - echo "Compiling the code..."
+    - echo "Compiling the code with Java 21..."
     - echo "Build complete."
 
 unit-test-job:
   stage: test
   script:
-    - echo "Running unit tests..."
-    - echo "This will simulate running tests."
+    - echo "Running unit tests with Java 21..."
     - sleep 10
     - echo "Tests complete."
