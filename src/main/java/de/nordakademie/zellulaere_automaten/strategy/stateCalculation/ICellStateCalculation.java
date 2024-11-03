@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Interface that defines the logic for determining the next state of a cell.
+ * @author Viktoria Melnyk
+ * @author Daria Stolarzcyk
  */
 
 public interface ICellStateCalculation {
