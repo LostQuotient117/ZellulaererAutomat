@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Unit tests for the {@link NoLog} class.
  * This class contains tests to verify the behavior of the {@code NoLog} class,
  * ensuring that no logs are printed when the methods are called.
+ *
+ * @author Jannick Gottschalk
  */
 public class NoLogTests {
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();

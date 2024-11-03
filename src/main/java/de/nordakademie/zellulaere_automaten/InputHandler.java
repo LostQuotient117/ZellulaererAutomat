@@ -33,7 +33,7 @@ public class InputHandler {
     public void getUserInputs(){
         //region labels
         final String welcomeMessage = "Willkommen zum Zellulären Automaten der Gruppe c7 der I22c.";
-        final String askForCalcType = "Falls sie jedes der zur Verfügung stehenden Experimente ausführen wollen, geben Sie 'all' ein. Andernfalls wählen Sie bitte ein Calculation Type." + System.lineSeparator() + "Bitte geben Sie die Zahl für einen Type ein. Folgende stehen zur Verfügung:" + System.lineSeparator() + "%s";
+        final String askForCalcType = "Falls sie jedes der zur Verfügung stehenden Experimente ausführen wollen, geben Sie 'all' ein. Andernfalls wählen Sie bitte ein Modell." + System.lineSeparator() + "Bitte geben Sie die Zahl für Ihr gewünschtes Modell ein. Folgende stehen zur Verfügung:" + System.lineSeparator() + "%s";
         final String askForConfig = System.lineSeparator() + "Bitte geben Sie ihr gewolltes Experiment ein. Es stehen folgende Experimente zur Verfügung:" + System.lineSeparator() + "%s";
         final String askForGridType = System.lineSeparator() + "Bitte geben Sie ihr gewolltes Grid ein. Es stehen folgende Grids zur Verfügung:" + System.lineSeparator() + "%s";
         //endregion
@@ -162,7 +162,7 @@ public class InputHandler {
     private String buildStringForExperiment(String calcType, String configType, String gridType, String logType){
         String output = CalculationType.getType(Integer.parseInt(calcType)).name() + "Experiment" + configType + "Structure" + gridType;
         if (Objects.equals(logType, "1") || Objects.equals(logType, "3")){
-            System.out.println("Your file will be named: " + output + ".log");
+            System.out.println("Ihre Datei erhält den Namen: " + output + ".log");
         }
         return output;
     }
