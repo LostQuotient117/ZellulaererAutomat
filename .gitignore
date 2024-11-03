@@ -1,4 +1,9 @@
+# Ignore all .log files
 *.log
+
+# Except .log files in the specific folder
+!src/test/java/de/nordakademie/zellulaere_automaten/expectedOutputFiles/*.log
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
