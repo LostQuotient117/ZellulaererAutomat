@@ -16,6 +16,23 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * This test class verifies the functionality of the {@link SetGrid} class, which models a grid
+ * of cells in a cellular automaton. It tests initialization, next-generation calculation,
+ * stability checking, and string representation of the grid under different configurations.
+ *
+ * The tests are organized into nested classes to cover different scenarios:
+ * - Default setup tests confirm basic properties like row and column counts, active cell retrieval,
+ *   and stability when the grid state is unchanged.
+ * - Empty grid tests ensure the correct behavior when no cells are active.
+ * - Next generation tests evaluate the cell state transitions according to the Game of Life rules,
+ *   checking whether cells survive, die, or become alive based on their neighbors.
+ *
+ * Different neighborhood and state calculation strategies are used to validate the flexibility
+ * and correctness of the SetGrid implementation.
+ * @author Daria Stolarczyk
+ */
 class SetGridTest {
 
     private SetGrid grid;
