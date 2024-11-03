@@ -6,8 +6,6 @@ Projekt `hausarbeit_i143_2024_i22c_c7` ist eine Java-basierte Anwendung. Sie ist
 
 ## Erste Schritte
 
-Um mit diesem Projekt zu beginnen, folgen Sie den unten stehenden Anweisungen.
-
 ### Voraussetzungen
 
 Bevor Sie beginnen, stellen Sie sicher, dass Sie Folgendes installiert haben:
@@ -75,8 +73,18 @@ Dieser Befehl kompiliert das Projekt als .jar Datei in den 'Target' Ordner und f
 ### Ausführen mit IntelliJ IDEA
 
 1. Wählen Sie `View` -> `Tool Windows` -> `Maven`.
-2. Im Maven-Fenster, erweitern Sie das Projekt und navigieren Sie zu Lifecycle.
+2. Im Maven-Fenster, erweitern Sie das Projekt und navigieren Sie zu `Lifecycle`.
 3. Doppelklicken Sie auf `install`, um den Build-Prozess zu starten.
+
+### Ausführen der .jar Datei
+
+1. Öffnen Sie die `Eingabeaufforderung` (CMD).
+2. Navigieren Sie zum Speicherort der `.jar` Datei.
+3. Geben Sie den folgenden Befehl ein (Wenn die .jar eine andere Version als 1.0 hat, muss der Command entsprechend dem neuen Namen angepasst werden).
+
+```sh
+java -jar zellulaere_automaten-1.0.jar
+```
 
 ## Autoren und Lizenz
 
