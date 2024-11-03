@@ -27,7 +27,6 @@ public class SetGrid implements IGrid{
     private final INeighborStrategy neighborStrategy;
 
     private final Map<Cell, List<Cell>> neighborCache;
-
     // endregion
 
 
@@ -71,14 +70,6 @@ public class SetGrid implements IGrid{
         Cell tempCell = new Cell(x, y, true);
         return activeCells.contains(tempCell) ? tempCell : new Cell(x, y, false);
     }
-    /*@Override
-    public Cell getCellByCoordinates(int x, int y) {
-        Cell tempCell = new Cell(x, y, true);
-        return activeCells.stream()
-                .filter(cell ->  cell.equals(tempCell))
-                .findFirst()
-                .orElse(new Cell(x, y, false));
-    }*/
 
     @Override
     public Cell getCellByCoordinatesFromPreviousGrid(int x, int y) {
@@ -114,7 +105,7 @@ public class SetGrid implements IGrid{
     }
     // endregion
 
-
+    // region main algorithm
     @Override
     public Object calculateNextGeneration() {
         neighborCache.clear();
@@ -146,39 +137,9 @@ public class SetGrid implements IGrid{
         return activeCells;
     }
 
-
-
-    /*@Override
-    public Object calculateNextGeneration() {
-        //Setup
-        activeCellsLastIteration.clear();
-        activeCellsLastIteration.addAll(activeCells);
-        Set<Cell> nextGeneration = new HashSet<>();
-        Set<Cell> cellsToCheck = new HashSet<>(activeCells);
-
-        for (Cell cell : activeCells) {
-            List<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
-            cellsToCheck.addAll(neighbors);
-        }
-
-        for (Cell cell : cellsToCheck) {
-            List<Cell> neighbors = neighborStrategy.getNeighbors(cell, this);
-
-            if (cell.getIsAlive()) {
-                if (stateCalculationStrategy.staysAlive(cell, neighbors)) {
-                    nextGeneration.add(new Cell(cell.getRow(), cell.getColumn(), true));
-                }
-            } else {
-                if (!stateCalculationStrategy.staysDead(cell, neighbors)) {
-                    nextGeneration.add(new Cell(cell.getRow(), cell.getColumn(), true));
-                }
-            }
-        }
-        activeCells = nextGeneration;
-        return activeCells;
-    }*/
-
+    // Geilster Scheiß evvverrr <3 :3
     private List<Cell> getNeighborsWithCache(Cell cell) {
         return neighborCache.computeIfAbsent(cell, c -> neighborStrategy.getNeighbors(c, this));
     }
+    // endregion
 }
