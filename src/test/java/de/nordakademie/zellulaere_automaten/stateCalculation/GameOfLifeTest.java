@@ -10,6 +10,18 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the {@link GameOfLife} class, which implements the cell state calculation
+ * rules for the "Game of Life" cellular automaton. This test suite verifies that cells
+ * follow the correct survival and birth rules based on the number of alive neighbors.
+ *
+ * The tests cover:
+ * - The behavior of alive cells, ensuring they stay alive with exactly two or three neighbors,
+ *   and die with fewer than two or more than three neighbors.
+ * - The behavior of dead cells, ensuring they become alive with exactly three neighbors and
+ *   remain dead in other cases.
+ * @author Daria Stolarczyk
+ */
 class GameOfLifeTest {
 
     private GameOfLife gameOfLife;

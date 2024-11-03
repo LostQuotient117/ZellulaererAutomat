@@ -10,23 +10,28 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Test class for the {@link StateCalculationFactory} class, which is responsible for creating
+ * instances of different cell state calculation strategies based on an input string.
+ * This test suite verifies that the factory correctly returns instances of {@link GameOfLife}
+ * and {@link Parity} based on valid input values, and throws appropriate exceptions for
+ * invalid input.
+ *
+ * The tests cover:
+ * - Verifying that an instance of {@link GameOfLife} is returned when the input is "1".
+ * - Verifying that an instance of {@link Parity} is returned when the input is "2".
+ * - Ensuring that an {@link EnumConstantNotPresentException} is thrown for an invalid numeric input.
+ * - Ensuring that a {@link NumberFormatException} is thrown for a non-numeric input.
+ * @author Viktoria Melnyk
+ */
 public class StateCalculationFactoryTest {
 
     private StateCalculationFactory factory;
-
-    /**
-     * Sets up the StateCalculationFactory instance before each test.
-     */
 
     @BeforeEach
     void setUp() {
         factory = new StateCalculationFactory();
     }
-
-    /**
-     * Test for the createCalculationType method when input is "1".
-     * The expected result is that an instance of GameOfLife is returned.
-     */
 
     @Test
     void createCalculationType_InputOne_ReturnsGameOfLifeInstance() {
@@ -34,20 +39,12 @@ public class StateCalculationFactoryTest {
         assertInstanceOf(GameOfLife.class, strategy, "Expected GameOfLife instance");
     }
 
-    /**
-     * Test for the createCalculationType method when input is "2".
-     * The expected result is that an instance of Parity is returned.
-     */
     @Test
     void createCalculationType_InputTwo_ReturnsParityInstance() {
         ICellStateCalculation strategy = factory.createCalculationType("2");
         assertInstanceOf(Parity.class, strategy, "Expected Parity instance");
     }
 
-    /**
-     * Test for the createCalculationType method when input is invalid (e.g., "3").
-     * The expected result is that an EnumConstantNotPresentException is thrown.
-     */
     @Test
     void createCalculationType_InvalidInput_ThrowsException() {
         assertThrows(EnumConstantNotPresentException.class, () -> {
@@ -55,10 +52,6 @@ public class StateCalculationFactoryTest {
         });
     }
 
-    /**
-     * Test for the createCalculationType method when input is not a number (e.g., "abc").
-     * The expected result is that a NumberFormatException is thrown.
-     */
     @Test
     void createCalculationType_NonNumericInput_ThrowsNumberFormatException() {
         assertThrows(NumberFormatException.class, () -> {
