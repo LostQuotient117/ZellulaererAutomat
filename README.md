@@ -19,9 +19,9 @@ Bevor Sie beginnen, stellen Sie sicher, dass Sie Folgendes installiert haben:
 1. Öffnen Sie IntelliJ IDEA.
 2. Wählen Sie `File` -> `New` -> `Project from Version Control` oder `Get from VCS`.
 3. Wählen Sie Git und geben Sie die Repository-URL ein: `https://gitlab2.nordakademie.de/LarsNicht-I22/hausarbeit_i143_2024_i22c_c7.git`.
-5. Klicken Sie auf `Clone`.
-4. Loggen Sie sich mit Ihren Daten ein.
-5. IntelliJ IDEA erkennt das Maven-Projekt automatisch und importiert es.
+4. Klicken Sie auf `Clone`.
+5. Loggen Sie sich mit Ihren Daten ein.
+6. IntelliJ IDEA erkennt das Maven-Projekt automatisch und importiert es.
 
 ## Anwendung ausführen
 
