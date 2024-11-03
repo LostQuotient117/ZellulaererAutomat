@@ -8,7 +8,9 @@ import de.nordakademie.zellulaere_automaten.logger.LoggerFactory;
 import de.nordakademie.zellulaere_automaten.logger.LoggerTypes;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Moore;
+import de.nordakademie.zellulaere_automaten.strategy.neighbors.Neumann;
 import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.GameOfLife;
+import de.nordakademie.zellulaere_automaten.strategy.stateCalculation.Parity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -39,7 +41,9 @@ public class BaseExperimentTests {
     static Stream<IGrid> gridProvider() {
         return Stream.of(
                 new ClassicGrid(5, 5, new HashSet<>(), new GameOfLife(), new Moore()),
-                new SetGrid(5, 5, new HashSet<>(), new GameOfLife(), new Moore())
+                new SetGrid(5, 5, new HashSet<>(), new GameOfLife(), new Moore()),
+                new ClassicGrid(5, 5, new HashSet<>(), new Parity(), new Neumann()),
+                new SetGrid(5, 5, new HashSet<>(), new Parity(), new Neumann())
         );
     }
 
