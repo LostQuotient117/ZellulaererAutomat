@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * INeighborStrategy provides methods to find neighbors of a cell in a grid.
  * Different implementations can determine various types of neighbors, like direct or diagonal.
+ * @author Daria Stolarczyk
  */
 public interface INeighborStrategy {
     /**

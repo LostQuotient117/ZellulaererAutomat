@@ -16,6 +16,22 @@ import java.util.*;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Moore;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the {@link ClassicGrid} class, which represents a grid of cells
+ * in a cellular automaton. This test suite verifies the correct functioning of
+ * various grid-related operations, including stability checks, grid state copying,
+ * coordinate-based cell retrieval, and calculation of the next generation of cells
+ * under different configurations and state calculation strategies.
+ *
+ * The tests cover multiple scenarios through nested classes:
+ * - DefaultTesting: Verifies basic properties, grid stability, and cell retrieval.
+ * - CalculateNextGenerationWithParityTests: Checks cell state transitions using the Parity rule.
+ * - CalculateNextGenerationWithGameOfLifeTests: Tests cell state transitions according to the Game of Life rule.
+ *
+ * Each nested test class sets up different neighbor and state calculation strategies to
+ * ensure flexibility and correctness in the ClassicGrid implementation.
+ * @author Daria Stolarczyk
+ */
 class ClassicGridTest {
 
     private ClassicGrid grid;

@@ -11,24 +11,28 @@ import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Moore;
 
+/**
+ * Test class for the {@link Moore} class, which implements the Moore neighborhood strategy
+ * for a cellular automaton. This test suite verifies that the correct number of neighboring
+ * cells is returned for different positions on the grid, including cells in the middle,
+ * on the edge, and in the corner.
+ *
+ * The tests use a mocked {@link IGrid} instance to simulate grid behavior and verify
+ * that the {@code getNeighbors} method in the {@link Moore} class correctly identifies
+ * the surrounding cells for each position.
+ * @author Daria Stolarczyk
+ */
 class MooreTest {
 
     private IGrid grid;
     private Moore moore;
 
-    /**
-     * Sets up the mock grid and the Moore instance before each test.
-     */
     @BeforeEach
     public void setUp() {
         grid = Mockito.mock(IGrid.class);
         moore = new Moore();
     }
 
-    /**
-     * Test for the getNeighbors method when the cell is in the middle of a 3x3 grid.
-     * The expected result is that all eight neighbors (four direct and four diagonal) are returned.
-     */
     @Test
     void getNeighbors_CellInMiddle_ReturnsEightNeighbors() {
         Cell cell = new Cell(1, 1, true);
@@ -52,10 +56,6 @@ class MooreTest {
         assertEquals(8, result.size());
     }
 
-    /**
-     * Test for the getNeighbors method when the cell is on the edge of a 3x3 grid.
-     * The expected result is that only five neighbors are returned (three direct and two diagonal).
-     */
     @Test
     void getNeighbors_CellOnEdge_ReturnsFiveNeighbors() {
         Cell cell = new Cell(1, 0, true);
@@ -76,10 +76,6 @@ class MooreTest {
         assertEquals(5, result.size());
     }
 
-    /**
-     * Test for the getNeighbors method when the cell is in the corner of a 3x3 grid.
-     * The expected result is that only three neighbors are returned (one direct and two diagonal).
-     */
     @Test
     void getNeighbors_CellInCorner_ReturnsThreeNeighbors() {
         Cell cell = new Cell(0, 0, true);

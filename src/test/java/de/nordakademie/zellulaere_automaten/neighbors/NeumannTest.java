@@ -11,24 +11,27 @@ import de.nordakademie.zellulaere_automaten.grid.IGrid;
 import de.nordakademie.zellulaere_automaten.model.Cell;
 import de.nordakademie.zellulaere_automaten.strategy.neighbors.Neumann;
 
+/**
+ * Test class for the {@link Neumann} class, which implements the Neumann neighborhood
+ * strategy for a cellular automaton. This test suite verifies that the correct number
+ * of direct (orthogonal) neighbors is returned for cells in different positions within
+ * a grid, including the middle, edge, and corner.
+ *
+ * The tests use a mocked {@link IGrid} instance to simulate the grid behavior and verify
+ * the functionality of the {@code getNeighbors} method in the {@link Neumann} class.
+ * @author Daria Stolarczyk
+ */
 class NeumannTest {
 
     private IGrid grid;
     private Neumann neumann;
 
-    /**
-     * Sets up the mock grid and the Neumann instance before each test.
-     */
     @BeforeEach
     public void setUp() {
         grid = Mockito.mock(IGrid.class);
         neumann = new Neumann();
     }
 
-    /**
-     * Test for the getNeighbors method when the cell is in the middle of a 3x3 grid.
-     * The expected result is that all four direct neighbors are returned.
-     */
     @Test
     void getNeighbors_CellInMiddle_ReturnsFourNeighbors() {
         Cell cell = new Cell(1, 1, true);
@@ -44,10 +47,6 @@ class NeumannTest {
         assertEquals(4, result.size());
     }
 
-    /**
-     * Test for the getNeighbors method when the cell is on the edge of a 3x3 grid.
-     * The expected result is that only three direct neighbors are returned.
-     */
     @Test
     void getNeighbors_CellOnEdge_ReturnsThreeNeighbors() {
         Cell cell = new Cell(1, 0, true);
@@ -62,10 +61,6 @@ class NeumannTest {
         assertEquals(3, result.size());
     }
 
-    /**
-     * Test for the getNeighbors method when the cell is in the corner of a 3x3 grid.
-     * The expected result is that only two direct neighbors are returned.
-     */
     @Test
     void getNeighbors_CellInCorner_ReturnsTwoNeighbors() {
         Cell cell = new Cell(0, 0, true);

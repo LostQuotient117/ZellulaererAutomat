@@ -92,19 +92,6 @@ public class Cell {
     // region Logic
 
     /**
-     * Compares this cell with another cell.
-     * They are considered equal if they have the same coordinates and alive status.
-     *
-     * @param otherCell the cell to compare with
-     * @return {@code true} if the cells are equal, {@code false} otherwise
-     */
-    public boolean isEqualCell(Cell otherCell) {
-        return this.column == otherCell.getColumn()
-                && this.row == otherCell.getRow()
-                && this.isAlive == otherCell.getIsAlive();
-    }
-
-    /**
      * Returns a string representation of the cell's state.
      * If the cell is alive, it returns "1"; otherwise, it returns "0".
      *

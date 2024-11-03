@@ -8,6 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The {@code ClassicGrid} class represents a cellular automaton grid using a two-dimensional array of {@link Cell} objects.
+ * It provides functionality to initialize the grid, calculate the next generation based on neighbor and state calculation strategies,
+ * and check if the grid has reached a stable state.
+ *
+ * This implementation uses the {@link INeighborStrategy} to determine cell neighbors and {@link ICellStateCalculation} to
+ * calculate the next state of each cell in the grid. The class supports different grid sizes and initial configurations.
+ *
+ * Key features:
+ * - Initializing the grid with specified rows, columns, and an initial configuration of active cells.
+ * - Calculating the next generation by applying the neighbor and state calculation strategies.
+ * - Checking if the grid is stable by comparing the current and previous generations.
+ * @author Daria Stolarczyk
+ */
 public class ClassicGrid implements IGrid<Cell[][]>{
 
     //region variables
@@ -59,12 +73,6 @@ public class ClassicGrid implements IGrid<Cell[][]>{
     }
     // endregion
 
-    /**
-     * Calculates the next generation of cells by updating each cell's alive status
-     * based on its neighbors and the defined state calculation strategy.
-     * The current grid state is copied to `previousGrid` before any updates.
-     * @return the updated grid with recalculated cell states for the next generation
-     */
     @Override
     public Cell[][] calculateNextGeneration() {
         copyGrid(grid, previousGrid);
@@ -85,13 +93,6 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         return grid;
     }
 
-    /**
-     * Returns the cell located at the specified coordinates in the grid.
-     * @param x the row index of the cell
-     * @param y the column index of the cell
-     * @return the cell located at the specified (x, y) coordinates
-     * @throws IndexOutOfBoundsException if the specified coordinates are out of bounds
-     */
     @Override
     public Cell getCellByCoordinates(int x, int y) {
         return grid[x][y];
@@ -102,11 +103,6 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         return previousGrid[x][y];
     }
 
-    /**
-     * Returns a string representation of the grid, where each cell's state is represented
-     * by its toString method. A newline is added after each row to separate the rows.
-     * @return a string representation of the current state of the grid
-     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -119,10 +115,6 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         return stringBuilder.toString();
     }
 
-    /**
-     * Checks if grid is in a stable constellation
-     * @return true: when the grid has not changed
-     */
     @Override
     public boolean isStable() {
         for (int row = 0; row < rows; row++) {
@@ -148,15 +140,6 @@ public class ClassicGrid implements IGrid<Cell[][]>{
         }
     }
 
-    /**
-     * Initializes the grid with new Cell instances for each position based on the given starting configuration.
-     * For each cell in the grid, the method checks if the cell's position is contained in the start configuration.
-     * If so, the cell is initialized as alive; otherwise, it is initialized as dead.
-     *
-     * @param startConfig a set of Cell objects representing the initial configuration of alive cells.
-     *                    Each Cell in the set has its row and column position defined, and will be marked as alive
-     *                    in the grid if found in this configuration.
-     */
     private void initialize(Set<Cell> startConfig) {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {

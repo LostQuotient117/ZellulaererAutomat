@@ -8,18 +8,10 @@ import java.util.List;
  * Moore is an implementation of the AbstractNeighbors class, providing neighbors based on the Moore neighborhood.
  * The Moore neighborhood includes all eight neighbors around a given cell: direct neighbors (up, down, left, right)
  * as well as diagonal neighbors (top-left, top-right, bottom-left, bottom-right).
+ * @author Daria Stolarczyk
  */
 public class Moore extends AbstractNeighbors{
 
-    /**
-     * Returns a list of neighboring Moore cells.
-     * This method creates a list of neighboring cells, based on the Moore neighborhood.
-     * The list includes the direct neighbors which are above, below, to the left, to the right,
-     * above right, above left, below right and below left to the specific cell.
-     *
-     * @param cell the cell for that
-     * @return list of neighboring Moore cells
-     */
     @Override
     public List<Cell> getNeighbors(Cell cell, IGrid iGrid){
         List<Cell> mooreNeighbors = getDirectNeighbors(cell, iGrid);

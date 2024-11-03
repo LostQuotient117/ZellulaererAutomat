@@ -10,6 +10,19 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the {@link Parity} class, which implements a cell state calculation
+ * strategy based on the parity (odd or even count) of alive neighbors. This test suite
+ * verifies that cells follow the correct survival and birth rules according to the
+ * parity of their neighbors.
+ *
+ * The tests cover:
+ * - The behavior of alive cells, ensuring they stay alive with an odd number of alive neighbors
+ *   and die with an even number of alive neighbors.
+ * - The behavior of dead cells, ensuring they remain dead with an even number of alive neighbors
+ *   and become alive with an odd number of alive neighbors.
+ * @author Daria Stolarczyk
+ */
 class ParityTest {
 
     private Parity parity;
