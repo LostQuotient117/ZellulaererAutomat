@@ -34,23 +34,23 @@ public class LogFile extends Log {
         }
     }
     /**
- * Writes the end message to a log file.
- * This method writes the provided end message to the log file. If an
- * {@code IOException} occurs during the file writing process, it is
- * caught and the stack trace is printed.
- *
- * @param endMessage the end message to be logged
- */
-@Override
-protected void writeLog(String endMessage, String className) {
-    try {
-        exportGridToFile(endMessage, className);
-    } catch (IOException e) {
-        System.out.println("An error occurred while writing the end message to the log file. This should not happen. Throwback to main method.");
-        InputHandler inputHandler = new InputHandler();
-        inputHandler.getUserInputs();
+    * Writes the end message to a log file.
+    * This method writes the provided end message to the log file. If an
+    * {@code IOException} occurs during the file writing process, it is
+    * caught and the stack trace is printed.
+    *
+    * @param endMessage the end message to be logged
+    */
+    @Override
+    protected void writeLog(String endMessage, String className) {
+        try {
+            exportGridToFile(endMessage, className);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing the end message to the log file. This should not happen. Throwback to main method.");
+            InputHandler inputHandler = new InputHandler();
+            inputHandler.getUserInputs();
+        }
     }
-}
     /**
      * Builds a string for logging to a file.
      * This method constructs a string that includes the iteration number

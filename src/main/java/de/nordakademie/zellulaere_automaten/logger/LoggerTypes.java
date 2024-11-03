@@ -53,6 +53,12 @@ public enum LoggerTypes {
                                                 new EnumConstantNotPresentException(LoggerTypes.class, "This type of logger does not exist"));
     }
 
+    /**
+     * Returns a string representation of the available logger types for user input.
+     * Each logger type is represented by its corresponding integer value and name.
+     *
+     * @return a string listing all available logger types with their integer values and names.
+     */
     public static String getAvailableLoggerTypesForUserInput() {
         return Arrays.stream(LoggerTypes.values())
                 .map(loggerType -> loggerType.getValue() + " für " + loggerType.name())
