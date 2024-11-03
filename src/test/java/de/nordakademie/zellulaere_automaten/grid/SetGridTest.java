@@ -114,7 +114,7 @@ class SetGridTest {
 
         @Test
         void calculateNextGeneration_SingleAliveCell_NoSurvival() {
-            initialCells.add(new Cell(0, 0, true));
+            grid.activeCells.add(new Cell(0, 0, true));
             grid.calculateNextGeneration();
             assertTrue(grid.activeCells.isEmpty(), "Die Zelle sollte in der nächsten Generation tot sein.");
         }
